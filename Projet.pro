@@ -4,7 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        primitives/contact.cpp \
+        primitives/interaction.cpp
 
 HEADERS += \
     date/chrono_io.h \
@@ -16,4 +18,6 @@ HEADERS += \
     date/ptz.h \
     date/solar_hijri.h \
     date/tz.h \
-    date/tz_private.h
+    date/tz_private.h \
+    primitives/contact.h \
+    primitives/interaction.h
