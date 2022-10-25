@@ -50,8 +50,6 @@ public:
      */
     std::string getDateStrFormat() const;
 
-    time_point<system_clock, date::days>& getTime();
-
     static int getDifferenceDays(const DateSimple& d1, const DateSimple& d2);
 
     bool operator<(const DateSimple& date) const;

@@ -24,11 +24,6 @@ DateSimple::DateSimple(const std::string str)
     time = date::year(date[2])/date::month(date[1])/date::day(date[0]);
 }
 
-time_point<system_clock, date::days>& DateSimple::getTime()
-{
-    return time;
-}
-
 int DateSimple::getDifferenceDays(const DateSimple& d1, const DateSimple& d2)
 {
     auto timeRestant = d2.time - d1.time;

@@ -9,6 +9,7 @@ Interaction::Interaction(const std::string& desc)
 {
     contenu = desc;
     date = DateSimple();
+    lTache = std::list<Tache>();
 }
 
 Interaction::Interaction(const std::string& desc, const DateSimple& date_)
@@ -55,6 +56,8 @@ void Interaction::setDate(const DateSimple &value)
 
 std::ostream& operator<<(std::ostream& out, const Interaction& i)
 {
-    return out << i.getContenu() << " " << i.getDate().getDateStrFormat();
+    out << i.getContenu() << " " << i.getDate().getDateStrFormat();
+    out << i.getLTache().size() << std::endl;
+    return out;
 }
 
