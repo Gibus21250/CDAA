@@ -6,7 +6,9 @@ CONFIG -= qt
 SOURCES += \
         main.cpp \
         primitives/contact.cpp \
-        primitives/interaction.cpp
+        primitives/dateSimple.cpp \
+        primitives/interaction.cpp \
+        primitives/tache.cpp
 
 HEADERS += \
     date/chrono_io.h \
@@ -20,4 +22,6 @@ HEADERS += \
     date/tz.h \
     date/tz_private.h \
     primitives/contact.h \
-    primitives/interaction.h
+    primitives/dateSimple.h \
+    primitives/interaction.h \
+    primitives/tache.h

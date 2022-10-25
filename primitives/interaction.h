@@ -2,15 +2,20 @@
 #define INTERACTION_H
 
 #include <string>
-#include "date/date.h"
+#include "primitives/dateSimple.h"
 
 
 class Interaction
 {
 public:
     Interaction();
-    std::chrono::time_point<std::chrono::system_clock, date::days> date;
+    Interaction(const std::string& desc);
+    Interaction(const std::string& desc, const DateSimple& date);
+    Interaction(const std::string& desc, const std::string& date);
+
+    DateSimple date;
     std::string contenu;
+    friend std::ostream& operator<<(std::ostream out, const Interaction& i);
 };
 
 #endif // INTERACTION_H

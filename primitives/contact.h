@@ -5,16 +5,19 @@
 #include <list>
 
 #include "interaction.h"
-#include "date/date.h"
-#include "date/chrono_io.h"
-
-using laDate = std::chrono::time_point<std::chrono::system_clock, date::days>;
+#include "dateSimple.h"
 
 /**
  * @brief La classe primitive d'un Contact
  */
 class Contact
 {
+private:
+
+    std::string nom, prenom, entreprise, mail, telephone, uriPhoto;
+    std::list<Interaction> listinteractions;
+    DateSimple date;
+
 public:
 
     Contact();
@@ -58,16 +61,8 @@ public:
     std::list<Interaction> getListinteractions() const;
     void setListinteractions(const std::list<Interaction> &value);
 
-    laDate getDate() const;
-    void setDate(const laDate &value);
-
-private:
-
-    std::string nom, prenom, entreprise, mail, telephone, uriPhoto;
-    std::list<Interaction> listinteractions;
-    laDate date;
-
-
+    DateSimple getDate() const;
+    void setDate(const DateSimple &value);
 };
 
 #endif // CONTACT_H

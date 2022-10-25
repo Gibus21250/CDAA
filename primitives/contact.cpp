@@ -5,12 +5,12 @@ Contact::Contact()
 
 }
 
-std::chrono::time_point<std::chrono::system_clock, date::days> Contact::getDate() const
+DateSimple Contact::getDate() const
 {
     return date;
 }
 
-void Contact::setDate(const std::chrono::time_point<std::chrono::system_clock, date::days> &value)
+void Contact::setDate(const DateSimple &value)
 {
     date = value;
 }
