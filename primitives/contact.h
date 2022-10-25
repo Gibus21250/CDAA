@@ -23,7 +23,7 @@ public:
      * @param nom Le nom du contact
      * @param prenom Le prenom du contact
      */
-    Contact(const std::string nom, const std::string prenom);
+    Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto);
 
     /**
      * @brief getNom
@@ -46,18 +46,38 @@ public:
     std::string getEntreprise() const;
     void setEntreprise(const std::string &value);
 
+    /**
+     * @brief getMail
+     * @return le mail du contact
+     */
     std::string getMail() const;
     void setMail(const std::string &value);
 
+    /**
+     * @brief getTelephone
+     * @return le numero de telephone du contact
+     */
     std::string getTelephone() const;
     void setTelephone(const std::string &value);
 
+    /**
+     * @brief getUriPhoto
+     * @return l'URI de la photo du contact
+     */
     std::string getUriPhoto() const;
     void setUriPhoto(const std::string &value);
 
+    /**
+     * @brief getListinteractions
+     * @return la liste de(s) interaction(s) du contact
+     */
     std::list<Interaction> getListinteractions() const;
     void setListinteractions(const std::list<Interaction> &value);
 
+    /**
+     * @brief getDate
+     * @return la(les) date(s) de(s) interaction(s)
+     */
     laDate getDate() const;
     void setDate(const laDate &value);
 
