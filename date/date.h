@@ -318,9 +318,10 @@ operator/(const month_weekday_last& mwdl, int         y) NOEXCEPT;
 
 class day
 {
+public:
+
     unsigned char d_;
 
-public:
     day() = default;
     explicit CONSTCD11 day(unsigned d) NOEXCEPT;
 
@@ -356,9 +357,10 @@ operator<<(std::basic_ostream<CharT, Traits>& os, const day& d);
 
 class month
 {
+public:
+
     unsigned char m_;
 
-public:
     month() = default;
     explicit CONSTCD11 month(unsigned m) NOEXCEPT;
 
@@ -394,9 +396,11 @@ operator<<(std::basic_ostream<CharT, Traits>& os, const month& m);
 
 class year
 {
-    short y_;
 
 public:
+
+    short y_;
+
     year() = default;
     explicit CONSTCD11 year(int y) NOEXCEPT;
 
@@ -1559,7 +1563,6 @@ month::operator-=(const months& m) NOEXCEPT
     *this = *this - m;
     return *this;
 }
-
 CONSTCD11 inline month::operator unsigned() const NOEXCEPT {return m_;}
 CONSTCD11 inline bool month::ok() const NOEXCEPT {return 1 <= m_ && m_ <= 12;}
 

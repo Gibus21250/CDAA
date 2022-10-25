@@ -20,13 +20,18 @@ private:
 
 public:
 
-    Contact();
     /**
-     * @brief Contact
+     * @brief Constructeur standard
      * @param nom Le nom du contact
      * @param prenom Le prenom du contact
+     * @param entreprise
+     * @param mail
+     * @param telephone
+     * @param uriPhoto
      */
     Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto);
+
+    friend std::ostream& operator<<(std::ostream& out, const Contact& c);
 
     /**
      * @brief getNom
@@ -77,12 +82,13 @@ public:
     std::list<Interaction> getListinteractions() const;
     void setListinteractions(const std::list<Interaction> &value);
 
+    /**
+     * @brief Recupère la Date de l'interaction
+     * @return la date de l'interaction
+     */
     DateSimple getDate() const;
     void setDate(const DateSimple &value);
-    /**
-     * @brief getDate
-     * @return la(les) date(s) de(s) interaction(s)
-     */
+
 };
 
 #endif // CONTACT_H

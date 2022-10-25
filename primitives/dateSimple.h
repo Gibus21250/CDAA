@@ -5,18 +5,17 @@
 #include <chrono>
 
 #include "date/date.h"
-#include "date/chrono_io.h"
 
 using namespace std::chrono;
-
-using day_point = time_point<system_clock, date::days>;
 
 /**
  * @brief Une classe permettant l'utilisation plus simple d'objet Date
  */
 class DateSimple
 {
+
 private:
+
     time_point<system_clock, date::days> time;
 
 public:
@@ -39,12 +38,28 @@ public:
      * @param d : numéro du jour de l'année demandé
      */
     DateSimple(const unsigned y, const unsigned m,  const unsigned d);
+    /**
+     * @brief DateSimple
+     * @param time
+     */
+    DateSimple(time_point<system_clock, date::days> time);
 
     /**
      * @brief Renvoie sous forme de string standard la date associé à l'instance
-     * @return DateSimple sous forme de string standard
+     * @return DateSimple sous forme de string standard à à l'aide de la classe date.h modifiée
      */
-    std::string& getDateStrFormat() const;
+    std::string getDateStrFormat() const;
+
+    time_point<system_clock, date::days>& getTime();
+
+    static int getDifferenceDays(const DateSimple& d1, const DateSimple& d2);
+
+    bool operator<(const DateSimple& date) const;
+    bool operator==(const DateSimple& date) const;
+    bool operator>(const DateSimple& date) const;
+    bool operator<=(const DateSimple& date) const;
+    bool operator>=(const DateSimple& date) const;
+    bool operator!=(const DateSimple& date) const;
 
 };
 

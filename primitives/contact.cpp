@@ -4,10 +4,15 @@ Contact::Contact(const std::string nom, const std::string prenom, const std::str
 {
     this->nom = nom;
     this->prenom = prenom;
-    this->nom = entreprise;
-    this->prenom = mail;
-    this->nom = telephone;
-    this->prenom = uriPhoto;
+    this->entreprise = entreprise;
+    this->mail = mail;
+    this->telephone = telephone;
+    this->uriPhoto = uriPhoto;
+}
+
+std::ostream& operator<<(std::ostream& out, const Contact& c)
+{
+    return out << c.getNom() << " " << c.getPrenom() << " " << c.getEntreprise() << " " << c.getMail() << " " << c.getTelephone() << " " << c.getUriPhoto();
 }
 
 DateSimple Contact::getDate() const
