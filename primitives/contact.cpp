@@ -1,8 +1,13 @@
 #include "contact.h"
 
-Contact::Contact()
+Contact::Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto)
 {
-
+    this->nom = nom;
+    this->prenom = prenom;
+    this->nom = entreprise;
+    this->prenom = mail;
+    this->nom = telephone;
+    this->prenom = uriPhoto;
 }
 
 DateSimple Contact::getDate() const
