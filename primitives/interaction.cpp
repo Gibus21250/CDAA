@@ -23,12 +23,6 @@ Interaction::Interaction(const std::string& desc, const std::string& dateStr)
     date = DateSimple(dateStr);
 }
 
-std::ostream& operator<<(std::ostream& out, const Interaction& i)
-{
-    out << i.contenu << " " << i.date.getDateStrFormat() << std::endl;
-    return out;
-}
-
 std::string Interaction::getContenu() const
 {
     return contenu;
@@ -39,12 +33,19 @@ void Interaction::setContenu(const std::string &value)
     contenu = value;
 }
 
-laDate Interaction::getDate() const
+DateSimple Interaction::getDate() const
 {
     return date;
 }
 
-void Interaction::setDate(const laDate &value)
+void Interaction::setDate(const DateSimple &value)
 {
     date = value;
 }
+
+std::ostream& operator<<(std::ostream& out, const Interaction& i)
+{
+    out << i.contenu << " " << i.date.getDateStrFormat() << std::endl;
+    return out;
+}
+

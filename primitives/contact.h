@@ -77,25 +77,12 @@ public:
     std::list<Interaction> getListinteractions() const;
     void setListinteractions(const std::list<Interaction> &value);
 
-<<<<<<< HEAD
     DateSimple getDate() const;
     void setDate(const DateSimple &value);
-=======
     /**
      * @brief getDate
      * @return la(les) date(s) de(s) interaction(s)
      */
-    laDate getDate() const;
-    void setDate(const laDate &value);
-
-private:
-
-    std::string nom, prenom, entreprise, mail, telephone, uriPhoto;
-    std::list<Interaction> listinteractions;
-    laDate date;
-
-
->>>>>>> de128080eccd3c5be6cda10e29c325f5d5406ff1
 };
 
 #endif // CONTACT_H
