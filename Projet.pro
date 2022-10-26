@@ -7,6 +7,8 @@ SOURCES += \
         main.cpp \
         primitives/contact.cpp \
         primitives/dateSimple.cpp \
+        primitives/gestioncontact.cpp \
+        primitives/gestioninteraction.cpp \
         primitives/interaction.cpp \
         primitives/tache.cpp
 
@@ -23,5 +25,7 @@ HEADERS += \
     date/tz_private.h \
     primitives/contact.h \
     primitives/dateSimple.h \
+    primitives/gestioncontact.h \
+    primitives/gestioninteraction.h \
     primitives/interaction.h \
     primitives/tache.h

@@ -8,6 +8,12 @@ Contact::Contact(const std::string nom, const std::string prenom, const std::str
     this->mail = mail;
     this->telephone = telephone;
     this->uriPhoto = uriPhoto;
+    this->interactions = new GestionInteraction();
+}
+
+Contact::~Contact()
+{
+    delete interactions;
 }
 
 std::ostream& operator<<(std::ostream& out, const Contact& c)
@@ -25,14 +31,9 @@ void Contact::setDate(const DateSimple &value)
     date = value;
 }
 
-std::list<Interaction> Contact::getListinteractions() const
+GestionInteraction& Contact::getGestionInteractions() const
 {
-    return listinteractions;
-}
-
-void Contact::setListinteractions(const std::list<Interaction> &value)
-{
-    listinteractions = value;
+    return *interactions;
 }
 
 std::string Contact::getUriPhoto() const
