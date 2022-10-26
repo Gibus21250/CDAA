@@ -57,7 +57,18 @@ void Interaction::setDate(const DateSimple &value)
 std::ostream& operator<<(std::ostream& out, const Interaction& i)
 {
     out << i.getContenu() << " " << i.getDate().getDateStrFormat();
-    out << i.getLTache().size() << std::endl;
+    if(i.getLTache().size() != 0)
+    {
+        for(auto tache = i.getLTache().begin(); tache != i.getLTache().end();)
+        {
+            out << std::endl << *tache;
+        }
+    }
+    out << std::endl;
     return out;
+}
+
+bool Interaction::operator==(const Interaction& in){
+    return in.contenu.compare(contenu) == 0;
 }
 

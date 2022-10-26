@@ -2,10 +2,10 @@
 #define CONTACT_H
 
 #include <string>
-#include <list>
 
 #include "interaction.h"
 #include "dateSimple.h"
+#include "gestioninteraction.h"
 
 /**
  * @brief La classe primitive d'un Contact
@@ -15,7 +15,7 @@ class Contact
 private:
 
     std::string nom, prenom, entreprise, mail, telephone, uriPhoto;
-    std::list<Interaction> listinteractions;
+    GestionInteraction *interactions;
     DateSimple date;
 
 public:
@@ -30,7 +30,7 @@ public:
      * @param uriPhoto
      */
     Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto);
-
+    ~Contact();
     friend std::ostream& operator<<(std::ostream& out, const Contact& c);
 
     /**
@@ -79,8 +79,7 @@ public:
      * @brief getListinteractions
      * @return la liste de(s) interaction(s) du contact
      */
-    std::list<Interaction> getListinteractions() const;
-    void setListinteractions(const std::list<Interaction> &value);
+    GestionInteraction& getGestionInteractions() const;
 
     /**
      * @brief Recupère la Date de l'interaction

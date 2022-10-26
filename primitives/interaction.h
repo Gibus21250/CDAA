@@ -33,6 +33,8 @@ public:
 
     std::list<Tache> getLTache() const;
     void setLTache(const std::list<Tache> &value);
+
+    bool operator==(const Interaction& in);
 };
 
 #endif // INTERACTION_H
