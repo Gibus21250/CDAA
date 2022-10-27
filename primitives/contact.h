@@ -88,6 +88,8 @@ public:
     DateSimple getDate() const;
     void setDate(const DateSimple &value);
 
+    bool Contact::operator==(const Contact& in);
+
 };
 
 #endif // CONTACT_H

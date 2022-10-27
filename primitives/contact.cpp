@@ -95,3 +95,20 @@ void Contact::setNom(const std::string &value)
 {
     nom = value;
 }
+
+bool Contact::operator==(const Contact& in){
+
+    if((in.nom.compare(nom) && 
+    in.prenom.compare(prenom) && 
+    in.entreprise.compare(entreprise) && 
+    in.mail.compare(mail) && 
+    in.telephone.compare(telephone) && 
+    in.uriPhoto.compare(uriPhoto))==0)
+    {
+        return true;
+    }else
+    {
+        return false;
+    }
+    
+}
