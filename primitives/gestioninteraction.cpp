@@ -68,7 +68,7 @@ std::ostream& operator<<(std::ostream& out, const GestionInteraction& c)
         for(auto in : c.getListInteraction())
         {
             out << std::endl << "Interaction No " << cmpt++;
-            out << std::endl << in;
+            out << std::endl << in << std::endl;
         }
     }
     return out;

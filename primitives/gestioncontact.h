@@ -24,6 +24,22 @@ public:
      * @return un boolean
      */
     bool supprimerContact(const Contact& in);
+
+    /**
+     * @brief Renvoie la liste de contacts
+     * @return
+     */
+    std::list<Contact> getListContact() const;
+
+    /**
+     * @brief Renvoie le no contact ajoute à la liste
+     * @param no
+     * @return
+     */
+    Contact getContact(const int no);
+
+    friend std::ostream& operator<<(std::ostream& out, const GestionContact& c);
+
 };
 
 #endif // GESTIONCONTACT_H

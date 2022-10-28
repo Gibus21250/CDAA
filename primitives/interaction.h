@@ -54,10 +54,26 @@ public:
 
     unsigned getNombreTache() const;
 
+    /**
+     * @brief Ajoute une tache à la liste de tache
+     * @param tache
+     */
     void ajouterTache(const Tache& tache);
+    /**
+     * @brief Ajoute une tache à la liste de tache
+     * @param tache
+     */
     void ajouterTache(const std::string contenu, std::string dateStr);
+    /**
+     * @brief Ajoute une tache à la liste de tache
+     * @param tache
+     */
     void ajouterTache(const std::string contenu, DateSimple dateStr);
 
+    /**
+     * @brief Retire toute les taches à la liste de tache
+     * @param tache
+     */
     void retirerTache(const Tache& tache);
 
     bool operator==(const Interaction& in);

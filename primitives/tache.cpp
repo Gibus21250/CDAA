@@ -21,7 +21,7 @@ Tache::Tache(const std::string& contenu_, const std::string& datestr)
     hasDate = true;
 }
 
-bool Tache::isDated() const
+bool Tache::isDatee() const
 {
     return hasDate;
 }
@@ -29,7 +29,7 @@ bool Tache::isDated() const
 std::ostream& operator<<(std::ostream& out, const Tache& tache)
 {
     out << "@todo " << tache.contenu;
-    if(tache.isDated())
+    if(tache.isDatee())
     {
         out << " @date " << tache.date.getDateStrFormat();
     }

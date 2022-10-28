@@ -18,9 +18,9 @@ public:
 
     /**
      * @brief isDate
-     * @return un boolean pour savoir s'il y a une date
+     * @return un boolean pour savoir si la tache est datée
      */
-    bool isDate() const;
+    bool isDatee() const;
 
     /**
      * @brief getContenu

@@ -6,12 +6,14 @@
 #include "primitives/interaction.h"
 #include "primitives/dateSimple.h"
 #include "primitives/tache.h"
+#include "primitives/gestioncontact.h"
 
 void testCreationContact();
 void testCreationTache();
 void testCreationInteractionSansTache();
 void testCreationInteractionAvecTache();
 void testContactAvecInteraction();
+void testGestionContact();
 
 int main()
 {
@@ -20,6 +22,7 @@ int main()
     testCreationInteractionSansTache();
     testCreationInteractionAvecTache();
     testContactAvecInteraction();
+    testGestionContact();
 
     return 0;
 }
@@ -93,4 +96,29 @@ void testContactAvecInteraction()
 
     std::cout << c << std::endl;
     std::cout << "\\---------------------------Fin---------------------------/" << std::endl << std::endl;
+}
+void testGestionContact()
+{
+    std::cout << "/--------------------------DEBUT--------------------------\\" << std::endl;
+    std::cout << "Test de création d'un gestionnaire de contacts, avec \"garniture\" des classe, puis affichage" << std::endl;
+    GestionContact gc;
+
+    Contact n("Nathan", "Jacquinet", "none", "n.j@gmail.com", "0614024807", "none");
+    Contact m("Marie", "Mortier", "none", "m.m@gmail.com", "0748021406", "none");
+
+    n.ajoutInteraction(Interaction("Finir rapport", "28/10/2022"));
+    n.ajoutInteraction(Interaction("Prendre le train", "29/10/2022"));
+
+    Interaction iM("Preparer voyage", "31/10/2022");
+
+    iM.ajouterTache(Tache("Descendre la valise du grenier"));
+    iM.ajouterTache(Tache("Sortir la voiture du garage le soir", "30/10/2022"));
+
+    m.ajoutInteraction(iM);
+
+    gc.ajoutContact(n);
+    gc.ajoutContact(m);
+
+    std::cout << gc;
+    std::cout << "\\---------------------------Fin---------------------------/" << std::endl;
 }
