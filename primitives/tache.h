@@ -25,6 +25,7 @@ public:
     void setDate(const DateSimple &value);
 
     friend std::ostream& operator<<(std::ostream& out, const Tache& tache);
+    bool operator==(const Tache& t);
 };
 
 #endif // TACHE_H

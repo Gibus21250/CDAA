@@ -9,7 +9,7 @@ Interaction::Interaction(const std::string& desc)
 {
     contenu = desc;
     date = DateSimple();
-    lTache = std::list<Tache>();
+    taches = GestionTache();
 }
 
 Interaction::Interaction(const std::string& desc, const DateSimple& date_)
@@ -22,16 +22,6 @@ Interaction::Interaction(const std::string& desc, const std::string& dateStr)
 {
     contenu = desc;
     date = DateSimple(dateStr);
-}
-
-std::list<Tache> Interaction::getLTache() const
-{
-    return lTache;
-}
-
-void Interaction::setLTache(const std::list<Tache> &value)
-{
-    lTache = value;
 }
 
 std::string Interaction::getContenu() const
@@ -54,17 +44,42 @@ void Interaction::setDate(const DateSimple &value)
     date = value;
 }
 
+GestionTache Interaction::getTaches() const
+{
+    return taches;
+}
+
+void Interaction::setTaches(const GestionTache &value)
+{
+    taches = value;
+}
+
+unsigned Interaction::getNombreTache() const
+{
+    return taches.getNombreTache();
+}
+
+void Interaction::ajouterTache(const Tache &tache)
+{
+    taches.ajoutTache(tache);
+}
+
+void Interaction::ajouterTache(const std::string contenu, std::string dateStr)
+{
+    taches.ajoutTache(Tache(contenu, dateStr));
+}
+
+void Interaction::ajouterTache(const std::string contenu, DateSimple date)
+{
+    taches.ajoutTache(Tache(contenu, date));
+}
+
+
 std::ostream& operator<<(std::ostream& out, const Interaction& i)
 {
     out << i.getContenu() << " " << i.getDate().getDateStrFormat();
-    if(i.getLTache().size() != 0)
-    {
-        for(auto tache = i.getLTache().begin(); tache != i.getLTache().end();)
-        {
-            out << std::endl << *tache;
-        }
-    }
-    out << std::endl;
+    if(i.getNombreTache() != 0)
+        out << std::endl << i.getTaches();
     return out;
 }
 

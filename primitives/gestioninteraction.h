@@ -16,10 +16,9 @@ public:
     unsigned getNombreInteraction() const;
     std::pair<Interaction, bool> getInteraction(const std::string contenu);
     std::pair<Interaction, bool> getInteraction(const int nb);
-    const std::list<Interaction> &getListInteraction() const;
+    std::list<Interaction> getListInteraction() const;
 
     friend std::ostream& operator<<(std::ostream& out, const GestionInteraction& c);
-    //TODO finir les operateur << et les fonctions test
 };
 
 #endif // GESTIONINTERACTION_H

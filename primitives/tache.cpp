@@ -36,6 +36,11 @@ std::ostream& operator<<(std::ostream& out, const Tache& tache)
     return out;
 }
 
+bool Tache::operator==(const Tache& t)
+{
+    return contenu == t.getContenu() && date == t.getDate();
+}
+
 std::string Tache::getContenu() const
 {
     return contenu;

@@ -2,10 +2,10 @@
 #define INTERACTION_H
 
 #include <string>
-#include <list>
 
-#include "primitives/dateSimple.h"
+#include "dateSimple.h"
 #include "tache.h"
+#include "gestiontache.h"
 
 
 class Interaction
@@ -14,7 +14,7 @@ private:
 
     DateSimple date;
     std::string contenu;
-    std::list<Tache> lTache;
+    GestionTache taches;
 
 public:
 
@@ -31,10 +31,20 @@ public:
     std::string getContenu() const;
     void setContenu(const std::string &value);
 
-    std::list<Tache> getLTache() const;
-    void setLTache(const std::list<Tache> &value);
+    GestionTache getTaches() const;
+    void setTaches(const GestionTache &value);
+
+    unsigned getNombreTache() const;
+
+    void ajouterTache(const Tache& tache);
+    void ajouterTache(const std::string contenu, std::string dateStr);
+    void ajouterTache(const std::string contenu, DateSimple dateStr);
+
+    void retirerTache(const Tache& tache);
 
     bool operator==(const Interaction& in);
+
+
 };
 
 #endif // INTERACTION_H

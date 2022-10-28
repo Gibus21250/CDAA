@@ -113,6 +113,12 @@ public:
      */
     void ajoutInteraction(const std::string contenu, const std::string dateStr);
 
+    /**
+     * @brief Permet de retirer une interaction de la liste des interactions du contact
+     * @param Interaction
+     */
+    void supprimerInteraction(const Interaction& in);
+
     unsigned getNombreInteraction() const;
 
 protected:

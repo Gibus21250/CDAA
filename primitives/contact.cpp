@@ -101,14 +101,15 @@ bool Contact::operator==(const Contact& in){
 std::ostream& operator<<(std::ostream& out, const Contact& c)
 {
     out << "Nom: " <<  c.getNom()
-               << " Prénom: " << c.getPrenom()
-               << " Entreprise: " << c.getEntreprise()
-               << " Mail: " << c.getMail()
-               << " Téléphone: " << c.getTelephone()
-               << " Uri" << c.getUriPhoto()
-               << " Nombre d'interaction(s): " << c.getNombreInteraction();
+               << ", Prénom: " << c.getPrenom()
+               << std::endl << "Entreprise: " << c.getEntreprise()
+               << ", Mail: " << c.getMail()
+               << ", Téléphone: " << c.getTelephone()
+               << std::endl << "Uri: " << c.getUriPhoto()
+               << std::endl << "Nombre d'interaction(s): " << c.getNombreInteraction() << std::endl;
     if(c.getNombreInteraction() > 0)
-        out << c.getGestionInteraction() << std::endl;
+        out << c.getGestionInteraction();
+    return out;
 }
 //////////////////////////////////////////
 /// Gestion des Intéractions du contact //
@@ -123,6 +124,11 @@ void Contact::ajoutInteraction(const std::string contenu, const std::string date
 {
     DateSimple dt(dateStr);
     ajoutInteraction(contenu, dt);
+}
+
+void Contact::supprimerInteraction(const Interaction &in)
+{
+    interactions.supprimerInteraction(in);
 }
 
 unsigned Contact::getNombreInteraction() const

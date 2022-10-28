@@ -46,8 +46,30 @@ std::pair<Interaction, bool> GestionInteraction::getInteraction(const int nb)
     if(nb < (int) listInteraction.size()){
         auto element = listInteraction.begin();
         std::advance(element, nb);
-        //std::cout << "Trouve l'interaction no " << nb << " " << *element << std::endl;
         return std::make_pair(*element, true);
     }
     return std::make_pair(Interaction(), false);
+}
+
+std::list<Interaction> GestionInteraction::getListInteraction() const
+{
+    return listInteraction;
+}
+
+std::ostream& operator<<(std::ostream& out, const GestionInteraction& c)
+{
+    if(c.getNombreInteraction() < 1)
+    {
+        out << "Aucune interaction";
+    }
+    else
+    {
+        int cmpt = 1;
+        for(auto in : c.getListInteraction())
+        {
+            out << std::endl << "Interaction No " << cmpt++;
+            out << std::endl << in;
+        }
+    }
+    return out;
 }

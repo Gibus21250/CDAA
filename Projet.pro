@@ -9,6 +9,7 @@ SOURCES += \
         primitives/dateSimple.cpp \
         primitives/gestioncontact.cpp \
         primitives/gestioninteraction.cpp \
+        primitives/gestiontache.cpp \
         primitives/interaction.cpp \
         primitives/tache.cpp
 
@@ -27,5 +28,6 @@ HEADERS += \
     primitives/dateSimple.h \
     primitives/gestioncontact.h \
     primitives/gestioninteraction.h \
+    primitives/gestiontache.h \
     primitives/interaction.h \
     primitives/tache.h
