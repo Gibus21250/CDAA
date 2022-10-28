@@ -3,7 +3,6 @@
 
 #include <string>
 
-#include "interaction.h"
 #include "dateSimple.h"
 #include "gestioninteraction.h"
 
@@ -88,6 +87,7 @@ public:
     DateSimple getDate() const;
     void setDate(const DateSimple &value);
 
+    const GestionInteraction &getInteractions() const;
 };
 
 #endif // CONTACT_H
