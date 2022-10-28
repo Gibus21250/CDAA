@@ -24,6 +24,9 @@ int main()
     testContactAvecInteraction();
     testGestionContact();
 
+    DateSimple ds;
+    std::cout << ds.getDateStrFormat() << std::endl;
+
     return 0;
 }
 

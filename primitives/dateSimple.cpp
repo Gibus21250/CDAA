@@ -6,7 +6,14 @@
 
 DateSimple::DateSimple()
 {
-    time = date::ceil<date::days>(system_clock::now());
+    if(date::is_am(std::chrono::hours()))
+    {
+        time = date::floor<date::days>(system_clock::now());
+    }
+    else
+    {
+        time = date::ceil<date::days>(system_clock::now());
+    }
 }
 
 DateSimple::DateSimple(const std::string str)
