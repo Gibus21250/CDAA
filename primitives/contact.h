@@ -14,7 +14,7 @@ class Contact
 private:
 
     std::string nom, prenom, entreprise, mail, telephone, uriPhoto;
-    GestionInteraction *interactions;
+    GestionInteraction interactions;
     DateSimple date;
 
 public:
@@ -29,7 +29,7 @@ public:
      * @param uriPhoto
      */
     Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto);
-    ~Contact();
+
     friend std::ostream& operator<<(std::ostream& out, const Contact& c);
 
     /**
@@ -75,19 +75,49 @@ public:
     void setUriPhoto(const std::string &value);
 
     /**
-     * @brief getListinteractions
-     * @return la liste de(s) interaction(s) du contact
-     */
-    GestionInteraction& getGestionInteractions() const;
-
-    /**
-     * @brief Recupère la Date de l'interaction
-     * @return la date de l'interaction
+     * @brief Recupère la Date de création du contact
+     * @return la date de création du contact
      */
     DateSimple getDate() const;
     void setDate(const DateSimple &value);
 
-    bool Contact::operator==(const Contact& in);
+    bool operator==(const Contact& in);
+
+    //////////////////////////////////////////
+    /// Gestion des Intéractions du contact //
+    //////////////////////////////////////////
+
+    /**
+     * @brief Ajoute une copie de l'interaction à la liste des interaction du Contact
+     * @param in
+     */
+    void ajoutInteraction(const Interaction& in);
+
+    /**
+     * @brief Ajoute une interaction à la liste des interaction du contact
+     * @param contenu de l'interaction
+     * @param date de l'interaction
+     */
+    void ajoutInteraction(const std::string contenu, const DateSimple date);
+
+    /**
+     * @brief Ajoute une interaction à la liste des interaction du contact en prenant la date du jour
+     * @param contenu de l'intéraction
+     */
+    void ajoutInteraction(const std::string contenu);
+
+    /**
+     * @brief Ajoute une interaction à la liste des interaction du contact
+     * @param contenu
+     * @param dateStr
+     */
+    void ajoutInteraction(const std::string contenu, const std::string dateStr);
+
+    unsigned getNombreInteraction() const;
+
+protected:
+    GestionInteraction getGestionInteraction() const;
+
 
 };
 

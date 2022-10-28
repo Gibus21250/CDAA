@@ -8,17 +8,7 @@ Contact::Contact(const std::string nom, const std::string prenom, const std::str
     this->mail = mail;
     this->telephone = telephone;
     this->uriPhoto = uriPhoto;
-    this->interactions = new GestionInteraction();
-}
-
-Contact::~Contact()
-{
-    delete interactions;
-}
-
-std::ostream& operator<<(std::ostream& out, const Contact& c)
-{
-    return out << c.getNom() << " " << c.getPrenom() << " " << c.getEntreprise() << " " << c.getMail() << " " << c.getTelephone() << " " << c.getUriPhoto();
+    this->interactions = GestionInteraction();
 }
 
 DateSimple Contact::getDate() const
@@ -29,11 +19,6 @@ DateSimple Contact::getDate() const
 void Contact::setDate(const DateSimple &value)
 {
     date = value;
-}
-
-GestionInteraction& Contact::getGestionInteractions() const
-{
-    return *interactions;
 }
 
 std::string Contact::getUriPhoto() const
@@ -111,4 +96,52 @@ bool Contact::operator==(const Contact& in){
         return false;
     }
     
+}
+
+std::ostream& operator<<(std::ostream& out, const Contact& c)
+{
+    out << "Nom: " <<  c.getNom()
+               << " Prénom: " << c.getPrenom()
+               << " Entreprise: " << c.getEntreprise()
+               << " Mail: " << c.getMail()
+               << " Téléphone: " << c.getTelephone()
+               << " Uri" << c.getUriPhoto()
+               << " Nombre d'interaction(s): " << c.getNombreInteraction();
+    if(c.getNombreInteraction() > 0)
+        out << c.getGestionInteraction() << std::endl;
+}
+//////////////////////////////////////////
+/// Gestion des Intéractions du contact //
+//////////////////////////////////////////
+
+void Contact::ajoutInteraction(const Interaction &in)
+{
+    interactions.ajoutInteraction(in);
+}
+
+void Contact::ajoutInteraction(const std::string contenu, const std::string dateStr)
+{
+    DateSimple dt(dateStr);
+    ajoutInteraction(contenu, dt);
+}
+
+unsigned Contact::getNombreInteraction() const
+{
+    return interactions.getNombreInteraction();
+}
+
+GestionInteraction Contact::getGestionInteraction() const
+{
+    return interactions;
+}
+
+void Contact::ajoutInteraction(const std::string contenu, const DateSimple date)
+{
+    Interaction tmp(contenu, date);
+    interactions.ajoutInteraction(tmp);
+}
+
+void Contact::ajoutInteraction(const std::string contenu)
+{
+    interactions.ajoutInteraction(Interaction(contenu));
 }

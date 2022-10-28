@@ -1,7 +1,7 @@
 #ifndef GESTIONCONTACT_H
 #define GESTIONCONTACT_H
 
-#include "Contact.h"
+#include "contact.h"
 #include <list>
 
 class GestionContact

@@ -7,7 +7,7 @@ GestionInteraction::GestionInteraction()
     listInteraction = std::list<Interaction>();
 }
 
-void GestionInteraction::ajoutInteraction(const Interaction& in)
+void GestionInteraction::ajoutInteraction(const Interaction in)
 {
     this->listInteraction.push_back(in);
 }
@@ -25,6 +25,11 @@ bool GestionInteraction::supprimerInteraction(const Interaction& in)
     return done;
 }
 
+unsigned GestionInteraction::getNombreInteraction() const
+{
+    return listInteraction.size();
+}
+
 std::pair<Interaction, bool> GestionInteraction::getInteraction(const std::string contenu)
 {
 
@@ -38,7 +43,7 @@ std::pair<Interaction, bool> GestionInteraction::getInteraction(const std::strin
 
 std::pair<Interaction, bool> GestionInteraction::getInteraction(const int nb)
 {
-    if(nb < listInteraction.size()){
+    if(nb < (int) listInteraction.size()){
         auto element = listInteraction.begin();
         std::advance(element, nb);
         //std::cout << "Trouve l'interaction no " << nb << " " << *element << std::endl;
