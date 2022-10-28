@@ -113,9 +113,13 @@ public:
      */
     void ajoutInteraction(const std::string contenu, const std::string dateStr);
 
+    /**
+     * @brief Avoir le nombre d'interaction du contact
+     */
     unsigned getNombreInteraction() const;
 
 protected:
+
     GestionInteraction getGestionInteraction() const;
 
 
