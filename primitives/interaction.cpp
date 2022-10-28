@@ -69,6 +69,6 @@ std::ostream& operator<<(std::ostream& out, const Interaction& i)
 }
 
 bool Interaction::operator==(const Interaction& in){
-    return in.contenu.compare(contenu) == 0;
+    return in.contenu.compare(contenu) ==0;
 }
 

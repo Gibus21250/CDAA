@@ -87,7 +87,8 @@ public:
     DateSimple getDate() const;
     void setDate(const DateSimple &value);
 
-    const GestionInteraction &getInteractions() const;
+    bool Contact::operator==(const Contact& in);
+
 };
 
 #endif // CONTACT_H

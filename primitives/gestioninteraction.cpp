@@ -7,12 +7,12 @@ GestionInteraction::GestionInteraction()
     listInteraction = std::list<Interaction>();
 }
 
-void GestionInteraction::addInteraction(const Interaction& in)
+void GestionInteraction::ajoutInteraction(const Interaction& in)
 {
     this->listInteraction.push_back(in);
 }
 
-bool GestionInteraction::removeInteraction(const Interaction& in)
+bool GestionInteraction::supprimerInteraction(const Interaction& in)
 {
     bool done = false;
     for(auto it = listInteraction.begin(); it != listInteraction.end(); ++it){
