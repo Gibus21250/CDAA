@@ -25,10 +25,28 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const Interaction& i);
 
+    /**
+     * @brief getDate
+     * @return la date à laquelle se passe l'interaction
+     */
     DateSimple getDate() const;
+
+    /**
+     * @brief setDate
+     * @param la valeur de la date à modifier
+     */
     void setDate(const DateSimple &value);
 
+    /**
+     * @brief getContenu
+     * @return Le contenu de l'interaction
+     */
     std::string getContenu() const;
+
+    /**
+     * @brief setContenu
+     * @param valeur du contenu à modifier
+     */
     void setContenu(const std::string &value);
 
     GestionTache getTaches() const;

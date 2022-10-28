@@ -119,9 +119,13 @@ public:
      */
     void supprimerInteraction(const Interaction& in);
 
+    /**
+     * @brief Avoir le nombre d'interaction du contact
+     */
     unsigned getNombreInteraction() const;
 
 protected:
+
     GestionInteraction getGestionInteraction() const;
 
 

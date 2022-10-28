@@ -46,10 +46,16 @@ public:
 
     /**
      * @brief Renvoie sous forme de string standard la date associé à l'instance
-     * @return DateSimple sous forme de string standard à à l'aide de la classe date.h modifiée
+     * @return DateSimple sous forme de string standard à l'aide de la classe date.h modifiée
      */
     std::string getDateStrFormat() const;
 
+    /**
+     * @brief avoir le nombre restant de jour entre les dates d1 et d2
+     * @param d1
+     * @param d2
+     * @return
+     */
     static int getDifferenceDays(const DateSimple& d1, const DateSimple& d2);
 
     bool operator<(const DateSimple& date) const;
