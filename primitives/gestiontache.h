@@ -7,20 +7,26 @@
 class GestionTache
 {
 private:
-    std::list<Tache> lTache;
+    std::list<Tache> m_lTache;
 
 public:
+    /**
+     * @brief Constructeur par défaut,
+     */
     GestionTache();
+
     /**
      * @brief Ajouter une tache à la liste des taches
      * @param in
      */
-    void ajoutTache(const Tache in);
+    void ajoutTache(const Tache& in);
+
     /**
      * @brief Supprimer toute les taches correspondant à la tache mit en argument
      * @param in
      */
     bool supprimerTache(const Tache& in);
+
     /**
      * @brief Renvoie le nombre de taches
      */

@@ -12,9 +12,9 @@ class Interaction
 {
 private:
 
-    DateSimple date;
-    std::string contenu;
-    GestionTache taches;
+    std::string m_contenu;
+    DateSimple m_date;
+    GestionTache m_taches;
 
 public:
 
@@ -49,9 +49,6 @@ public:
      */
     void setContenu(const std::string &value);
 
-    GestionTache getTaches() const;
-    void setTaches(const GestionTache &value);
-
     unsigned getNombreTache() const;
 
     /**
@@ -63,12 +60,12 @@ public:
      * @brief Ajoute une tache à la liste de tache
      * @param tache
      */
-    void ajouterTache(const std::string contenu, std::string dateStr);
+    void ajouterTache(const std::string& contenu, std::string& dateStr);
     /**
      * @brief Ajoute une tache à la liste de tache
      * @param tache
      */
-    void ajouterTache(const std::string contenu, DateSimple dateStr);
+    void ajouterTache(const std::string& contenu, DateSimple& dateStr);
 
     /**
      * @brief Retire toute les taches à la liste de tache
@@ -77,6 +74,10 @@ public:
     void retirerTache(const Tache& tache);
 
     bool operator==(const Interaction& in);
+
+protected:
+
+    GestionTache getTaches() const;
 
 
 };

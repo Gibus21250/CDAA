@@ -1,77 +1,59 @@
 #include "interaction.h"
 
-Interaction::Interaction()
-{
-    Interaction("");
-}
+Interaction::Interaction() : Interaction("") {}
 
 Interaction::Interaction(const std::string& desc)
-{
-    contenu = desc;
-    date = DateSimple();
-    taches = GestionTache();
-}
+    : m_contenu(desc), m_date(DateSimple()) {}
 
 Interaction::Interaction(const std::string& desc, const DateSimple& date_)
-{
-    contenu = desc;
-    date = date_;
-}
+    : m_contenu(desc), m_date(date_) {}
 
 Interaction::Interaction(const std::string& desc, const std::string& dateStr)
-{
-    contenu = desc;
-    date = DateSimple(dateStr);
-}
+    : m_contenu(desc), m_date(DateSimple(dateStr)) {}
 
 std::string Interaction::getContenu() const
 {
-    return contenu;
+    return m_contenu;
 }
 
 void Interaction::setContenu(const std::string &value)
 {
-    contenu = value;
+    m_contenu = value;
 }
 
 DateSimple Interaction::getDate() const
 {
-    return date;
+    return m_date;
 }
 
 void Interaction::setDate(const DateSimple &value)
 {
-    date = value;
+    m_date = value;
 }
 
 GestionTache Interaction::getTaches() const
 {
-    return taches;
-}
-
-void Interaction::setTaches(const GestionTache &value)
-{
-    taches = value;
+    return m_taches;
 }
 
 unsigned Interaction::getNombreTache() const
 {
-    return taches.getNombreTache();
+    return m_taches.getNombreTache();
 }
 
 void Interaction::ajouterTache(const Tache &tache)
 {
-    taches.ajoutTache(tache);
+    m_taches.ajoutTache(tache);
 }
 
-void Interaction::ajouterTache(const std::string contenu, std::string dateStr)
+void Interaction::ajouterTache(const std::string& contenu, std::string& dateStr)
 {
-    taches.ajoutTache(Tache(contenu, dateStr));
+    m_taches.ajoutTache(Tache(contenu, dateStr));
 }
 
-void Interaction::ajouterTache(const std::string contenu, DateSimple date)
+void Interaction::ajouterTache(const std::string& contenu, DateSimple& date)
 {
-    taches.ajoutTache(Tache(contenu, date));
+    m_taches.ajoutTache(Tache(contenu, date));
 }
 
 
@@ -84,6 +66,6 @@ std::ostream& operator<<(std::ostream& out, const Interaction& i)
 }
 
 bool Interaction::operator==(const Interaction& in){
-    return in.contenu.compare(contenu) ==0;
+    return in.m_contenu.compare(m_contenu) == 0;
 }
 

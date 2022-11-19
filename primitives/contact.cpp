@@ -1,100 +1,88 @@
 #include "contact.h"
 
 Contact::Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto)
-{
-    this->nom = nom;
-    this->prenom = prenom;
-    this->entreprise = entreprise;
-    this->mail = mail;
-    this->telephone = telephone;
-    this->uriPhoto = uriPhoto;
-    this->interactions = GestionInteraction();
-}
+    : m_nom(nom), m_prenom(prenom), m_entreprise(entreprise), m_mail(mail), m_telephone(telephone), m_uriPhoto(uriPhoto) {}
 
 DateSimple Contact::getDate() const
 {
-    return date;
+    return m_date;
 }
 
 void Contact::setDate(const DateSimple &value)
 {
-    date = value;
+    m_date = value;
 }
 
 std::string Contact::getUriPhoto() const
 {
-    return uriPhoto;
+    return m_uriPhoto;
 }
 
 void Contact::setUriPhoto(const std::string &value)
 {
-    uriPhoto = value;
+    m_uriPhoto = value;
 }
 
 std::string Contact::getTelephone() const
 {
-    return telephone;
+    return m_telephone;
 }
 
 void Contact::setTelephone(const std::string &value)
 {
-    telephone = value;
+    m_telephone = value;
 }
 
 std::string Contact::getMail() const
 {
-    return mail;
+    return m_mail;
 }
 
 void Contact::setMail(const std::string &value)
 {
-    mail = value;
+    m_mail = value;
 }
 
 std::string Contact::getEntreprise() const
 {
-    return entreprise;
+    return m_entreprise;
 }
 
 void Contact::setEntreprise(const std::string &value)
 {
-    entreprise = value;
+    m_entreprise = value;
 }
 
 std::string Contact::getPrenom() const
 {
-    return prenom;
+    return m_prenom;
 }
 
 void Contact::setPrenom(const std::string &value)
 {
-    prenom = value;
+    m_prenom = value;
 }
 
 std::string Contact::getNom() const
 {
-    return nom;
+    return m_nom;
 }
 
 void Contact::setNom(const std::string &value)
 {
-    nom = value;
+    m_nom = value;
 }
 
 bool Contact::operator==(const Contact& in){
 
-    if((in.nom.compare(nom) && 
-    in.prenom.compare(prenom) && 
-    in.entreprise.compare(entreprise) && 
-    in.mail.compare(mail) && 
-    in.telephone.compare(telephone) && 
-    in.uriPhoto.compare(uriPhoto))==0)
-    {
-        return true;
-    }else
-    {
-        return false;
-    }
+    return (
+                in.m_nom.compare(m_nom) &&
+                in.m_prenom.compare(m_prenom) &&
+                in.m_entreprise.compare(m_entreprise) &&
+                in.m_mail.compare(m_mail) &&
+                in.m_telephone.compare(m_telephone) &&
+                in.m_uriPhoto.compare(m_uriPhoto)
+           );
     
 }
 
@@ -115,12 +103,12 @@ std::ostream& operator<<(std::ostream& out, const Contact& c)
 /// Gestion des Intéractions du contact //
 //////////////////////////////////////////
 
-void Contact::ajoutInteraction(const Interaction &in)
+void Contact::ajoutInteraction(const Interaction& in)
 {
-    interactions.ajoutInteraction(in);
+    m_interactions.ajoutInteraction(in);
 }
 
-void Contact::ajoutInteraction(const std::string contenu, const std::string dateStr)
+void Contact::ajoutInteraction(const std::string& contenu, const std::string& dateStr)
 {
     DateSimple dt(dateStr);
     ajoutInteraction(contenu, dt);
@@ -128,26 +116,26 @@ void Contact::ajoutInteraction(const std::string contenu, const std::string date
 
 void Contact::supprimerInteraction(const Interaction &in)
 {
-    interactions.supprimerInteraction(in);
+    m_interactions.supprimerInteraction(in);
 }
 
 unsigned Contact::getNombreInteraction() const
 {
-    return interactions.getNombreInteraction();
+    return m_interactions.getNombreInteraction();
 }
 
 GestionInteraction Contact::getGestionInteraction() const
 {
-    return interactions;
+    return m_interactions;
 }
 
-void Contact::ajoutInteraction(const std::string contenu, const DateSimple date)
+void Contact::ajoutInteraction(const std::string& contenu, const DateSimple& date)
 {
     Interaction tmp(contenu, date);
-    interactions.ajoutInteraction(tmp);
+    m_interactions.ajoutInteraction(tmp);
 }
 
-void Contact::ajoutInteraction(const std::string contenu)
+void Contact::ajoutInteraction(const std::string& contenu)
 {
-    interactions.ajoutInteraction(Interaction(contenu));
+    m_interactions.ajoutInteraction(Interaction(contenu));
 }

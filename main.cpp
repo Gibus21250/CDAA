@@ -15,17 +15,21 @@ void testCreationInteractionAvecTache();
 void testContactAvecInteraction();
 void testGestionContact();
 
+
 int main()
 {
+
+     Tache t;
+     std::cout << t << std::endl;
+
+   /*
     testCreationContact();
     testCreationTache();
     testCreationInteractionSansTache();
     testCreationInteractionAvecTache();
     testContactAvecInteraction();
     testGestionContact();
-
-    DateSimple ds;
-    std::cout << ds.getDateStrFormat() << std::endl;
+    */
 
     return 0;
 }

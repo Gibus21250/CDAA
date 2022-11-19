@@ -1,62 +1,58 @@
 #include "tache.h"
 
+Tache::Tache() : Tache("") {}
 
 Tache::Tache(const std::string& contenu_)
-{
-    contenu = contenu_;
-    hasDate = false;
-}
+    : m_contenu(contenu_), m_hasDate(false) {}
 
 Tache::Tache(const std::string& contenu_, const DateSimple& date_)
-{
-    contenu = contenu_;
-    date = date_;
-    hasDate = true;
-}
+    : m_contenu(contenu_), m_date(date_), m_hasDate(true) {}
 
 Tache::Tache(const std::string& contenu_, const std::string& datestr)
-{
-    contenu = contenu_;
-    date = DateSimple(datestr);
-    hasDate = true;
-}
+    : m_contenu(contenu_), m_date(DateSimple(datestr)), m_hasDate(true) {}
 
 bool Tache::isDatee() const
 {
-    return hasDate;
+    return m_hasDate;
+}
+
+std::string Tache::getContenu() const
+{
+    return m_contenu;
+}
+
+void Tache::setContenu(const std::string &value)
+{
+    m_contenu = value;
+}
+
+DateSimple Tache::getDate() const
+{
+    return m_date;
+}
+
+void Tache::setDate(const DateSimple &value)
+{
+    if(value.getDateStrFormat().compare("") != 0)
+    {
+        m_date = value;
+        m_hasDate = true;
+    }
+    else m_hasDate = false;
+
 }
 
 std::ostream& operator<<(std::ostream& out, const Tache& tache)
 {
-    out << "@todo " << tache.contenu;
+    out << "@todo " << tache.m_contenu;
     if(tache.isDatee())
     {
-        out << " @date " << tache.date.getDateStrFormat();
+        out << " @date " << tache.m_date.getDateStrFormat();
     }
     return out;
 }
 
 bool Tache::operator==(const Tache& t)
 {
-    return contenu == t.getContenu() && date == t.getDate();
-}
-
-std::string Tache::getContenu() const
-{
-    return contenu;
-}
-
-void Tache::setContenu(const std::string &value)
-{
-    contenu = value;
-}
-
-DateSimple Tache::getDate() const
-{
-    return date;
-}
-
-void Tache::setDate(const DateSimple &value)
-{
-    date = value;
+    return m_contenu == t.getContenu() && m_date == t.getDate();
 }

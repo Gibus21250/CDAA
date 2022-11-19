@@ -7,22 +7,23 @@ GestionInteraction::GestionInteraction()
     listInteraction = std::list<Interaction>();
 }
 
-void GestionInteraction::ajoutInteraction(const Interaction in)
+//TODO VERIFIER LE BON AJOUT A LA LISTE
+void GestionInteraction::ajoutInteraction(const Interaction& in)
 {
     this->listInteraction.push_back(in);
 }
 
 bool GestionInteraction::supprimerInteraction(const Interaction& in)
 {
-    bool done = false;
-    for(auto it = listInteraction.begin(); it != listInteraction.end(); ++it){
-        if(*it == in){
-            listInteraction.erase(it);
-            done = true;
-            it = listInteraction.end();
+    bool finded = false;
+    for(auto it = listInteraction.begin(); it != listInteraction.end() && !finded; ++it){
+        if(*it == in)
+        {
+            listInteraction.erase(it);      //On supprime l'interaction
+            finded = true;                  //On affecte
         }
     }
-    return done;
+    return finded;      //On renvoie si oui ou non l'interaction a été trouvée et supprimée
 }
 
 unsigned GestionInteraction::getNombreInteraction() const
@@ -30,10 +31,11 @@ unsigned GestionInteraction::getNombreInteraction() const
     return listInteraction.size();
 }
 
-std::pair<Interaction, bool> GestionInteraction::getInteraction(const std::string contenu)
+std::pair<Interaction, bool> GestionInteraction::getInteraction(const std::string& contenu) const
 {
 
-    for(auto it = listInteraction.begin(); it != listInteraction.end(); ++it){
+    for(auto it = listInteraction.begin(); it != listInteraction.end(); ++it)
+    {
         if(it->getContenu() == contenu){
             return std::make_pair(*it, true);
         }
@@ -41,7 +43,7 @@ std::pair<Interaction, bool> GestionInteraction::getInteraction(const std::strin
     return std::make_pair(Interaction(), false);
 }
 
-std::pair<Interaction, bool> GestionInteraction::getInteraction(const int nb)
+std::pair<Interaction, bool> GestionInteraction::getInteraction(const int nb) const
 {
     if(nb < (int) listInteraction.size()){
         auto element = listInteraction.begin();

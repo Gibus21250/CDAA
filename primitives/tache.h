@@ -7,11 +7,12 @@
 class Tache
 {
 private:
-    std::string contenu;
-    DateSimple date;
-    bool hasDate;
+    std::string m_contenu;
+    DateSimple m_date;
+    bool m_hasDate;
 
 public:
+    Tache();
     Tache(const std::string& contenu);
     Tache(const std::string& contenu, const DateSimple& date);
     Tache(const std::string& contenu, const std::string& dateStr );
@@ -47,6 +48,7 @@ public:
     void setDate(const DateSimple &value);
 
     friend std::ostream& operator<<(std::ostream& out, const Tache& tache);
+
     bool operator==(const Tache& t);
 };
 

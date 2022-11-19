@@ -2,7 +2,6 @@
 #define CONTACT_H
 
 #include <string>
-
 #include "dateSimple.h"
 #include "gestioninteraction.h"
 
@@ -13,24 +12,22 @@ class Contact
 {
 private:
 
-    std::string nom, prenom, entreprise, mail, telephone, uriPhoto;
-    GestionInteraction interactions;
-    DateSimple date;
+    std::string m_nom, m_prenom, m_entreprise, m_mail, m_telephone, m_uriPhoto;
+    GestionInteraction m_interactions;
+    DateSimple m_date;
 
 public:
 
     /**
-     * @brief Constructeur standard
+     * @brief Constructeur standard d'un contact
      * @param nom Le nom du contact
      * @param prenom Le prenom du contact
-     * @param entreprise
-     * @param mail
-     * @param telephone
-     * @param uriPhoto
+     * @param entreprise Le nom de l'entreprise
+     * @param mail  Le mail du contact
+     * @param telephone Le téléphone du contact
+     * @param uriPhoto  L'uri de l'image de profile du contact
      */
     Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto);
-
-    friend std::ostream& operator<<(std::ostream& out, const Contact& c);
 
     /**
      * @brief getNom
@@ -83,6 +80,8 @@ public:
 
     bool operator==(const Contact& in);
 
+    friend std::ostream& operator<<(std::ostream& out, const Contact& c);
+
     //////////////////////////////////////////
     /// Gestion des Intéractions du contact //
     //////////////////////////////////////////
@@ -98,20 +97,20 @@ public:
      * @param contenu de l'interaction
      * @param date de l'interaction
      */
-    void ajoutInteraction(const std::string contenu, const DateSimple date);
+    void ajoutInteraction(const std::string& contenu, const DateSimple& date);
 
     /**
      * @brief Ajoute une interaction à la liste des interaction du contact en prenant la date du jour
      * @param contenu de l'intéraction
      */
-    void ajoutInteraction(const std::string contenu);
+    void ajoutInteraction(const std::string& contenu);
 
     /**
      * @brief Ajoute une interaction à la liste des interaction du contact
      * @param contenu
      * @param dateStr
      */
-    void ajoutInteraction(const std::string contenu, const std::string dateStr);
+    void ajoutInteraction(const std::string& contenu, const std::string& dateStr);
 
     /**
      * @brief Permet de retirer une interaction de la liste des interactions du contact
@@ -126,6 +125,10 @@ public:
 
 protected:
 
+    /**
+     * @brief getGestionInteraction
+     * @return Renvoie le gstionnaire d'interaction du contact
+     */
     GestionInteraction getGestionInteraction() const;
 
 
