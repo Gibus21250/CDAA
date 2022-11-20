@@ -42,9 +42,7 @@ public:
      */
     Tache(const std::string& contenu, const std::string& dateStr);
 
-    //Tache(std::string&& contenu);
-
-    ~Tache();
+    Tache(std::string&& contenu);
 
     void printValue();
 
@@ -86,7 +84,8 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const Tache& tache);
 
-    bool operator==(const Tache& t);
+    bool operator==(const Tache& t) const;
+
 };
 
 #endif // TACHE_H

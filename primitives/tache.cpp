@@ -2,55 +2,40 @@
 
 #include <iostream>
 
-Tache::Tache() : m_contenu(""), m_date(), m_hasDate(false)
+Tache::Tache() : m_contenu(""), m_hasDate(false)
 {
-    std::cout << "[TACHE] Constructor default called" << std::endl;
-    printValue();
 }
 
 Tache::Tache(const Tache& tache)
     : m_contenu(tache.m_contenu), m_date(tache.m_date), m_hasDate(tache.m_hasDate)
 {
-    std::cout << "[TACHE] Constructor copy called" << std::endl;
 }
 
 Tache::Tache(const std::string& contenu_)
-    : m_contenu(contenu_), m_date(), m_hasDate(false)
+    : m_contenu(contenu_), m_hasDate(false)
 {
-    std::cout << "[TACHE] Constructor string& called" << std::endl;
-    printValue();
 }
 
 Tache::Tache(const std::string& contenu_, const DateSimple& date_)
     : m_contenu(contenu_), m_date(date_), m_hasDate(true)
 {
-    std::cout << "[TACHE] Constructor string&, date& called" << std::endl;
-    printValue();
 }
 
 Tache::Tache(const std::string& contenu_, const std::string& datestr)
     : m_contenu(contenu_), m_date(DateSimple(datestr)), m_hasDate(true)
 {
-    std::cout << "[TACHE] Constructor string&, string& called" << std::endl;
-    printValue();
 }
 
-/*Tache::Tache(std::string&& contenu)
+Tache::Tache(std::string&& contenu)
+    : m_date(), m_hasDate(false)
 {
-    std::cout << "Move constructor string&& called" << std::endl;
     m_contenu.clear();
     m_contenu.append(contenu);
-}
-*/
-
-Tache::~Tache()
-{
-    std::cout << "[TACHE] détruite" << std::endl;
 }
 
 void Tache::printValue()
 {
-    std::cout << m_contenu << " " << m_date.getDateStrFormat() << " " << m_hasDate << std::endl;
+    std::cout << m_contenu << " " << m_date.getDateStrFormat() << " " << m_hasDate << " " << this << std::endl;
 }
 
 bool Tache::isDatee() const
@@ -105,7 +90,10 @@ std::ostream& operator<<(std::ostream& out, const Tache& tache)
     return out;
 }
 
-bool Tache::operator==(const Tache& t)
+bool Tache::operator==(const Tache& t) const
 {
-    return m_contenu.compare(t.getContenu()) == 0 && m_date == t.getDate();
+    return m_contenu.compare(t.m_contenu) == 0? //Les contenu sont equivalent ? si oui on regarde s'ils sont tous les deux daté, on compare leurs date, sinon on renvois s'ils sont tous les deux date ou non
+                (m_hasDate & t.m_hasDate)?
+                    m_date == t.m_date : (m_hasDate == t.m_hasDate)
+                  : 0;  //Ici les contenu ne sont pas equivalent
 }

@@ -26,7 +26,6 @@ public:
      * @brief Initialise une date à la date du jour
      */
     DateSimple();
-    ~DateSimple();
 
     /**
      * @brief Initialise une date au jour correspondant à la date strDate

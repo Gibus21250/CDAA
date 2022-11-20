@@ -14,7 +14,6 @@ DateSimple::DateSimple()
     {
         time = date::ceil<date::days>(system_clock::now());
     }
-    std::cout << "[DATESIMPLE] Constructor default called" << std::endl;
 }
 
 DateSimple::DateSimple(const std::string& str)
@@ -33,12 +32,6 @@ DateSimple::DateSimple(const std::string& str)
         }
         time = date::year(date[2])/date::month(date[1])/date::day(date[0]);
     }
-    std::cout << "[DATESIMPLE] Constructor string& called" << std::endl;
-}
-
-DateSimple::~DateSimple()
-{
-    std::cout << "[DATESIMPLE] Destructor called" << std::endl;
 }
 
 int DateSimple::getDifferenceDays(const DateSimple& d1, const DateSimple& d2)
