@@ -11,7 +11,12 @@ Interaction::Interaction(const std::string& desc, const DateSimple& date_)
 Interaction::Interaction(const std::string& desc, const std::string& dateStr)
     : m_contenu(desc), m_date(DateSimple(dateStr)) {}
 
-std::string Interaction::getContenu() const
+const DateSimple &Interaction::getDate() const
+{
+    return m_date;
+}
+
+const std::string& Interaction::getContenu() const
 {
     return m_contenu;
 }
@@ -21,39 +26,34 @@ void Interaction::setContenu(const std::string &value)
     m_contenu = value;
 }
 
-DateSimple Interaction::getDate() const
-{
-    return m_date;
-}
-
 void Interaction::setDate(const DateSimple &value)
 {
     m_date = value;
 }
 
-GestionTache Interaction::getTaches() const
+const GestionTache& Interaction::getTaches() const
 {
     return m_taches;
 }
 
 unsigned Interaction::getNombreTache() const
 {
-    return m_taches.getNombreTache();
+    return m_taches.getNombreElements();
 }
 
 void Interaction::ajouterTache(const Tache &tache)
 {
-    m_taches.ajoutTache(tache);
+    m_taches.ajouterElement(tache);
 }
 
 void Interaction::ajouterTache(const std::string& contenu, std::string& dateStr)
 {
-    m_taches.ajoutTache(Tache(contenu, dateStr));
+    m_taches.ajouterElement(Tache(contenu, dateStr));
 }
 
 void Interaction::ajouterTache(const std::string& contenu, DateSimple& date)
 {
-    m_taches.ajoutTache(Tache(contenu, date));
+    m_taches.ajouterElement(Tache(contenu, date));
 }
 
 
@@ -65,7 +65,7 @@ std::ostream& operator<<(std::ostream& out, const Interaction& i)
     return out;
 }
 
-bool Interaction::operator==(const Interaction& in){
-    return in.m_contenu.compare(m_contenu) == 0;
+bool Interaction::operator==(const Interaction& in) const {
+    return in.m_contenu.compare(m_contenu) == 0 && this->getTaches() == in.getTaches();
 }
 

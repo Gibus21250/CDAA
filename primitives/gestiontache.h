@@ -2,13 +2,11 @@
 #define GESTIONTACHE_H
 
 #include "tache.h"
+#include "gestionnaire.h"
 #include <list>
 
-class GestionTache
+class GestionTache : public Gestionnaire<Tache>
 {
-private:
-    std::list<Tache> m_lTache;
-
 public:
     /**
      * @brief Constructeur par défaut,
@@ -16,23 +14,13 @@ public:
     GestionTache();
 
     /**
-     * @brief Ajouter une tache à la liste des taches
-     * @param in
+     * @brief Permet de récupérer toutes les tâches contenant le mot 'mot'
+     * @param mot à tester
+     * @return Un nouveau Gestionnaire de tache
      */
-    void ajoutTache(const Tache& in);
+    GestionTache& getTacheContenant(const std::string& mot) const;
 
-    /**
-     * @brief Supprimer toute les taches correspondant à la tache mit en argument
-     * @param in
-     */
-    bool supprimerTache(const Tache& in);
 
-    /**
-     * @brief Renvoie le nombre de taches
-     */
-    unsigned getNombreTache() const;
-
-    friend std::ostream& operator<<(std::ostream& out, const GestionTache& c);
 };
 
 #endif // GESTIONTACHE_H

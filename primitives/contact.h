@@ -14,7 +14,7 @@ private:
 
     std::string m_nom, m_prenom, m_entreprise, m_mail, m_telephone, m_uriPhoto;
     GestionInteraction m_interactions;
-    DateSimple m_date;
+    DateSimple m_dateCreation, m_dateDerniereModification;
 
 public:
 
@@ -75,8 +75,9 @@ public:
      * @brief Recupère la Date de création du contact
      * @return la date de création du contact
      */
-    DateSimple getDate() const;
-    void setDate(const DateSimple &value);
+    const DateSimple& getDateCreation() const;
+
+    const DateSimple& getDateModification() const;
 
     bool operator==(const Contact& in);
 
@@ -122,6 +123,9 @@ public:
      * @brief Avoir le nombre d'interaction du contact
      */
     unsigned getNombreInteraction() const;
+
+    const DateSimple &dateDerniereModification() const;
+    void setDateDerniereModification(const DateSimple &newDateDerniereModification);
 
 protected:
 

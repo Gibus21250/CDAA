@@ -16,19 +16,22 @@ DateSimple::DateSimple()
     }
 }
 
-DateSimple::DateSimple(const std::string str)
+DateSimple::DateSimple(const std::string& str)
 {
-    std::stringstream ss(str);
-    std::string tmp;
-    unsigned date[3];
-
-    short i = 0;
-    while(std::getline(ss, tmp, '/'))
+    if(str.length() > 0)
     {
-        date[i] = stoi(tmp);
-        i++;
+        std::stringstream ss(str);
+        std::string tmp;
+        unsigned date[3];
+
+        short i = 0;
+        while(std::getline(ss, tmp, '/'))
+        {
+            date[i] = stoi(tmp);
+            i++;
+        }
+        time = date::year(date[2])/date::month(date[1])/date::day(date[0]);
     }
-    time = date::year(date[2])/date::month(date[1])/date::day(date[0]);
 }
 
 int DateSimple::getDifferenceDays(const DateSimple& d1, const DateSimple& d2)

@@ -1,19 +1,31 @@
 #include "contact.h"
 
+
 Contact::Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto)
     : m_nom(nom), m_prenom(prenom), m_entreprise(entreprise), m_mail(mail), m_telephone(telephone), m_uriPhoto(uriPhoto) {}
 
-DateSimple Contact::getDate() const
+
+const DateSimple &Contact::dateDerniereModification() const
 {
-    return m_date;
+    return m_dateDerniereModification;
 }
 
-void Contact::setDate(const DateSimple &value)
+void Contact::setDateDerniereModification(const DateSimple &newDateDerniereModification)
 {
-    m_date = value;
+    m_dateDerniereModification = newDateDerniereModification;
 }
 
-std::string Contact::getUriPhoto() const
+const DateSimple& Contact::getDateCreation() const
+{
+    return m_dateCreation;
+}
+
+const DateSimple &Contact::getDateModification() const
+{
+    return m_dateDerniereModification;
+}
+
+const std::string& Contact::getUriPhoto() const
 {
     return m_uriPhoto;
 }
@@ -76,12 +88,14 @@ void Contact::setNom(const std::string &value)
 bool Contact::operator==(const Contact& in){
 
     return (
-                in.m_nom.compare(m_nom) &&
-                in.m_prenom.compare(m_prenom) &&
-                in.m_entreprise.compare(m_entreprise) &&
-                in.m_mail.compare(m_mail) &&
-                in.m_telephone.compare(m_telephone) &&
-                in.m_uriPhoto.compare(m_uriPhoto)
+                in.m_nom.compare(m_nom) == 0 &&
+                in.m_prenom.compare(m_prenom) == 0 &&
+                in.m_entreprise.compare(m_entreprise) == 0 &&
+                in.m_mail.compare(m_mail) == 0&&
+                in.m_telephone.compare(m_telephone) == 0 &&
+                in.m_uriPhoto.compare(m_uriPhoto) == 0 &&
+                in.m_dateCreation == m_dateCreation &&
+                in.m_dateDerniereModification == m_dateDerniereModification
            );
     
 }
@@ -99,13 +113,13 @@ std::ostream& operator<<(std::ostream& out, const Contact& c)
         out << c.getGestionInteraction();
     return out;
 }
-//////////////////////////////////////////
-/// Gestion des Intéractions du contact //
-//////////////////////////////////////////
+        //////////////////////////////////////////
+        /// Gestion des Intéractions du contact //
+        //////////////////////////////////////////
 
 void Contact::ajoutInteraction(const Interaction& in)
 {
-    m_interactions.ajoutInteraction(in);
+    m_interactions.ajouterElement(in);
 }
 
 void Contact::ajoutInteraction(const std::string& contenu, const std::string& dateStr)
@@ -116,12 +130,12 @@ void Contact::ajoutInteraction(const std::string& contenu, const std::string& da
 
 void Contact::supprimerInteraction(const Interaction &in)
 {
-    m_interactions.supprimerInteraction(in);
+    m_interactions.ajouterElement(in);
 }
 
 unsigned Contact::getNombreInteraction() const
 {
-    return m_interactions.getNombreInteraction();
+    return m_interactions.getNombreElements();
 }
 
 GestionInteraction Contact::getGestionInteraction() const
@@ -132,10 +146,10 @@ GestionInteraction Contact::getGestionInteraction() const
 void Contact::ajoutInteraction(const std::string& contenu, const DateSimple& date)
 {
     Interaction tmp(contenu, date);
-    m_interactions.ajoutInteraction(tmp);
+    m_interactions.ajouterElement(tmp);
 }
 
 void Contact::ajoutInteraction(const std::string& contenu)
 {
-    m_interactions.ajoutInteraction(Interaction(contenu));
+    m_interactions.ajouterElement(Interaction(contenu));
 }

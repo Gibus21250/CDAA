@@ -29,7 +29,7 @@ public:
      * @brief getDate
      * @return la date à laquelle se passe l'interaction
      */
-    DateSimple getDate() const;
+    const DateSimple& getDate() const;
 
     /**
      * @brief setDate
@@ -41,7 +41,7 @@ public:
      * @brief getContenu
      * @return Le contenu de l'interaction
      */
-    std::string getContenu() const;
+    const std::string& getContenu() const;
 
     /**
      * @brief setContenu
@@ -73,11 +73,15 @@ public:
      */
     void retirerTache(const Tache& tache);
 
-    bool operator==(const Interaction& in);
+    bool operator==(const Interaction& in) const;
 
 protected:
 
-    GestionTache getTaches() const;
+    /**
+     * @brief Renvoie le gestionnaire de tache associé à l'interaction
+     * @return La référence du gestionnaire de tache de l'interaction
+     */
+    const GestionTache& getTaches() const;
 
 
 };
