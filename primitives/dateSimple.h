@@ -26,11 +26,14 @@ public:
      * @brief Initialise une date à la date du jour
      */
     DateSimple();
+    ~DateSimple();
+
     /**
      * @brief Initialise une date au jour correspondant à la date strDate
      * @param strDate
      */
-    DateSimple(const std::string strDate);
+    DateSimple(const std::string& strDate);
+
     /**
      * @brief Initialise la DateSimple correspondant au jour, le mois et l'année mis en argument
      * @param y : Année de la date demandée
@@ -38,6 +41,7 @@ public:
      * @param d : numéro du jour de l'année demandé
      */
     DateSimple(const unsigned y, const unsigned m,  const unsigned d);
+
     /**
      * @brief DateSimple
      * @param time

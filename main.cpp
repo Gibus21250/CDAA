@@ -18,11 +18,34 @@ void testGestionContact();
 
 int main()
 {
+/*
+    Tache* t = new Tache();
 
-     Tache t;
-     std::cout << t << std::endl;
+    std::cout << *t << std::endl;
 
-   /*
+    t->setContenu("Changement");
+
+
+    std::cout << *t << std::endl;
+
+    delete t;
+*/
+
+    //GestionTache gt;
+    Tache t("TEST");
+    Tache t2 = t;
+    /*
+    gt.ajoutTache(t);
+
+    std::cout << gt << std::endl;
+
+    Tache* tache = gt.getTache(0).first;
+    tache->setContenu("Oui");
+
+    std::cout << gt << std::endl;
+
+
+/*
     testCreationContact();
     testCreationTache();
     testCreationInteractionSansTache();
@@ -46,6 +69,7 @@ void testCreationContact()
 
 void testCreationTache()
 {
+
     std::cout << "/--------------------------DEBUT--------------------------\\" << std::endl;
     std::cout << "Test de creation d'une Tâche, avec et sans date, et de leurs affichage" << std::endl;
     std::cout << "Tache sans date predefinie:" << std::endl << std::endl;
@@ -55,6 +79,7 @@ void testCreationTache()
     Tache t2("Envoyer rapport", "28/10/2022");
     std::cout << t2 << std::endl;
     std::cout << "\\---------------------------Fin---------------------------/" << std::endl;
+
 }
 
 void testCreationInteractionSansTache()
