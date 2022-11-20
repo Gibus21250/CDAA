@@ -27,6 +27,8 @@ public:
      */
     bool supprimerTache(const Tache& in);
 
+    bool supprimerTache(const unsigned indice);
+
     /**
      * @brief Renvoie le nombre de taches contenu dans le gestionnaire
      */

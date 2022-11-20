@@ -2,10 +2,20 @@
 
 GestionTache::GestionTache(){}
 
+unsigned GestionTache::getNombreTache() const
+{
+    return m_lTache.size();
+}
+
+void GestionTache::effacerTouteTache()
+{
+    m_lTache.clear();
+}
+
 void GestionTache::ajoutTache(const Tache& tache)
 {
     //Push_back fait un copy de la tache en argument
-    //emplace_back instancie directement dans la list, sans faire une copy superflue de l'instance, comme push_back
+    //emplace_back instancie directement dans la list, sans faire une copy superflue de l'instance tache, PUIS une copy dans la list
     m_lTache.emplace_back(tache);
 }
 
@@ -22,14 +32,19 @@ bool GestionTache::supprimerTache(const Tache &tache)
     return finded;
 }
 
-unsigned GestionTache::getNombreTache() const
+bool GestionTache::supprimerTache(const unsigned indice)
 {
-    return m_lTache.size();
-}
-
-void GestionTache::effacerTouteTache()
-{
-    m_lTache.clear();
+    if(indice < m_lTache.size())
+    {
+        //On récupère l'iterator au début de la liste
+        auto element = m_lTache.begin();
+        //On avance dans l'iterator
+        std::advance(element, indice);
+        //On supprime l'instance désignée
+        m_lTache.erase(element);
+        return true;
+    }
+    return false;
 }
 
 std::pair<Tache, bool> GestionTache::getTache(const unsigned indice) const

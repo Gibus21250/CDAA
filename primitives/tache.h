@@ -42,8 +42,6 @@ public:
      */
     Tache(const std::string& contenu, const std::string& dateStr);
 
-    Tache(std::string&& contenu);
-
     void printValue();
 
     /**

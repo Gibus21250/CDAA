@@ -2,41 +2,19 @@
 
 #include <iostream>
 
-Tache::Tache() : m_contenu(""), m_hasDate(false)
-{
-}
+Tache::Tache() : m_contenu(""), m_hasDate(false) {}
 
 Tache::Tache(const Tache& tache)
-    : m_contenu(tache.m_contenu), m_date(tache.m_date), m_hasDate(tache.m_hasDate)
-{
-}
+    : m_contenu(tache.m_contenu), m_date(tache.m_date), m_hasDate(tache.m_hasDate) {}
 
 Tache::Tache(const std::string& contenu_)
-    : m_contenu(contenu_), m_hasDate(false)
-{
-}
+    : m_contenu(contenu_), m_hasDate(false) {}
 
 Tache::Tache(const std::string& contenu_, const DateSimple& date_)
-    : m_contenu(contenu_), m_date(date_), m_hasDate(true)
-{
-}
+    : m_contenu(contenu_), m_date(date_), m_hasDate(true) {}
 
 Tache::Tache(const std::string& contenu_, const std::string& datestr)
-    : m_contenu(contenu_), m_date(DateSimple(datestr)), m_hasDate(true)
-{
-}
-
-Tache::Tache(std::string&& contenu)
-    : m_date(), m_hasDate(false)
-{
-    m_contenu.clear();
-    m_contenu.append(contenu);
-}
-
-void Tache::printValue()
-{
-    std::cout << m_contenu << " " << m_date.getDateStrFormat() << " " << m_hasDate << " " << this << std::endl;
-}
+    : m_contenu(contenu_), m_date(DateSimple(datestr)), m_hasDate(true) {}
 
 bool Tache::isDatee() const
 {
@@ -77,7 +55,6 @@ void Tache::setDate(const std::string &value)
         m_hasDate = true;
     }
     else m_hasDate = false;
-
 }
 
 std::ostream& operator<<(std::ostream& out, const Tache& tache)
@@ -92,7 +69,7 @@ std::ostream& operator<<(std::ostream& out, const Tache& tache)
 
 bool Tache::operator==(const Tache& t) const
 {
-    return m_contenu.compare(t.m_contenu) == 0? //Les contenu sont equivalent ? si oui on regarde s'ils sont tous les deux daté, on compare leurs date, sinon on renvois s'ils sont tous les deux date ou non
+    return m_contenu.compare(t.m_contenu) == 0? //Les contenus sont equivalent ? si oui on regarde s'ils sont tous les deux daté, on compare leurs date, sinon on renvois s'ils sont tous les deux date ou non
                 (m_hasDate & t.m_hasDate)?
                     m_date == t.m_date : (m_hasDate == t.m_hasDate)
                   : 0;  //Ici les contenu ne sont pas equivalent
