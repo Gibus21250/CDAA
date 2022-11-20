@@ -68,7 +68,7 @@ public:
      * @brief getUriPhoto
      * @return l'URI de la photo du contact
      */
-    std::string getUriPhoto() const;
+    const std::string& getUriPhoto() const;
     void setUriPhoto(const std::string &value);
 
     /**
