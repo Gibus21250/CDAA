@@ -9,7 +9,6 @@ SOURCES += \
         primitives/dateSimple.cpp \
         primitives/gestioncontact.cpp \
         primitives/gestioninteraction.cpp \
-        primitives/gestionnaire.cpp \
         primitives/gestiontache.cpp \
         primitives/interaction.cpp \
         primitives/tache.cpp

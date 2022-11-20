@@ -6,6 +6,7 @@
 #include "primitives/interaction.h"
 #include "primitives/dateSimple.h"
 #include "primitives/tache.h"
+#include "primitives/gestionnaire.h"
 #include "primitives/gestioncontact.h"
 
 void testCreationContact();
@@ -18,41 +19,13 @@ void testGestionContact();
 
 int main()
 {
-/*
-    Tache* t = new Tache();
-
-    std::cout << *t << std::endl;
-
-    t->setContenu("Changement");
-
-
-    std::cout << *t << std::endl;
-
-    delete t;
-*/
-
-    //GestionTache gt;
-    Tache t("TEST");
-    Tache t2 = t;
-    /*
-    gt.ajoutTache(t);
-
-    std::cout << gt << std::endl;
-
-    Tache* tache = gt.getTache(0).first;
-    tache->setContenu("Oui");
-
-    std::cout << gt << std::endl;
-
-
-/*
     testCreationContact();
     testCreationTache();
     testCreationInteractionSansTache();
     testCreationInteractionAvecTache();
     testContactAvecInteraction();
     testGestionContact();
-    */
+
 
     return 0;
 }
@@ -148,8 +121,8 @@ void testGestionContact()
 
     m.ajoutInteraction(iM);
 
-    gc.ajoutContact(n);
-    gc.ajoutContact(m);
+    gc.ajouterElement(n);
+    gc.ajouterElement(m);
 
     std::cout << gc;
     std::cout << "\\---------------------------Fin---------------------------/" << std::endl;
