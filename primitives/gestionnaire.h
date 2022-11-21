@@ -77,9 +77,8 @@ Gestionnaire<T>::Gestionnaire() {}
 template<class T>
 void Gestionnaire<T>::ajouterElement(const T& element)
 {
-    //Push_back fait un copy de l'élément en argument, PUIS une copy dans la list
-    //emplace_back instancie directement dans la list un copie de l'element
-    m_list.emplace_back(element);
+    //On fait une copy de l'instance, qui est ensuite ajouté dans la list
+    m_list.push_back(element);
 }
 
 template<class T>

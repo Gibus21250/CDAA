@@ -20,7 +20,7 @@ public:
     /**
      * @brief Constructeur par copy
      */
-    Tache(const Tache&);
+    Tache(const Tache& tache);
 
     /**
      * @brief Constructeur de Tache avec contenu

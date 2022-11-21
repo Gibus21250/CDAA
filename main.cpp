@@ -19,21 +19,6 @@ void testGestionContact();
 
 int main()
 {
-
-    GestionTache gt;
-    Tache t("Laver la table", DateSimple("22/11/2022"));
-
-    gt.ajouterElement(t);
-
-    std::cout << gt << std::endl;
-
-    Tache trecup = gt.getElement(0).first;
-
-    trecup.setContenu("Faire le ménage");
-
-    gt.remplacer(trecup, 0);
-
-    std::cout << gt << std::endl;
     /*
     testCreationContact();
     testCreationTache();
@@ -41,7 +26,7 @@ int main()
     testCreationInteractionAvecTache();
     testContactAvecInteraction();
     testGestionContact();
-*/
+    */
 
     return 0;
 }

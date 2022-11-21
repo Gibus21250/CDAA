@@ -83,9 +83,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const Contact& c);
 
-    //////////////////////////////////////////
-    /// Gestion des Intéractions du contact //
-    //////////////////////////////////////////
+    ///////////////////////////////////////////
+    /// Gestion des Intéractions du contact ///
+    ///////////////////////////////////////////
 
     /**
      * @brief Ajoute une copie de l'interaction à la liste des interaction du Contact
