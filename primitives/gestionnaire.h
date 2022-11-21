@@ -138,7 +138,7 @@ std::pair<T, bool> Gestionnaire<T>::getElement(const unsigned indice) const
 }
 
 template<class T>
-bool Gestionnaire<T>::remplacer(const T& element, const unsigned indice)
+bool Gestionnaire<T>::remplacer(const T& toReplace, const unsigned indice)
 {
     if(indice < m_list.size())
     {
@@ -154,7 +154,7 @@ bool Gestionnaire<T>::remplacer(const T& element, const unsigned indice)
         //On se place à l'emplacement où on a enlever l'ancien élément
         std::advance(element, indice);
         //On place une copie de notre instance dans la liste
-        m_list.emplace(element, element);
+        m_list.emplace(element, toReplace);
         return true;
     }
     return false;
