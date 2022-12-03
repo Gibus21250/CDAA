@@ -2,12 +2,16 @@
 #include <string>
 #include <list>
 
+#include <QApplication>
+
 #include "primitives/contact.h"
 #include "primitives/interaction.h"
 #include "primitives/dateSimple.h"
 #include "primitives/tache.h"
 #include "primitives/gestionnaire.h"
 #include "primitives/gestioncontact.h"
+
+#include "interfaces/accueil.h"
 
 void testCreationContact();
 void testCreationTache();
@@ -17,18 +21,14 @@ void testContactAvecInteraction();
 void testGestionContact();
 
 
-int main()
+int main(int argc, char *argv[])
 {
-    /*
-    testCreationContact();
-    testCreationTache();
-    testCreationInteractionSansTache();
-    testCreationInteractionAvecTache();
-    testContactAvecInteraction();
-    testGestionContact();
-    */
 
-    return 0;
+    QApplication app(argc, argv);
+    Accueil acc(nullptr);
+    acc.show();
+
+    return app.exec();
 }
 
 void testCreationContact()

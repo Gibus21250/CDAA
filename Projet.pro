@@ -1,9 +1,9 @@
 TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
-CONFIG -= qt
 
 SOURCES += \
+        interfaces/accueil.cpp \
         main.cpp \
         primitives/contact.cpp \
         primitives/dateSimple.cpp \
@@ -11,6 +11,7 @@ SOURCES += \
         primitives/gestioninteraction.cpp \
         primitives/gestiontache.cpp \
         primitives/interaction.cpp \
+        interfaces/accueil.cpp \
         primitives/tache.cpp
 
 HEADERS += \
@@ -24,6 +25,7 @@ HEADERS += \
     date/solar_hijri.h \
     date/tz.h \
     date/tz_private.h \
+    interfaces/accueil.h \
     primitives/contact.h \
     primitives/dateSimple.h \
     primitives/gestioncontact.h \
@@ -32,3 +34,8 @@ HEADERS += \
     primitives/gestiontache.h \
     primitives/interaction.h \
     primitives/tache.h
+
+QT += widgets
+
+FORMS += \
+    interfaces/Accueil.ui

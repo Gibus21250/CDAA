@@ -9,7 +9,7 @@ class Gestionnaire
 {
 protected:
     //Déclaration de la list
-    //mutable permet d'autoriser la modification de la liste
+    //mutable permet d'autoriser la modification de la liste (et de récupérer les référence des instance dans les listes
     mutable std::list<T> m_list;
 
 public:
@@ -46,7 +46,7 @@ public:
      * @param indice
      * @return L'élément correspondant à l'indice 'indice'
      */
-    std::pair<T, bool> getElement(const unsigned indice) const;
+    T& getElement(const unsigned indice) const;
 
     /**
      * @brief Remplace l'instance de l'élément à l'indice précisé, par celle mit en argument
@@ -124,16 +124,17 @@ void Gestionnaire<T>::effacerToutElements()
 }
 
 template<class T>
-std::pair<T, bool> Gestionnaire<T>::getElement(const unsigned indice) const
+T& Gestionnaire<T>::getElement(const unsigned indice) const
 {
     if(indice < (int) m_list.size())
     {
         auto element = m_list.begin();
         std::advance(element, indice);
-        return std::make_pair(*element, true);
+        return *element;
     }
 
-    return std::make_pair(T(), false);
+    throw std::out_of_range(&"L'indice est out of range " [indice]);
+
 }
 
 template<class T>
