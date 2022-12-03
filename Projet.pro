@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 
 SOURCES += \
         interfaces/accueil.cpp \
+        interfaces/contactwidget.cpp \
         main.cpp \
         primitives/contact.cpp \
         primitives/dateSimple.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     date/tz.h \
     date/tz_private.h \
     interfaces/accueil.h \
+    interfaces/contactwidget.h \
     primitives/contact.h \
     primitives/dateSimple.h \
     primitives/gestioncontact.h \
@@ -38,4 +40,5 @@ HEADERS += \
 QT += widgets
 
 FORMS += \
-    interfaces/Accueil.ui
+    interfaces/Accueil.ui \
+    interfaces/contactwidget.ui

@@ -30,6 +30,13 @@ public:
     Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto);
 
     /**
+     * @brief Constructeur par copie
+     */
+    Contact(const Contact& copy);
+
+    Contact();
+
+    /**
      * @brief getNom
      * @return le nom du contact
      */

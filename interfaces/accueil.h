@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "primitives/gestioncontact.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
     class Accueil;
@@ -15,12 +17,15 @@ class Accueil : public QMainWindow
 
 private:
     Ui::Accueil* ui;
+    GestionContact gt;
 
 public:
     explicit Accueil(QWidget *parent = nullptr);
     ~Accueil();
-signals:
 
+
+
+    void setGt(const GestionContact &newGt);
 };
 
 #endif // ACCUEIL_H

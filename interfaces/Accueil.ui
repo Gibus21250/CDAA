@@ -74,26 +74,107 @@
         <item>
          <widget class="QLineEdit" name="lineEdit_3"/>
         </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
      </layout>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="labelDate">
       <property name="text">
        <string>Par date:</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
      </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="layout_date_apres">
       <item>
-       <widget class="QLineEdit" name="lineEdit_4"/>
+       <layout class="QHBoxLayout" name="layout_apres">
+        <item>
+         <widget class="QCheckBox" name="checkBox_4">
+          <property name="text">
+           <string>Après :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="dateEdit"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="layout_avant">
+        <item>
+         <widget class="QCheckBox" name="checkBox_5">
+          <property name="text">
+           <string>Avant :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="dateEdit_2"/>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
     <item>
-     <widget class="QListWidget" name="lw_Contact"/>
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QListWidget" name="lw_Contact">
+      <property name="tabKeyNavigation">
+       <bool>true</bool>
+      </property>
+      <property name="showDropIndicator" stdset="0">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -130,7 +211,7 @@
      <x>0</x>
      <y>0</y>
      <width>650</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAccueil">
@@ -145,12 +226,14 @@
      <addaction name="actiondepuis_JSON"/>
     </widget>
     <addaction name="menuAjouter"/>
+    <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
    <widget class="QMenu" name="menuAffichage">
     <property name="title">
      <string>Affichage</string>
     </property>
+    <addaction name="action_actualiser"/>
    </widget>
    <addaction name="menuAccueil"/>
    <addaction name="menuAffichage"/>
@@ -165,9 +248,19 @@
     <string>depuis JSON</string>
    </property>
   </action>
+  <action name="actionActualiser">
+   <property name="text">
+    <string>Actualiser</string>
+   </property>
+  </action>
   <action name="actionQuitter">
    <property name="text">
     <string>Quitter</string>
+   </property>
+  </action>
+  <action name="action_actualiser">
+   <property name="text">
+    <string>Actualiser</string>
    </property>
   </action>
  </widget>
