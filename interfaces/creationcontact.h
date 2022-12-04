@@ -18,6 +18,7 @@ class CreationContact : public QDialog
 private:
     Ui::CreationContact* ui;
     Contact contact;
+    QString uri;
 
 public:
     explicit CreationContact(QWidget *parent = nullptr);
@@ -27,6 +28,7 @@ signals:
 
 private slots:
     void terminerCreation();
+    void ouvrirDialogFichier();
 };
 
 #endif // CREATIONCONTACT_H

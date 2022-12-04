@@ -71,7 +71,7 @@ void Accueil::ouvrirCreationContact()
     CreationContact* cc = new CreationContact(this);
     QObject::connect(cc, SIGNAL(creerContact(Contact)), this, SLOT(ajouterContact(Contact)));
     cc->exec();
-    //Execution de Accueil mit en attente de la fin d'execution de la fenêtre de création création
+    //Execution de Accueil mit en attente de la fin d'execution de la fenêtre de création création, d'où le delete
     delete cc;
 }
 

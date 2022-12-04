@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>507</width>
-    <height>174</height>
+    <width>703</width>
+    <height>218</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,11 +56,24 @@
       </layout>
      </item>
      <item>
+      <widget class="Line" name="line_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <layout class="QVBoxLayout" name="layout_nom_prenom">
        <item>
         <layout class="QHBoxLayout" name="layout_nom">
          <item>
           <widget class="QLabel" name="l_nom_2">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>Nom* :</string>
            </property>
@@ -75,6 +88,12 @@
         <layout class="QHBoxLayout" name="layout_prenom">
          <item>
           <widget class="QLabel" name="l_prenom">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>Prénom* : </string>
            </property>
@@ -93,6 +112,12 @@
         <layout class="QHBoxLayout" name="layout_tel">
          <item>
           <widget class="QLabel" name="l_tel">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>Téléphone: </string>
            </property>
@@ -107,6 +132,12 @@
         <layout class="QHBoxLayout" name="layout_mail">
          <item>
           <widget class="QLabel" name="l_mail">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>Mail* : </string>
            </property>
@@ -121,6 +152,12 @@
      </item>
      <item>
       <widget class="QLabel" name="l_entreprise">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="text">
         <string>Entreprise: </string>
        </property>
@@ -132,9 +169,31 @@
     </layout>
    </item>
    <item>
+    <widget class="QLabel" name="l_obligation">
+     <property name="font">
+      <font>
+       <italic>true</italic>
+      </font>
+     </property>
+     <property name="text">
+      <string>* : Obligatoire</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="l_infoText">
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>

@@ -14,7 +14,12 @@ ContactWidget::ContactWidget(QWidget *parent, const Contact& cont)
     : QWidget{parent}, contact(cont), ui(new Ui::ContactWidget())
 {
     ui->setupUi(this);
-    QPixmap pix("E:/Cloud/GitHub/CDAA/CDAA/interfaces/no-user-image.gif");
+
+    QString uriImage;
+    if(cont.getUriPhoto().empty()) uriImage = ":/profileImg/no-image";
+    else uriImage = QString::fromStdString(cont.getUriPhoto());
+
+    QPixmap pix(uriImage);
     ui->profileImg->setPixmap(pix.scaled(50, 50, Qt::KeepAspectRatio));
 
     ui->l_nom->setText(QString::fromStdString(contact.getNom()));
@@ -24,7 +29,6 @@ ContactWidget::ContactWidget(QWidget *parent, const Contact& cont)
     ui->l_tel->setText(QString::fromStdString(contact.getTelephone()));
 
     ui->l_entreprise->setText(QString::fromStdString(contact.getEntreprise()));
-
 
 }
 
