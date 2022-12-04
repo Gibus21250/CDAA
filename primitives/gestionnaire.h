@@ -90,6 +90,7 @@ bool Gestionnaire<T>::supprimerElement(const T& element)
         {
             m_list.erase(it);           //On le supprime de la list
             finded = true;              //Pour terminer la boucle
+            break;
         }
     }
     return finded;

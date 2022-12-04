@@ -5,6 +5,11 @@
 
 #include "ui_contactwidget.h"
 
+const Contact &ContactWidget::getContact() const
+{
+    return contact;
+}
+
 ContactWidget::ContactWidget(QWidget *parent, const Contact& cont)
     : QWidget{parent}, contact(cont), ui(new Ui::ContactWidget())
 {

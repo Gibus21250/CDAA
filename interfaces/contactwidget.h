@@ -24,6 +24,9 @@ public:
     explicit ContactWidget(QWidget *parent = nullptr, const Contact& cont = Contact());
     ~ContactWidget();
 
+
+    const Contact &getContact() const;
+
 signals:
 
 };

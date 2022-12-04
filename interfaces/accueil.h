@@ -17,15 +17,19 @@ class Accueil : public QMainWindow
 
 private:
     Ui::Accueil* ui;
-    GestionContact gt;
+    GestionContact* gt;
+
+    void actualiseList();
 
 public:
     explicit Accueil(QWidget *parent = nullptr);
     ~Accueil();
 
 
+    void setGt(GestionContact *newGt);
 
-    void setGt(const GestionContact &newGt);
+private slots:
+    void supprimerContact();
 };
 
 #endif // ACCUEIL_H

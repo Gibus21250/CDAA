@@ -195,7 +195,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="b_Suprimer">
+       <widget class="QPushButton" name="b_Supprimer">
         <property name="text">
          <string>Supprimer</string>
         </property>
