@@ -30,6 +30,9 @@ public:
 
 private slots:
     void supprimerContact();
+
+    void ouvrirCreationContact();
+    void ajouterContact(const Contact& c);
 };
 
 #endif // ACCUEIL_H

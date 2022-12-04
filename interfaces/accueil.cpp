@@ -3,6 +3,7 @@
 #include "ui_Accueil.h"
 
 #include "contactwidget.h"
+#include "creationcontact.h"
 
 void Accueil::setGt(GestionContact *newGt)
 {
@@ -32,6 +33,7 @@ Accueil::Accueil(QWidget *parent)
     ui->setupUi(this);
 
     QObject::connect(ui->b_Supprimer, SIGNAL(clicked()), this, SLOT(supprimerContact()));
+    QObject::connect(ui->b_Ajouter, SIGNAL(clicked()), this, SLOT(ouvrirCreationContact()));
 
     QWidget::setWindowTitle("Gestionnaire de Contact");
     setMinimumWidth(650);
@@ -56,10 +58,27 @@ void Accueil::supprimerContact()
         ContactWidget* cw = dynamic_cast<ContactWidget*>(ui->lw_Contact->itemWidget(ui->lw_Contact->currentItem()));
         //On supprime le contact de la list de contact
         gt->supprimerElement(cw->getContact());
-        //TODO O¨PTIMISER
+        //TODO OPTIMISER
         ui->lw_Contact->clear();
         actualiseList();
     }
 
+}
+
+
+void Accueil::ouvrirCreationContact()
+{
+    CreationContact* cc = new CreationContact(this);
+    QObject::connect(cc, SIGNAL(creerContact(Contact)), this, SLOT(ajouterContact(Contact)));
+    cc->exec();
+    //Execution de Accueil mit en attente de la fin d'execution de la fenêtre de création création
+    delete cc;
+}
+
+void Accueil::ajouterContact(const Contact& c)
+{
+    gt->ajouterElement(c);
+    ui->lw_Contact->clear();
+    actualiseList();
 }
 

@@ -10,6 +10,8 @@
 #include "interfaces/accueil.h"
 #include "interfaces/contactwidget.h"
 
+#include "interfaces/creationcontact.h"
+
 int main(int argc, char *argv[])
 {
 
@@ -21,9 +23,12 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
+
     Accueil acc;
     acc.setGt(&gt);
     acc.show();
+
+
 
     return app.exec();
 }

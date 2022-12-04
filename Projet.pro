@@ -6,6 +6,7 @@ RC_ICONS = app.ico
 SOURCES += \
         interfaces/accueil.cpp \
         interfaces/contactwidget.cpp \
+        interfaces/creationcontact.cpp \
         main.cpp \
         primitives/contact.cpp \
         primitives/dateSimple.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     date/tz_private.h \
     interfaces/accueil.h \
     interfaces/contactwidget.h \
+    interfaces/creationcontact.h \
     primitives/contact.h \
     primitives/dateSimple.h \
     primitives/gestioncontact.h \
@@ -42,7 +44,8 @@ QT += widgets
 
 FORMS += \
     interfaces/Accueil.ui \
-    interfaces/contactwidget.ui
+    interfaces/contactwidget.ui \
+    interfaces/creationContact.ui
 
 RESOURCES += \
     images.qrc
