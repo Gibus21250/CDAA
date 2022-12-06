@@ -1,7 +1,7 @@
 TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
-RC_ICONS = app.ico
+RC_ICONS = images/appli.ico
 
 SOURCES += \
         interfaces/accueil.cpp \
@@ -48,7 +48,8 @@ FORMS += \
     interfaces/Accueil.ui \
     interfaces/contactwidget.ui \
     interfaces/creationContact.ui \
-    interfaces/ficheContact.ui
+    interfaces/ficheContact.ui \
+    interfaces/interactionwidget.ui
 
 RESOURCES += \
     images.qrc
