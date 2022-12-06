@@ -150,7 +150,7 @@
        <item>
         <widget class="QPushButton" name="b_supp_interaction">
          <property name="text">
-          <string>Surppimer</string>
+          <string>Supprimer</string>
          </property>
         </widget>
        </item>

@@ -1,11 +1,15 @@
 #include "fichecontact.h"
 
+#include "interactionwidget.h"
+
 #include "ui_ficheContact.h"
 
 FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
     : QDialog{parent}, ui(new Ui::FicheContact()), m_p_contact(p_contact)
 {
     ui->setupUi(this);
+
+    QObject::connect(ui->lw_interactions, SIGNAL(currentRowChanged(int)), this, SLOT(interactionChange()));
 
     QString uriImage;
     if(m_p_contact->getUriPhoto().empty()) uriImage = ":/profileImg/no-image";
@@ -24,9 +28,22 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
 
     for(unsigned i = 0; i < m_p_contact->getNombreInteraction(); i++)
     {
-        ui->lw_interactions->addItem(QString::fromStdString(m_p_contact->interactions().getElement(i).getContenu()));
+        InteractionWidget* iw = new InteractionWidget(this, &(m_p_contact->interactions().getElement(i)));
+        auto item = new QListWidgetItem();
+
+        item->setSizeHint(iw->sizeHint());
+
+        ui->lw_interactions->addItem(item);
+        ui->lw_interactions->setItemWidget(item, iw);
     }
 }
+
+void FicheContact::interactionChange()
+{
+    ui->lw_taches->clear();
+    //TODO afficher les taches
+}
+
 FicheContact::~FicheContact()
 {
     delete ui;

@@ -8,6 +8,7 @@ SOURCES += \
         interfaces/contactwidget.cpp \
         interfaces/creationcontact.cpp \
         interfaces/fichecontact.cpp \
+        interfaces/interactionwidget.cpp \
         main.cpp \
         primitives/contact.cpp \
         primitives/dateSimple.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     interfaces/contactwidget.h \
     interfaces/creationcontact.h \
     interfaces/fichecontact.h \
+    interfaces/interactionwidget.h \
     primitives/contact.h \
     primitives/dateSimple.h \
     primitives/gestioncontact.h \

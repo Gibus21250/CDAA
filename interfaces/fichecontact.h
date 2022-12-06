@@ -25,6 +25,9 @@ public:
 
 signals:
 
+private slots:
+    void interactionChange();
+
 };
 
 #endif // FICHECONTACT_H
