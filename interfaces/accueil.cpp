@@ -16,7 +16,7 @@ void Accueil::actualiseList()
 {
     for(unsigned i = 0; i < gt->getNombreElements(); i++)
     {
-        ContactWidget* cw = new ContactWidget(this, gt->getElement(i));
+        ContactWidget* cw = new ContactWidget(this, &(gt->getElement(i)));
 
         auto item = new QListWidgetItem();
 
@@ -49,7 +49,6 @@ Accueil::~Accueil()
 
 /**
  * @brief Slot recepteur lors du bouton supprimer
- * @param checked
  */
 void Accueil::supprimerContact()
 {
@@ -59,7 +58,7 @@ void Accueil::supprimerContact()
         //On récupère le ContactWidget associé à l'item de la QListWidget
         ContactWidget* cw = dynamic_cast<ContactWidget*>(ui->lw_Contact->itemWidget(ui->lw_Contact->currentItem()));
         //On supprime le contact de la list de contact
-        gt->supprimerElement(cw->getContact());
+        gt->supprimerElement(*(cw->getContact()));
         //TODO OPTIMISER
         ui->lw_Contact->clear();
         actualiseList();
@@ -69,7 +68,10 @@ void Accueil::supprimerContact()
 
 void Accueil::ouvrirInfoContact(QListWidgetItem* )
 {
-    FicheContact fc(this);
+    //On récupère le widget selectionné par l'utilisateur
+    ContactWidget* cw = dynamic_cast<ContactWidget*>(ui->lw_Contact->itemWidget(ui->lw_Contact->currentItem()));
+
+    FicheContact fc(this, cw->getContact());
     fc.exec();
 }
 

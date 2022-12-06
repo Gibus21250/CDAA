@@ -18,7 +18,7 @@ Contact::Contact(const Contact &copy)
     : m_nom(copy.getNom()), m_prenom(copy.getPrenom()),
       m_entreprise(copy.getEntreprise()), m_mail(copy.getMail()),
       m_telephone(copy.getTelephone()), m_uriPhoto(copy.getUriPhoto()),
-      m_interactions(copy.getGestionInteraction()) {}
+      m_interactions(copy.interactions()) {}
 
 Contact::Contact() {}
 
@@ -127,7 +127,7 @@ std::ostream& operator<<(std::ostream& out, const Contact& c)
                << std::endl << "Uri: " << c.getUriPhoto()
                << std::endl << "Nombre d'interaction(s): " << c.getNombreInteraction() << std::endl;
     if(c.getNombreInteraction() > 0)
-        out << c.getGestionInteraction();
+        out << c.m_interactions;
     return out;
 }
         //////////////////////////////////////////
@@ -153,11 +153,6 @@ void Contact::supprimerInteraction(const Interaction &in)
 unsigned Contact::getNombreInteraction() const
 {
     return m_interactions.getNombreElements();
-}
-
-GestionInteraction Contact::getGestionInteraction() const
-{
-    return m_interactions;
 }
 
 void Contact::ajoutInteraction(const std::string& contenu, const DateSimple& date)

@@ -11,21 +11,28 @@ namespace Ui {
 }
 QT_END_NAMESPACE
 
-
+/**
+ * @brief The ContactWidget classe premet de générer un petit widget indicatif sur les infos du contact passé en argument
+ *
+ */
 class ContactWidget : public QWidget
 {
     Q_OBJECT
 
 private:
-    Contact contact;
+    Contact* contact;
     Ui::ContactWidget* ui;
 
 public:
-    explicit ContactWidget(QWidget *parent = nullptr, const Contact& cont = Contact());
+    /**
+     * @brief Prend en argument un pointeur du contact
+     * @param parent
+     */
+    explicit ContactWidget(QWidget *parent = nullptr, Contact* = nullptr);
     ~ContactWidget();
 
 
-    const Contact &getContact() const;
+    Contact* getContact() const;
 
 signals:
 

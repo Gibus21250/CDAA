@@ -75,15 +75,8 @@ public:
 
     bool operator==(const Interaction& in) const;
 
-protected:
-
-    /**
-     * @brief Renvoie le gestionnaire de tache associé à l'interaction
-     * @return La référence du gestionnaire de tache de l'interaction
-     */
-    const GestionTache& getTaches() const;
-
-
+    const GestionTache &taches() const;
+    void setTaches(const GestionTache &newTaches);
 };
 
 #endif // INTERACTION_H

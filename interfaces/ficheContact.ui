@@ -10,6 +10,11 @@
     <height>409</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <italic>false</italic>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -44,6 +49,7 @@
            <property name="font">
             <font>
              <pointsize>11</pointsize>
+             <italic>false</italic>
             </font>
            </property>
            <property name="text">
@@ -56,6 +62,7 @@
            <property name="font">
             <font>
              <pointsize>11</pointsize>
+             <italic>false</italic>
             </font>
            </property>
            <property name="text">
@@ -72,6 +79,7 @@
            <property name="font">
             <font>
              <pointsize>11</pointsize>
+             <italic>false</italic>
             </font>
            </property>
            <property name="text">
@@ -84,6 +92,7 @@
            <property name="font">
             <font>
              <pointsize>11</pointsize>
+             <italic>false</italic>
             </font>
            </property>
            <property name="text">
@@ -94,6 +103,22 @@
         </layout>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_entreprise">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>entreprise</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -106,6 +131,7 @@
          <property name="font">
           <font>
            <pointsize>10</pointsize>
+           <italic>false</italic>
            <underline>true</underline>
           </font>
          </property>
@@ -144,6 +170,7 @@
          <property name="font">
           <font>
            <pointsize>10</pointsize>
+           <italic>false</italic>
            <underline>true</underline>
           </font>
          </property>

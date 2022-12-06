@@ -17,9 +17,10 @@ class FicheContact : public QDialog
 
 private:
     Ui::FicheContact* ui;
+    Contact* m_p_contact;
 
 public:
-    explicit FicheContact(QWidget *parent = nullptr, const Contact* p_contact = nullptr);
+    explicit FicheContact(QWidget *parent = nullptr, Contact* p_contact = nullptr);
     ~FicheContact();
 
 signals:

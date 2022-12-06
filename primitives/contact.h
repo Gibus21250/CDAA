@@ -137,15 +137,6 @@ public:
     const GestionInteraction &interactions() const;
     void setInteractions(const GestionInteraction &newInteractions);
 
-protected:
-
-    /**
-     * @brief getGestionInteraction
-     * @return Renvoie le gstionnaire d'interaction du contact
-     */
-    GestionInteraction getGestionInteraction() const;
-
-
 };
 
 #endif // CONTACT_H

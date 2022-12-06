@@ -1,5 +1,15 @@
 #include "interaction.h"
 
+const GestionTache &Interaction::taches() const
+{
+    return m_taches;
+}
+
+void Interaction::setTaches(const GestionTache &newTaches)
+{
+    m_taches = newTaches;
+}
+
 Interaction::Interaction() : Interaction("") {}
 
 Interaction::Interaction(const std::string& desc)
@@ -31,11 +41,6 @@ void Interaction::setDate(const DateSimple &value)
     m_date = value;
 }
 
-const GestionTache& Interaction::getTaches() const
-{
-    return m_taches;
-}
-
 unsigned Interaction::getNombreTache() const
 {
     return m_taches.getNombreElements();
@@ -61,11 +66,11 @@ std::ostream& operator<<(std::ostream& out, const Interaction& i)
 {
     out << i.getContenu() << " " << i.getDate().getDateStrFormat();
     if(i.getNombreTache() != 0)
-        out << std::endl << i.getTaches();
+        out << std::endl << i.m_taches;
     return out;
 }
 
 bool Interaction::operator==(const Interaction& in) const {
-    return in.m_contenu.compare(m_contenu) == 0 && this->getTaches() == in.getTaches();
+    return in.m_contenu.compare(m_contenu) == 0 && this->m_taches == in.m_taches;
 }
 

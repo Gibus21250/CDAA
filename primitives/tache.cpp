@@ -5,10 +5,7 @@
 Tache::Tache() : m_contenu(""), m_hasDate(false) {}
 
 Tache::Tache(const Tache& tache)
-    : m_contenu(tache.m_contenu), m_date(tache.m_date), m_hasDate(tache.m_hasDate)
-{
-    std::cout << "[TACHE] copy constructor called" << std::endl;
-}
+    : m_contenu(tache.m_contenu), m_date(tache.m_date), m_hasDate(tache.m_hasDate) {}
 
 Tache::Tache(const std::string& contenu_)
     : m_contenu(contenu_), m_hasDate(false) {}
