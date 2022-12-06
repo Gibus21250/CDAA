@@ -1,13 +1,24 @@
 #include "contact.h"
 
 
+const GestionInteraction &Contact::interactions() const
+{
+    return m_interactions;
+}
+
+void Contact::setInteractions(const GestionInteraction &newInteractions)
+{
+    m_interactions = newInteractions;
+}
+
 Contact::Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto)
     : m_nom(nom), m_prenom(prenom), m_entreprise(entreprise), m_mail(mail), m_telephone(telephone), m_uriPhoto(uriPhoto) {}
 
 Contact::Contact(const Contact &copy)
     : m_nom(copy.getNom()), m_prenom(copy.getPrenom()),
       m_entreprise(copy.getEntreprise()), m_mail(copy.getMail()),
-      m_telephone(copy.getTelephone()), m_uriPhoto(copy.getUriPhoto()) {}
+      m_telephone(copy.getTelephone()), m_uriPhoto(copy.getUriPhoto()),
+      m_interactions(copy.getGestionInteraction()) {}
 
 Contact::Contact() {}
 

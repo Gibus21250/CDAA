@@ -134,6 +134,9 @@ public:
     const DateSimple &dateDerniereModification() const;
     void setDateDerniereModification(const DateSimple &newDateDerniereModification);
 
+    const GestionInteraction &interactions() const;
+    void setInteractions(const GestionInteraction &newInteractions);
+
 protected:
 
     /**
