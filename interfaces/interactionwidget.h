@@ -22,6 +22,9 @@ public:
     explicit InteractionWidget(QWidget *parent = nullptr, Interaction* p_int = nullptr);
     ~InteractionWidget();
 
+    Interaction *p_interaction() const;
+    void setP_interaction(Interaction *newP_interaction);
+
 signals:
 
 };

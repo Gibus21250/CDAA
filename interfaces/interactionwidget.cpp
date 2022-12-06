@@ -2,6 +2,16 @@
 
 #include "ui_interactionwidget.h"
 
+Interaction *InteractionWidget::p_interaction() const
+{
+    return m_p_interaction;
+}
+
+void InteractionWidget::setP_interaction(Interaction *newP_interaction)
+{
+    m_p_interaction = newP_interaction;
+}
+
 InteractionWidget::InteractionWidget(QWidget *parent, Interaction* interaction)
     : QWidget{parent}, ui(new Ui::InteractionWidget()), m_p_interaction(interaction)
 {

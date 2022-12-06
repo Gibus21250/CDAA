@@ -164,39 +164,21 @@
    <item>
     <layout class="QVBoxLayout" name="layout_taches">
      <item>
-      <layout class="QHBoxLayout" name="layout_bt_taches">
-       <item>
-        <widget class="QLabel" name="l_tache">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-           <italic>false</italic>
-           <underline>true</underline>
-          </font>
-         </property>
-         <property name="text">
-          <string>Tâche:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="b_ajout_tache">
-         <property name="text">
-          <string>Ajouter</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="p_supp_tache">
-         <property name="text">
-          <string>Supprimer</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QLabel" name="l_tache">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Information de l'interaction :</string>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="lw_taches"/>
+      <widget class="QTextEdit" name="te_information"/>
      </item>
     </layout>
    </item>

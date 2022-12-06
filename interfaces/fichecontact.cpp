@@ -9,6 +9,8 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
 {
     ui->setupUi(this);
 
+    ui->te_information->setReadOnly(true);
+
     QObject::connect(ui->lw_interactions, SIGNAL(currentRowChanged(int)), this, SLOT(interactionChange()));
 
     QString uriImage;
@@ -40,8 +42,25 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
 
 void FicheContact::interactionChange()
 {
-    ui->lw_taches->clear();
-    //TODO afficher les taches
+    ui->te_information->clear();
+
+    InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
+
+    ui->te_information->append(QString::fromStdString(iw->p_interaction()->getContenu()));
+    QString lineTodo;
+    for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
+    {
+        lineTodo.append("@todo ");
+        lineTodo.append(iw->p_interaction()->taches().getElement(i).getContenu().c_str());
+        if(iw->p_interaction()->taches().getElement(i).isDatee())
+        {
+            lineTodo.append(" @date ");
+            lineTodo.append(iw->p_interaction()->taches().getElement(i).getDate().getDateStrFormat().c_str());
+        }
+        lineTodo.append('\n');
+    }
+
+    ui->te_information->append(lineTodo);
 }
 
 FicheContact::~FicheContact()
