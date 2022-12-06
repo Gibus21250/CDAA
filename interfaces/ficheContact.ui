@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>372</width>
-    <height>409</height>
+    <width>367</width>
+    <height>359</height>
    </rect>
   </property>
   <property name="font">
@@ -24,101 +24,12 @@
      <item>
       <layout class="QHBoxLayout" name="layout_infosPrincipales">
        <item>
-        <widget class="QLabel" name="photo">
-         <property name="minimumSize">
-          <size>
-           <width>75</width>
-           <height>75</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>75</width>
-           <height>75</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="layout_nom_prenom"/>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="layout_nom_prenom">
-         <item>
-          <widget class="QLabel" name="l_nom">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <italic>false</italic>
-            </font>
-           </property>
-           <property name="text">
-            <string>nom</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="l_prenom">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <italic>false</italic>
-            </font>
-           </property>
-           <property name="text">
-            <string>prenom</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="layout_mail_tel">
-         <item>
-          <widget class="QLabel" name="l_mail">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <italic>false</italic>
-            </font>
-           </property>
-           <property name="text">
-            <string>mail</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="l_tel">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <italic>false</italic>
-            </font>
-           </property>
-           <property name="text">
-            <string>tel</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QVBoxLayout" name="layout_mail_tel"/>
        </item>
       </layout>
-     </item>
-     <item>
-      <widget class="QLabel" name="l_entreprise">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <italic>false</italic>
-        </font>
-       </property>
-       <property name="text">
-        <string>entreprise</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
@@ -179,6 +90,13 @@
      </item>
      <item>
       <widget class="QTextEdit" name="te_information"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_info">
+       <property name="text">
+        <string>Double clique pour modifier | ctrl+s pour sauvegarder modification</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
