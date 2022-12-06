@@ -2,6 +2,7 @@
 #define ACCUEIL_H
 
 #include <QMainWindow>
+#include<QListWidget>
 
 #include "primitives/gestioncontact.h"
 
@@ -33,6 +34,7 @@ private slots:
 
     void ouvrirCreationContact();
     void ajouterContact(const Contact& c);
+    void ouvrirInfoContact(QListWidgetItem*);
 };
 
 #endif // ACCUEIL_H

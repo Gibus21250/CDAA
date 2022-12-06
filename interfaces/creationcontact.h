@@ -29,6 +29,7 @@ signals:
 private slots:
     void terminerCreation();
     void ouvrirDialogFichier();
+    void annulerCreation();
 };
 
 #endif // CREATIONCONTACT_H

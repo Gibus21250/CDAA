@@ -7,6 +7,7 @@ SOURCES += \
         interfaces/accueil.cpp \
         interfaces/contactwidget.cpp \
         interfaces/creationcontact.cpp \
+        interfaces/fichecontact.cpp \
         main.cpp \
         primitives/contact.cpp \
         primitives/dateSimple.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     interfaces/accueil.h \
     interfaces/contactwidget.h \
     interfaces/creationcontact.h \
+    interfaces/fichecontact.h \
     primitives/contact.h \
     primitives/dateSimple.h \
     primitives/gestioncontact.h \
@@ -45,7 +47,8 @@ QT += widgets
 FORMS += \
     interfaces/Accueil.ui \
     interfaces/contactwidget.ui \
-    interfaces/creationContact.ui
+    interfaces/creationContact.ui \
+    interfaces/ficheContact.ui
 
 RESOURCES += \
     images.qrc

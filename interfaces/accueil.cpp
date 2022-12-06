@@ -4,6 +4,7 @@
 
 #include "contactwidget.h"
 #include "creationcontact.h"
+#include "fichecontact.h"
 
 void Accueil::setGt(GestionContact *newGt)
 {
@@ -34,6 +35,7 @@ Accueil::Accueil(QWidget *parent)
 
     QObject::connect(ui->b_Supprimer, SIGNAL(clicked()), this, SLOT(supprimerContact()));
     QObject::connect(ui->b_Ajouter, SIGNAL(clicked()), this, SLOT(ouvrirCreationContact()));
+    QObject::connect(ui->lw_Contact, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(ouvrirInfoContact(QListWidgetItem*)));
 
     QWidget::setWindowTitle("Gestionnaire de Contact");
     setMinimumWidth(650);
@@ -65,14 +67,18 @@ void Accueil::supprimerContact()
 
 }
 
+void Accueil::ouvrirInfoContact(QListWidgetItem* )
+{
+    FicheContact fc(this);
+    fc.exec();
+}
+
 
 void Accueil::ouvrirCreationContact()
 {
-    CreationContact* cc = new CreationContact(this);
-    QObject::connect(cc, SIGNAL(creerContact(Contact)), this, SLOT(ajouterContact(Contact)));
-    cc->exec();
-    //Execution de Accueil mit en attente de la fin d'execution de la fenêtre de création création, d'où le delete
-    delete cc;
+    CreationContact cc(this);
+    QObject::connect(&cc, SIGNAL(creerContact(Contact)), this, SLOT(ajouterContact(Contact)));
+    cc.exec();
 }
 
 void Accueil::ajouterContact(const Contact& c)

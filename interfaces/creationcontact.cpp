@@ -15,6 +15,12 @@ CreationContact::CreationContact(QWidget *parent)
     //Connection du bouton créer au slot terminer creation
     QObject::connect(ui->b_creer, SIGNAL(clicked()), this, SLOT(terminerCreation()));
     QObject::connect(ui->b_importerImage, SIGNAL(clicked()), this, SLOT(ouvrirDialogFichier()));
+    QObject::connect(ui->b_annuler, SIGNAL(clicked()), this, SLOT(annulerCreation()));
+}
+
+void CreationContact::annulerCreation()
+{
+    close();
 }
 
 void CreationContact::ouvrirDialogFichier()
