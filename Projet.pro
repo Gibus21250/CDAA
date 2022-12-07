@@ -8,6 +8,7 @@ SOURCES += \
         interfaces/contactwidget.cpp \
         interfaces/creationcontact.cpp \
         interfaces/doubleclickqlabel.cpp \
+        interfaces/doubleclicktexteditor.cpp \
         interfaces/fichecontact.cpp \
         interfaces/interactionwidget.cpp \
         main.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     interfaces/contactwidget.h \
     interfaces/creationcontact.h \
     interfaces/doubleclickqlabel.h \
+    interfaces/doubleclicktexteditor.h \
     interfaces/fichecontact.h \
     interfaces/interactionwidget.h \
     primitives/contact.h \

@@ -6,6 +6,7 @@
 #include <QLineEdit>
 
 #include "doubleclickqlabel.h"
+#include "doubleclicktexteditor.h"
 
 #include "primitives/contact.h"
 
@@ -26,11 +27,14 @@ private:
     DoubleClickQLabel* m_dcl[6];
     QLineEdit* m_le[5];
 
+    DoubleClickTextEditor* dcte;
+
     bool modeEdition;
     char quiEstEdite;
 
     void changerEtatPourEdition(bool mode);
     void keyPressEvent(QKeyEvent *event);
+
 
 public:
     explicit FicheContact(QWidget *parent = nullptr, Contact* p_contact = nullptr);
@@ -43,6 +47,9 @@ private slots:
     void modEditionInformation(char);
     void ajouterInteraction();
     void supprimerInteraction();
+
+    void doubleCliqueTextEditor();
+
 
 };
 

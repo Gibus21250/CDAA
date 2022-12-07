@@ -1,6 +1,7 @@
 #include <QMouseEvent>
 #include <QLineEdit>
 #include <QFileDialog>
+#include <QTextBlock>
 
 #include "fichecontact.h"
 #include "interactionwidget.h"
@@ -75,7 +76,13 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
 
     // ---- Fin ajout ---- //
 
-    ui->te_information->setReadOnly(true);
+    dcte = new DoubleClickTextEditor(this);
+    dcte->setReadOnly(true);
+    dcte->setEnabled(false);
+
+    ui->layout_taches->insertWidget(1, dcte);
+
+    QObject::connect(dcte, SIGNAL(doubleClique()), this, SLOT(doubleCliqueTextEditor()));
 
     QObject::connect(ui->b_ajout_interaction, SIGNAL(clicked()), this, SLOT(ajouterInteraction()));
     QObject::connect(ui->b_supp_interaction, SIGNAL(clicked()), this, SLOT(supprimerInteraction()));
@@ -93,17 +100,19 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
         ui->lw_interactions->setItemWidget(item, iw);
     }
 }
+
 void FicheContact::interactionChange()
 {
-    ui->te_information->clear();
+    dcte->clear();
 
     if(ui->lw_interactions->currentRow() != -1)
     {
+        dcte->setEnabled(true);
         InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
 
-        ui->te_information->insertPlainText(QString::fromStdString(iw->p_interaction()->getContenu()));
-        ui->te_information->insertPlainText(" ");
-        ui->te_information->insertPlainText(QString::fromStdString(iw->p_interaction()->getDate().getDateStrFormat()));
+        dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getContenu()));
+        dcte->insertPlainText(" ");
+        dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getDate().getDateStrFormat()));
 
         QString lineTodo;
         for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
@@ -118,7 +127,11 @@ void FicheContact::interactionChange()
             lineTodo.append('\n');
         }
 
-        ui->te_information->append(lineTodo);
+        dcte->append(lineTodo);
+    }
+    else
+    {
+        dcte->setEnabled(false);
     }
 
 }
@@ -149,6 +162,8 @@ void FicheContact::modEditionInformation(char type)
         changerEtatPourEdition(false);
         modeEdition = true;
         quiEstEdite = type;
+
+        ui->l_info->setText("Appuyez sur la touche Entrer pour valider, Echap pour annuler");
     }
 
 }
@@ -163,20 +178,16 @@ void FicheContact::changerEtatPourEdition(bool mode)
         m_dcl[i]->setEnabled(mode);
     }
 
-    ui->te_information->setEnabled(mode);
+    dcte->setEnabled(mode);
     ui->lw_interactions->setEnabled(mode);
-
-    if(!mode)
-    {
-        ui->l_info->setText("Appuyez sur la touche Entrer pour valider, Echap pour annuler");
-    }
 }
 
 void FicheContact::keyPressEvent(QKeyEvent *event)
 {
     if(modeEdition)
     {
-        if (event->key() == Qt::Key_Return)
+        //Si le mode edition est activé les attributs du contact (0 1 2 3 4 ou 5)
+        if (event->key() == Qt::Key_Return && quiEstEdite != -1)
         {
             changerEtatPourEdition(true);
             m_le[(int) quiEstEdite]->setVisible(false);
@@ -206,17 +217,70 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
 
             quiEstEdite = -1;
             modeEdition = false;
+
         }
         else if (event->key() == Qt::Key_Escape)
         {
             changerEtatPourEdition(true);
-            m_le[(int) quiEstEdite]->setVisible(false);
-            m_dcl[(int) quiEstEdite]->setVisible(true);
+            //On annule l'edition des attributs du contacts
+            if(quiEstEdite != -1)
+            {
+                m_le[(int) quiEstEdite]->setVisible(false);
+                m_dcl[(int) quiEstEdite]->setVisible(true);
+            }
+            //Ici on doit annuler les modifications de l'interaction du contact
+            else
+            {
 
+                dcte->clear();
+                dcte->setReadOnly(true);
+                //Même code pour generer le text que dans le constructeur
+                InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
+
+                dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getContenu()));
+                dcte->insertPlainText(" ");
+                dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getDate().getDateStrFormat()));
+
+                QString lineTodo;
+                for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
+                {
+                    lineTodo.append("@todo ");
+                    lineTodo.append(iw->p_interaction()->taches().getElement(i).getContenu().c_str());
+                    if(iw->p_interaction()->taches().getElement(i).isDatee())
+                    {
+                        lineTodo.append(" @date ");
+                        lineTodo.append(iw->p_interaction()->taches().getElement(i).getDate().getDateStrFormat().c_str());
+                    }
+                    lineTodo.append('\n');
+                }
+
+                dcte->append(lineTodo);
+
+            }
             quiEstEdite = -1;
             modeEdition = false;
         }
-        ui->l_info->setText("Double cliquez pour modifier l'interaction selectionnée");
+        //Ici on cherche à enregistrer les modifications
+        else if (event->matches(QKeySequence::Save) && quiEstEdite == -1)
+        {
+            QTextDocument* qDoc = dcte->document();
+            QTextCursor c(qDoc);
+
+            QTextDocument::FindFlags fcs = (QTextDocument::FindFlag) 0;
+
+            QRegularExpression reg("^@todo .*$");
+            QStringList lTodo;
+            QTextBlock qtb;
+
+            while(!(c = qDoc->find(reg, c.position(), fcs)).isNull())
+            {
+                qtb = c.block();
+                lTodo.append(qtb.text());
+            }
+
+            //TODO finir interaction affectation
+        }
+        ui->l_info->setText("Double cliquez sur le contenu pour modifier le contenu de l'interaction");
     }
 }
 
@@ -255,6 +319,15 @@ void FicheContact::supprimerInteraction()
         ui->lw_interactions->removeItemWidget(ui->lw_interactions->currentItem());
         delete ui->lw_interactions->currentItem();
     }
+}
+
+void FicheContact::doubleCliqueTextEditor()
+{
+    ui->l_info->setText("Echap pour annuler les modifications | ctrl+s pour enrigistrer");
+    modeEdition = true;
+    changerEtatPourEdition(false);
+    dcte->setReadOnly(false);
+    dcte->setEnabled(true);
 }
 
 FicheContact::~FicheContact()

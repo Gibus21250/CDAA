@@ -89,12 +89,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="te_information"/>
-     </item>
-     <item>
       <widget class="QLabel" name="l_info">
        <property name="text">
-        <string>Double cliquez pour modifier l'interaction selectionnée</string>
+        <string>Double cliquez sur le contenu pour modifier le contenu de l'interaction</string>
        </property>
       </widget>
      </item>
