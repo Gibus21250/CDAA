@@ -35,6 +35,32 @@ int main(int argc, char *argv[])
     acc.show();
 
 
+    /*
+    std::list<Tache> lt;
+    Tache t1("Dormir");
+
+    int cmp = 0;
+    while(cmp < 100)
+    {
+
+        for(int i = 0; i < 2; i++)
+        {
+            lt.push_back(t1);
+        }
+
+        int whoDelete = rand()%lt.size();
+
+        auto it = lt.begin();
+        std::advance(it, whoDelete);
+
+        lt.erase(it);
+
+
+    }
+    */
+
+
+
 
     return app.exec();
 }

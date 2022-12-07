@@ -122,9 +122,16 @@ public:
 
     /**
      * @brief Permet de retirer une interaction de la liste des interactions du contact
+     * Dans le pire des cas O(N) comparaison d'instance
      * @param Interaction
      */
     void supprimerInteraction(const Interaction& in);
+
+    /**
+     * @brief Supprime l'interaction à l'indice précisé O(1)
+     * @param indice
+     */
+    void supprimerInteraction(const int indice);
 
     /**
      * @brief Avoir le nombre d'interaction du contact

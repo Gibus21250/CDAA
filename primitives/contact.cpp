@@ -147,7 +147,12 @@ void Contact::ajoutInteraction(const std::string& contenu, const std::string& da
 
 void Contact::supprimerInteraction(const Interaction &in)
 {
-    m_interactions.ajouterElement(in);
+    m_interactions.supprimerElement(in);
+}
+
+void Contact::supprimerInteraction(const int indice)
+{
+    m_interactions.supprimerElement(indice);
 }
 
 unsigned Contact::getNombreInteraction() const

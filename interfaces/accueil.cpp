@@ -14,6 +14,8 @@ void Accueil::setGt(GestionContact *newGt)
 
 void Accueil::actualiseList()
 {
+    ui->lw_Contact->clear();
+
     for(unsigned i = 0; i < gt->getNombreElements(); i++)
     {
         ContactWidget* cw = new ContactWidget(this, &(gt->getElement(i)));
@@ -55,13 +57,11 @@ void Accueil::supprimerContact()
     //On vérifie qu'il y a bien un item de séléctionné
     if(ui->lw_Contact->selectedItems().count() != 0)
     {
-        //On récupère le ContactWidget associé à l'item de la QListWidget
-        ContactWidget* cw = dynamic_cast<ContactWidget*>(ui->lw_Contact->itemWidget(ui->lw_Contact->currentItem()));
         //On supprime le contact de la list de contact
-        gt->supprimerElement(*(cw->getContact()));
-        //TODO OPTIMISER
-        ui->lw_Contact->clear();
-        actualiseList();
+        gt->supprimerElement(ui->lw_Contact->currentRow());
+
+        ui->lw_Contact->removeItemWidget(ui->lw_Contact->currentItem());
+        delete ui->lw_Contact->currentItem();
     }
 
 }
@@ -73,6 +73,7 @@ void Accueil::ouvrirInfoContact(QListWidgetItem* )
 
     FicheContact fc(this, cw->getContact());
     fc.exec();
+    actualiseList();
 }
 
 
@@ -81,12 +82,12 @@ void Accueil::ouvrirCreationContact()
     CreationContact cc(this);
     QObject::connect(&cc, SIGNAL(creerContact(Contact)), this, SLOT(ajouterContact(Contact)));
     cc.exec();
+    actualiseList();
 }
 
 void Accueil::ajouterContact(const Contact& c)
 {
     gt->ajouterElement(c);
-    ui->lw_Contact->clear();
     actualiseList();
 }
 

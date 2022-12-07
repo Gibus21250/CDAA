@@ -25,7 +25,6 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
      * du contact
      **/
 
-
     for(int i = 0; i < 6; i++)
     {
         m_dcl[i] = new DoubleClickQLabel(this, i);
@@ -78,6 +77,9 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
 
     ui->te_information->setReadOnly(true);
 
+    QObject::connect(ui->b_ajout_interaction, SIGNAL(clicked()), this, SLOT(ajouterInteraction()));
+    QObject::connect(ui->b_supp_interaction, SIGNAL(clicked()), this, SLOT(supprimerInteraction()));
+
     QObject::connect(ui->lw_interactions, SIGNAL(currentRowChanged(int)), this, SLOT(interactionChange()));
 
     for(unsigned i = 0; i < m_p_contact->getNombreInteraction(); i++)
@@ -95,28 +97,34 @@ void FicheContact::interactionChange()
 {
     ui->te_information->clear();
 
-    InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
-
-    ui->te_information->append(QString::fromStdString(iw->p_interaction()->getContenu()));
-    QString lineTodo;
-    for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
+    if(ui->lw_interactions->currentRow() != -1)
     {
-        lineTodo.append("@todo ");
-        lineTodo.append(iw->p_interaction()->taches().getElement(i).getContenu().c_str());
-        if(iw->p_interaction()->taches().getElement(i).isDatee())
+        InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
+
+        ui->te_information->insertPlainText(QString::fromStdString(iw->p_interaction()->getContenu()));
+        ui->te_information->insertPlainText(" ");
+        ui->te_information->insertPlainText(QString::fromStdString(iw->p_interaction()->getDate().getDateStrFormat()));
+
+        QString lineTodo;
+        for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
         {
-            lineTodo.append(" @date ");
-            lineTodo.append(iw->p_interaction()->taches().getElement(i).getDate().getDateStrFormat().c_str());
+            lineTodo.append("@todo ");
+            lineTodo.append(iw->p_interaction()->taches().getElement(i).getContenu().c_str());
+            if(iw->p_interaction()->taches().getElement(i).isDatee())
+            {
+                lineTodo.append(" @date ");
+                lineTodo.append(iw->p_interaction()->taches().getElement(i).getDate().getDateStrFormat().c_str());
+            }
+            lineTodo.append('\n');
         }
-        lineTodo.append('\n');
+
+        ui->te_information->append(lineTodo);
     }
 
-    ui->te_information->append(lineTodo);
 }
 
 void FicheContact::modEditionInformation(char type)
 {
-    std::cout << "Double clique sur " << '0' + type << std::endl;
     if(type == 5)
     {
         QString dir = QFileDialog::getOpenFileName(this, tr("Image de profil"), QDir::currentPath());
@@ -208,6 +216,44 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
             quiEstEdite = -1;
             modeEdition = false;
         }
+        ui->l_info->setText("Double cliquez pour modifier l'interaction selectionnée");
+    }
+}
+
+void FicheContact::ajouterInteraction()
+{
+
+    Interaction i("Remplir contenu");
+    m_p_contact->ajoutInteraction(i);
+
+    int nbI = m_p_contact->getNombreInteraction();
+
+    InteractionWidget* iw = new InteractionWidget(this, &(m_p_contact->interactions().getElement(nbI-1)));
+    auto item = new QListWidgetItem();
+
+    item->setSizeHint(iw->sizeHint());
+
+    ui->lw_interactions->addItem(item);
+    ui->lw_interactions->setItemWidget(item, iw);
+}
+
+void FicheContact::supprimerInteraction()
+{
+    //On vérifie qu'il y a bien un item de séléctionné
+    if(ui->lw_interactions->selectedItems().count() != 0)
+    {
+        //On récupère le InteractionWidget associé à l'item de la QListWidget
+        //InteractionWidget* cw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
+
+        //utilisation de supprimerInteraction avec un indice, car supprime interaction par instance
+        //Est de une lourde (compare chaque instance une par une)
+        //Mais le plus grave, c'est qu'elle supprime la première instance correspondant, qui n'est donc pas
+        //forcément celle selectionné dans l'IHM (car deux instances peuvent être identique, pour autant
+        //L'utilisateur les vois comme differente.
+        m_p_contact->supprimerInteraction(ui->lw_interactions->currentRow());
+
+        ui->lw_interactions->removeItemWidget(ui->lw_interactions->currentItem());
+        delete ui->lw_interactions->currentItem();
     }
 }
 

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>367</width>
+    <width>374</width>
     <height>359</height>
    </rect>
   </property>
@@ -94,7 +94,7 @@
      <item>
       <widget class="QLabel" name="l_info">
        <property name="text">
-        <string>Double clique pour modifier | ctrl+s pour sauvegarder modification</string>
+        <string>Double cliquez pour modifier l'interaction selectionnée</string>
        </property>
       </widget>
      </item>

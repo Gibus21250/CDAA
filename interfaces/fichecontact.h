@@ -41,6 +41,8 @@ signals:
 private slots:
     void interactionChange();
     void modEditionInformation(char);
+    void ajouterInteraction();
+    void supprimerInteraction();
 
 };
 
