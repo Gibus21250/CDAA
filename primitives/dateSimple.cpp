@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 
 DateSimple::DateSimple()
 {
@@ -24,12 +25,30 @@ DateSimple::DateSimple(const std::string& str)
         std::string tmp;
         unsigned date[3];
 
-        short i = 0;
-        while(std::getline(ss, tmp, '/'))
+        std::string::difference_type n = std::count(str.begin(), str.end(), '/');
+
+        if(n == 2)
         {
-            date[i] = stoi(tmp);
-            i++;
+            short i = 0;
+            while(std::getline(ss, tmp, '/'))
+            {
+                try {
+                    date[i] = stoi(tmp);
+                } catch (_exception &err) {
+                    date[i] = 1;
+                }
+                i++;
+            }
         }
+        else
+        {
+            date[2] = 2000;
+            date[1] = 1;
+            date[0] = 1;
+        }
+
+
+
         time = date::year(date[2])/date::month(date[1])/date::day(date[0]);
     }
 }

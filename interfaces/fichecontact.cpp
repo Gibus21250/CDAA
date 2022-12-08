@@ -110,28 +110,7 @@ void FicheContact::interactionChange()
     if(ui->lw_interactions->currentRow() != -1)
     {
         dcte->setEnabled(true);
-        InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
-
-        dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getContenu()));
-
-        ui->de_interaction->setDate(QDate(iw->p_interaction()->getDate().getAnnee()
-                                          , iw->p_interaction()->getDate().getMois(),
-                                          iw->p_interaction()->getDate().getJour()));
-
-        QString lineTodo;
-        for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
-        {
-            lineTodo.append("@todo ");
-            lineTodo.append(iw->p_interaction()->taches().getElement(i).getContenu().c_str());
-            if(iw->p_interaction()->taches().getElement(i).isDatee())
-            {
-                lineTodo.append(" @date ");
-                lineTodo.append(iw->p_interaction()->taches().getElement(i).getDate().getDateStrFormat().c_str());
-            }
-            lineTodo.append('\n');
-        }
-
-        dcte->append(lineTodo);
+        actualiserContenuTextEdit();
     }
     else
     {
@@ -235,38 +214,9 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
             //Ici on doit annuler les modifications de l'interaction du contact
             else
             {
-
-                dcte->clear();
                 dcte->setReadOnly(true);
-                //Même code pour generer le text que dans le constructeur
-                InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
 
-                dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getContenu()));
-
-                ui->de_interaction->setDate(QDate(iw->p_interaction()->getDate().getAnnee()
-                                                  , iw->p_interaction()->getDate().getMois(),
-                                                  iw->p_interaction()->getDate().getJour()));
-
-
-                QString lineTodo;
-                for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
-                {
-                    lineTodo.append("@todo ");
-                    lineTodo.append(iw->p_interaction()->taches().getElement(i).getContenu().c_str());
-                    if(iw->p_interaction()->taches().getElement(i).isDatee())
-                    {
-                        lineTodo.append(" @date ");
-                        lineTodo.append(iw->p_interaction()->taches().getElement(i).getDate().getDateStrFormat().c_str());
-                    }
-                    lineTodo.append('\n');
-                }
-
-                dcte->append(lineTodo);
-
-                //On remet la date originale
-                ui->de_interaction->setDate(QDate(iw->p_interaction()->getDate().getAnnee()
-                                                  , iw->p_interaction()->getDate().getMois(),
-                                                  iw->p_interaction()->getDate().getJour()));
+                actualiserContenuTextEdit();
 
                 ui->de_interaction->setEnabled(false);
 
@@ -328,7 +278,7 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
 
             ui->de_interaction->setEnabled(false);
             dcte->setReadOnly(true);
-
+            actualiserContenuTextEdit();
             quiEstEdite = -1;
             modeEdition = false;
 
@@ -354,6 +304,34 @@ void FicheContact::ajouterInteraction()
 
     ui->lw_interactions->addItem(item);
     ui->lw_interactions->setItemWidget(item, iw);
+}
+
+void FicheContact::actualiserContenuTextEdit()
+{
+    dcte->clear();
+
+    InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
+
+    dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getContenu()));
+
+    ui->de_interaction->setDate(QDate(iw->p_interaction()->getDate().getAnnee()
+                                      , iw->p_interaction()->getDate().getMois(),
+                                      iw->p_interaction()->getDate().getJour()));
+
+    QString lineTodo;
+    for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
+    {
+        lineTodo.append("@todo ");
+        lineTodo.append(iw->p_interaction()->taches().getElement(i).getContenu().c_str());
+        if(iw->p_interaction()->taches().getElement(i).isDatee())
+        {
+            lineTodo.append(" @date ");
+            lineTodo.append(iw->p_interaction()->taches().getElement(i).getDate().getDateStrFormat().c_str());
+        }
+        lineTodo.append('\n');
+    }
+
+    dcte->append(lineTodo);
 }
 
 void FicheContact::supprimerInteraction()

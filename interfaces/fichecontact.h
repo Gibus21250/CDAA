@@ -35,6 +35,8 @@ private:
     void changerEtatPourEdition(bool mode);
     void keyPressEvent(QKeyEvent *event);
 
+    void actualiserContenuTextEdit();
+
 
 public:
     explicit FicheContact(QWidget *parent = nullptr, Contact* p_contact = nullptr);
