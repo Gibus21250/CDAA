@@ -25,7 +25,6 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
      * reçu un double click, dans lequel cas on entrera en mode edition de cet attribut
      * du contact
      **/
-
     for(int i = 0; i < 6; i++)
     {
         m_dcl[i] = new DoubleClickQLabel(this, i);
@@ -49,7 +48,8 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
     QPixmap pix(uriImage);
 
     m_dcl[5]->setPixmap(pix.scaled(50, 50, Qt::KeepAspectRatio));
-
+    m_dcl[5]->setFixedHeight(75);
+    m_dcl[5]->setFixedWidth(75);
 
     //Ajout de l'image à gauche du layout
     ui->layout_infosPrincipales->insertWidget(0, m_dcl[5]);
@@ -79,6 +79,8 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
     dcte = new DoubleClickTextEditor(this);
     dcte->setReadOnly(true);
     dcte->setEnabled(false);
+
+    ui->de_interaction->setEnabled(false);
 
     ui->layout_taches->insertWidget(1, dcte);
 
@@ -111,8 +113,10 @@ void FicheContact::interactionChange()
         InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
 
         dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getContenu()));
-        dcte->insertPlainText(" ");
-        dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getDate().getDateStrFormat()));
+
+        ui->de_interaction->setDate(QDate(iw->p_interaction()->getDate().getAnnee()
+                                          , iw->p_interaction()->getDate().getMois(),
+                                          iw->p_interaction()->getDate().getJour()));
 
         QString lineTodo;
         for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
@@ -238,8 +242,11 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
                 InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
 
                 dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getContenu()));
-                dcte->insertPlainText(" ");
-                dcte->insertPlainText(QString::fromStdString(iw->p_interaction()->getDate().getDateStrFormat()));
+
+                ui->de_interaction->setDate(QDate(iw->p_interaction()->getDate().getAnnee()
+                                                  , iw->p_interaction()->getDate().getMois(),
+                                                  iw->p_interaction()->getDate().getJour()));
+
 
                 QString lineTodo;
                 for(int i = 0; i < iw->p_interaction()->getNombreTache(); i++)
@@ -256,6 +263,13 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
 
                 dcte->append(lineTodo);
 
+                //On remet la date originale
+                ui->de_interaction->setDate(QDate(iw->p_interaction()->getDate().getAnnee()
+                                                  , iw->p_interaction()->getDate().getMois(),
+                                                  iw->p_interaction()->getDate().getJour()));
+
+                ui->de_interaction->setEnabled(false);
+
             }
             quiEstEdite = -1;
             modeEdition = false;
@@ -263,22 +277,63 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
         //Ici on cherche à enregistrer les modifications
         else if (event->matches(QKeySequence::Save) && quiEstEdite == -1)
         {
+
+            Interaction I;
+
+            //On récupère la nouvelle date sous intance DateSimple
+            QDate d = ui->de_interaction->date();
+
+            DateSimple dateI(d.year(), d.month(), d.day());
+
+            I.setDate(dateI);
+
+            // ------------------------------- //
+
             QTextDocument* qDoc = dcte->document();
             QTextCursor c(qDoc);
 
+            //On récupère la première ligne du textedit, qui est la ligne décrivant l'interaction
+            QTextBlock tb = qDoc->findBlockByLineNumber(0);
+            QString descInteraction = tb.text();
+
+            I.setContenu(descInteraction.toStdString());
+
+            //On va découper chaque todo et en extraillant la date (si tag @date trouvé)
             QTextDocument::FindFlags fcs = (QTextDocument::FindFlag) 0;
 
             QRegularExpression reg("^@todo .*$");
-            QStringList lTodo;
-            QTextBlock qtb;
+
+            Tache tache;
+            std::string ligne, descTache, dateStrTache;
 
             while(!(c = qDoc->find(reg, c.position(), fcs)).isNull())
             {
-                qtb = c.block();
-                lTodo.append(qtb.text());
+                ligne = c.block().text().toStdString();
+                descTache = ligne.substr(6, ligne.length());
+                auto pos = descTache.find("@date");
+
+                //Si le tag @date a été trouvé, on doit modifier à la fois la desc de la tache et récupérer la date
+                if(pos != std::string::npos)
+                {
+                    dateStrTache = descTache.substr(pos+6, descTache.length());
+                    descTache = descTache.substr(0, pos-1);
+                }
+                I.ajouterTache(Tache(descTache, dateStrTache));
             }
 
-            //TODO finir interaction affectation
+            InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
+
+            *iw->p_interaction() = I;
+
+
+            ui->de_interaction->setEnabled(false);
+            dcte->setReadOnly(true);
+
+            quiEstEdite = -1;
+            modeEdition = false;
+
+            changerEtatPourEdition(true);
+
         }
         ui->l_info->setText("Double cliquez sur le contenu pour modifier le contenu de l'interaction");
     }
@@ -328,6 +383,7 @@ void FicheContact::doubleCliqueTextEditor()
     changerEtatPourEdition(false);
     dcte->setReadOnly(false);
     dcte->setEnabled(true);
+    ui->de_interaction->setEnabled(true);
 }
 
 FicheContact::~FicheContact()

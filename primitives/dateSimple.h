@@ -39,7 +39,7 @@ public:
      * @param m : Mois de l'année demandée
      * @param d : numéro du jour de l'année demandé
      */
-    DateSimple(const unsigned y, const unsigned m,  const unsigned d);
+    DateSimple(const unsigned y, const unsigned m, const unsigned d);
 
     /**
      * @brief DateSimple
@@ -52,6 +52,10 @@ public:
      * @return DateSimple sous forme de string standard à l'aide de la classe date.h modifiée
      */
     std::string getDateStrFormat() const;
+
+    int getJour() const;
+    int getMois() const;
+    int getAnnee() const;
 
     /**
      * @brief avoir le nombre restant de jour entre les dates d1 et d2

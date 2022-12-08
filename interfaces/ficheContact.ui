@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>374</width>
+    <width>393</width>
     <height>359</height>
    </rect>
   </property>
@@ -75,18 +75,18 @@
    <item>
     <layout class="QVBoxLayout" name="layout_taches">
      <item>
-      <widget class="QLabel" name="l_tache">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <italic>false</italic>
-         <underline>true</underline>
-        </font>
-       </property>
-       <property name="text">
-        <string>Information de l'interaction :</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Informations sur l'interaction:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="de_interaction"/>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QLabel" name="l_info">

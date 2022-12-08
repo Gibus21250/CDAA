@@ -33,6 +33,10 @@ DateSimple::DateSimple(const std::string& str)
         time = date::year(date[2])/date::month(date[1])/date::day(date[0]);
     }
 }
+DateSimple::DateSimple(const unsigned y, const unsigned m, const unsigned d)
+{
+    time = date::year(y)/date::month(m)/date::day(d);
+}
 
 int DateSimple::getDifferenceDays(const DateSimple& d1, const DateSimple& d2)
 {
@@ -49,6 +53,26 @@ std::string DateSimple::getDateStrFormat() const
             nbMois = std::to_string(ymd.month().m_),
             nbAnnee = std::to_string(ymd.year().y_);
     return nbDay + "/" + nbMois + "/" + nbAnnee;
+}
+
+int DateSimple::getJour() const
+{
+    auto ymd = date::year_month_day{time};
+    return (int) ymd.day().d_;
+
+}
+
+int DateSimple::getMois() const
+{
+    auto ymd = date::year_month_day{time};
+    return (int) ymd.month().m_;
+
+}
+
+int DateSimple::getAnnee() const
+{
+    auto ymd = date::year_month_day{time};
+    return (int) ymd.year().y_;
 }
 
     //  --  -- Operators -- -- //

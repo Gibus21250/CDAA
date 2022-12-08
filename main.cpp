@@ -7,6 +7,8 @@
 #include "primitives/contact.h"
 #include "primitives/gestioncontact.h"
 
+#include "primitives/dateSimple.h"
+
 #include "interfaces/accueil.h"
 
 int main(int argc, char *argv[])
@@ -28,7 +30,6 @@ int main(int argc, char *argv[])
 
 
     QApplication app(argc, argv);
-
 
     Accueil acc;
     acc.setGt(&gt);
