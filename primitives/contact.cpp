@@ -11,7 +11,17 @@ void Contact::setInteractions(const GestionInteraction &newInteractions)
     m_interactions = newInteractions;
 }
 
-Contact::Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto)
+const unsigned &Contact::getIdC() const
+{
+    return m_IdC;
+}
+
+void Contact::setIdC(const unsigned &newIdC)
+{
+    m_IdC = newIdC;
+}
+
+Contact::Contact(const unsigned id, const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto)
     : m_nom(nom), m_prenom(prenom), m_entreprise(entreprise), m_mail(mail), m_telephone(telephone), m_uriPhoto(uriPhoto) {}
 
 Contact::Contact(const Contact &copy)
@@ -20,7 +30,7 @@ Contact::Contact(const Contact &copy)
       m_telephone(copy.getTelephone()), m_uriPhoto(copy.getUriPhoto()),
       m_interactions(copy.interactions()) {}
 
-Contact::Contact() {}
+Contact::Contact() : m_IdC(-1) {}
 
 const DateSimple &Contact::dateDerniereModification() const
 {
@@ -139,15 +149,9 @@ void Contact::ajoutInteraction(const Interaction& in)
     m_interactions.ajouterElement(in);
 }
 
-void Contact::ajoutInteraction(const std::string& contenu, const std::string& dateStr)
-{
-    DateSimple dt(dateStr);
-    ajoutInteraction(contenu, dt);
-}
-
 void Contact::supprimerInteraction(const Interaction &in)
 {
-    m_interactions.supprimerElement(in);
+    m_interactions.supprimerParId(in.IdI());
 }
 
 void Contact::supprimerInteraction(const int indice)
@@ -158,15 +162,4 @@ void Contact::supprimerInteraction(const int indice)
 unsigned Contact::getNombreInteraction() const
 {
     return m_interactions.getNombreElements();
-}
-
-void Contact::ajoutInteraction(const std::string& contenu, const DateSimple& date)
-{
-    Interaction tmp(contenu, date);
-    m_interactions.ajouterElement(tmp);
-}
-
-void Contact::ajoutInteraction(const std::string& contenu)
-{
-    m_interactions.ajouterElement(Interaction(contenu));
 }

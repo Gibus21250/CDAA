@@ -32,6 +32,13 @@ public:
     bool supprimerElement(const unsigned indice);
 
     /**
+     * @brief Supprime l'objet T correspondant à son ID
+     * @param Id
+     * @return Si la suppression a aboutit
+     */
+    virtual bool supprimerParId(const unsigned Id) = 0;
+
+    /**
      * @brief Renvoie le nombre d'élément contenu dans le gestionnaire
      */
     unsigned getNombreElements() const;

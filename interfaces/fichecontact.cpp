@@ -268,13 +268,23 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
                     dateStrTache = descTache.substr(pos+6, descTache.length());
                     descTache = descTache.substr(0, pos-1);
                 }
-                I.ajouterTache(Tache(descTache, dateStrTache));
+                if(dateStrTache.empty())
+                {
+                    tache = Tache(-1, descTache);
+                }
+                else
+                {
+                    tache = Tache(-1, descTache, dateStrTache);
+                }
+                I.ajouterTache(tache);
+                //TODO ajouter BDD!
             }
+
 
             InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
 
+            //On modifie directement dans la mémoire la nouvelle Interaction!
             *iw->p_interaction() = I;
-
 
             ui->de_interaction->setEnabled(false);
             dcte->setReadOnly(true);
@@ -292,7 +302,8 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
 void FicheContact::ajouterInteraction()
 {
 
-    Interaction i("Remplir contenu");
+    Interaction i(-1, "Remplir contenu");
+    //TODO Ajouter à la BDD sans oublier de mettre à jour l'id
     m_p_contact->ajoutInteraction(i);
 
     int nbI = m_p_contact->getNombreInteraction();

@@ -7,6 +7,7 @@
 class Tache
 {
 private:
+    unsigned m_IdT;
     std::string m_contenu;
     DateSimple m_date;
     bool m_hasDate;
@@ -20,27 +21,27 @@ public:
     /**
      * @brief Constructeur par copy
      */
-    Tache(const Tache& tache);
+    Tache(const unsigned id, const Tache& tache);
 
     /**
      * @brief Constructeur de Tache avec contenu
      * @param contenu
      */
-    Tache(const std::string& contenu);
+    Tache(const unsigned id, const std::string& contenu);
 
     /**
      * @brief Constructeur avec contenu et instance de date
      * @param contenu
      * @param date
      */
-    Tache(const std::string& contenu, const DateSimple& date);
+    Tache(const unsigned id, const std::string& contenu, const DateSimple& date);
 
     /**
      * @brief Constructeur avec contenu et date sous forme de string
      * @param contenu
      * @param dateStr
      */
-    Tache(const std::string& contenu, const std::string& dateStr);
+    Tache(const unsigned id, const std::string& contenu, const std::string& dateStr);
 
     void printValue();
 
@@ -84,6 +85,8 @@ public:
 
     bool operator==(const Tache& t) const;
 
+    const unsigned &IdT() const;
+    void setIdT(const unsigned &newIdT);
 };
 
 #endif // TACHE_H

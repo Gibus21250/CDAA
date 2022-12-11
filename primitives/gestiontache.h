@@ -13,6 +13,8 @@ public:
      */
     GestionTache();
 
+    bool supprimerParId(const unsigned Id);
+
     /**
      * @brief Permet de récupérer toutes les tâches contenant le mot 'mot'
      * @param mot à tester

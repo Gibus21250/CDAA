@@ -12,6 +12,7 @@ class Contact
 {
 private:
 
+    unsigned m_IdC;
     std::string m_nom, m_prenom, m_entreprise, m_mail, m_telephone, m_uriPhoto;
     GestionInteraction m_interactions;
     DateSimple m_dateCreation, m_dateDerniereModification;
@@ -27,7 +28,7 @@ public:
      * @param telephone Le téléphone du contact
      * @param uriPhoto  L'uri de l'image de profile du contact
      */
-    Contact(const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto);
+    Contact(const unsigned id, const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto);
 
     /**
      * @brief Constructeur par copie
@@ -102,19 +103,6 @@ public:
 
     /**
      * @brief Ajoute une interaction à la liste des interaction du contact
-     * @param contenu de l'interaction
-     * @param date de l'interaction
-     */
-    void ajoutInteraction(const std::string& contenu, const DateSimple& date);
-
-    /**
-     * @brief Ajoute une interaction à la liste des interaction du contact en prenant la date du jour
-     * @param contenu de l'intéraction
-     */
-    void ajoutInteraction(const std::string& contenu);
-
-    /**
-     * @brief Ajoute une interaction à la liste des interaction du contact
      * @param contenu
      * @param dateStr
      */
@@ -144,6 +132,8 @@ public:
     const GestionInteraction &interactions() const;
     void setInteractions(const GestionInteraction &newInteractions);
 
+    const unsigned &getIdC() const;
+    void setIdC(const unsigned &newIdC);
 };
 
 #endif // CONTACT_H

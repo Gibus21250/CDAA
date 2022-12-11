@@ -9,6 +9,8 @@ class GestionContact : public Gestionnaire<Contact>
 
 public:
     GestionContact();
+
+    bool supprimerParId(const unsigned IdC);
 };
 
 #endif // GESTIONCONTACT_H

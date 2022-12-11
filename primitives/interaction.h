@@ -12,6 +12,7 @@ class Interaction
 {
 private:
 
+    unsigned m_IdI;
     std::string m_contenu;
     DateSimple m_date;
     GestionTache m_taches;
@@ -19,9 +20,9 @@ private:
 public:
 
     Interaction();
-    Interaction(const std::string& desc);
-    Interaction(const std::string& desc, const DateSimple& date);
-    Interaction(const std::string& desc, const std::string& date);
+    Interaction(const unsigned id, const std::string& desc);
+    Interaction(const unsigned id, const std::string& desc, const DateSimple& date);
+    Interaction(const unsigned id, const std::string& desc, const std::string& date);
 
     friend std::ostream& operator<<(std::ostream& out, const Interaction& i);
 
@@ -56,27 +57,20 @@ public:
      * @param tache
      */
     void ajouterTache(const Tache& tache);
-    /**
-     * @brief Ajoute une tache à la liste de tache
-     * @param tache
-     */
-    void ajouterTache(const std::string& contenu, std::string& dateStr);
-    /**
-     * @brief Ajoute une tache à la liste de tache
-     * @param tache
-     */
-    void ajouterTache(const std::string& contenu, DateSimple& dateStr);
-
-    /**
+    /*
      * @brief Retire toute les taches à la liste de tache
      * @param tache
      */
     void retirerTache(const Tache& tache);
 
+    void retirerTache(const unsigned id);
+
     bool operator==(const Interaction& in) const;
 
     const GestionTache &taches() const;
     void setTaches(const GestionTache &newTaches);
+    const unsigned &IdI() const;
+    void setIdI(const unsigned &newIdI);
 };
 
 #endif // INTERACTION_H

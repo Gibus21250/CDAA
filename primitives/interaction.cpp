@@ -10,15 +10,25 @@ void Interaction::setTaches(const GestionTache &newTaches)
     m_taches = newTaches;
 }
 
-Interaction::Interaction() : Interaction("") {}
+const unsigned &Interaction::IdI() const
+{
+    return m_IdI;
+}
 
-Interaction::Interaction(const std::string& desc)
+void Interaction::setIdI(const unsigned &newIdI)
+{
+    m_IdI = newIdI;
+}
+
+Interaction::Interaction() : Interaction(-1, "") {}
+
+Interaction::Interaction(const unsigned id, const std::string& desc)
     : m_contenu(desc), m_date(DateSimple()) {}
 
-Interaction::Interaction(const std::string& desc, const DateSimple& date_)
+Interaction::Interaction(const unsigned id, const std::string& desc, const DateSimple& date_)
     : m_contenu(desc), m_date(date_) {}
 
-Interaction::Interaction(const std::string& desc, const std::string& dateStr)
+Interaction::Interaction(const unsigned id, const std::string& desc, const std::string& dateStr)
     : m_contenu(desc), m_date(DateSimple(dateStr)) {}
 
 const DateSimple &Interaction::getDate() const
@@ -49,16 +59,6 @@ unsigned Interaction::getNombreTache() const
 void Interaction::ajouterTache(const Tache &tache)
 {
     m_taches.ajouterElement(tache);
-}
-
-void Interaction::ajouterTache(const std::string& contenu, std::string& dateStr)
-{
-    m_taches.ajouterElement(Tache(contenu, dateStr));
-}
-
-void Interaction::ajouterTache(const std::string& contenu, DateSimple& date)
-{
-    m_taches.ajouterElement(Tache(contenu, date));
 }
 
 
