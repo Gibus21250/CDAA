@@ -14,10 +14,9 @@ ContactWidget::ContactWidget(QWidget *parent, Contact* cont)
     : QWidget{parent}, contact(cont), ui(new Ui::ContactWidget())
 {
     ui->setupUi(this);
-
     QString uriImage;
-    if(cont->getUriPhoto().empty()) uriImage = ":/profileImg/no-image";
-    else uriImage = QString::fromStdString(cont->getUriPhoto());
+    if(cont->getPhoto().empty()) uriImage = ":/profileImg/no-image";
+    else uriImage = QString::fromStdString(cont->getPhoto());
 
     QPixmap pix(uriImage);
     ui->profileImg->setPixmap(pix.scaled(50, 50, Qt::KeepAspectRatio));

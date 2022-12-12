@@ -13,6 +13,8 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
 {
     ui->setupUi(this);
 
+    QWidget::setWindowTitle(QString::fromStdString("Fiche contact: " + p_contact->getNom() + " " + p_contact->getPrenom()));
+
     /**
      * Explications:
      * Nous avons 6 pointeurs de notre QLabel custom
@@ -42,8 +44,8 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
     m_dcl[4]->setText(QString::fromStdString(m_p_contact->getEntreprise()));
 
     QString uriImage;
-    if(m_p_contact->getUriPhoto().empty()) uriImage = ":/profileImg/no-image";
-    else uriImage = QString::fromStdString(m_p_contact->getUriPhoto());
+    if(m_p_contact->getPhoto().empty()) uriImage = ":/profileImg/no-image";
+    else uriImage = QString::fromStdString(m_p_contact->getPhoto());
 
     QPixmap pix(uriImage);
 
@@ -133,7 +135,7 @@ void FicheContact::modEditionInformation(char type)
             if(!pix.isNull())
             {
                 m_dcl[5]->setPixmap(pix.scaled(75, 75, Qt::KeepAspectRatio));
-                m_p_contact->setUriPhoto(dir.toStdString());
+                m_p_contact->setPhoto(dir.toStdString());
             }
         }
     }
@@ -181,9 +183,11 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
             switch (quiEstEdite) {
             case 0:
                 m_p_contact->setNom(m_le[(int) quiEstEdite]->text().toStdString());
+                QWidget::setWindowTitle(QString::fromStdString("Fiche contact: " + m_p_contact->getNom() + " " + m_p_contact->getPrenom()));
                 break;
             case 1:
                 m_p_contact->setPrenom(m_le[(int) quiEstEdite]->text().toStdString());
+                QWidget::setWindowTitle(QString::fromStdString("Fiche contact: " + m_p_contact->getNom() + " " + m_p_contact->getPrenom()));
                 break;
             case 2:
                 m_p_contact->setTelephone(m_le[(int) quiEstEdite]->text().toStdString());
@@ -285,6 +289,7 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
 
             //On modifie directement dans la mémoire la nouvelle Interaction!
             *iw->p_interaction() = I;
+            iw->actualiserInfoWidget();
 
             ui->de_interaction->setEnabled(false);
             dcte->setReadOnly(true);

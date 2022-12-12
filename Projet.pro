@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 RC_ICONS = images/appli.ico
 
 SOURCES += \
+        bdd/mainsqlmanager.cpp \
         interfaces/accueil.cpp \
         interfaces/contactwidget.cpp \
         interfaces/creationcontact.cpp \
@@ -18,10 +19,10 @@ SOURCES += \
         primitives/gestioninteraction.cpp \
         primitives/gestiontache.cpp \
         primitives/interaction.cpp \
-        interfaces/accueil.cpp \
         primitives/tache.cpp
 
 HEADERS += \
+    bdd/mainsqlmanager.h \
     date/chrono_io.h \
     date/date.h \
     date/ios.h \
@@ -48,7 +49,7 @@ HEADERS += \
     primitives/interaction.h \
     primitives/tache.h
 
-QT += widgets
+QT += widgets sql
 
 FORMS += \
     interfaces/Accueil.ui \

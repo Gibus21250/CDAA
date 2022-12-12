@@ -22,12 +22,12 @@ void Contact::setIdC(const unsigned &newIdC)
 }
 
 Contact::Contact(const unsigned id, const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto)
-    : m_nom(nom), m_prenom(prenom), m_entreprise(entreprise), m_mail(mail), m_telephone(telephone), m_uriPhoto(uriPhoto) {}
+    : m_nom(nom), m_prenom(prenom), m_entreprise(entreprise), m_mail(mail), m_telephone(telephone), m_photo(uriPhoto) {}
 
 Contact::Contact(const Contact &copy)
-    : m_nom(copy.getNom()), m_prenom(copy.getPrenom()),
+    : m_IdC(copy.getIdC()), m_nom(copy.getNom()), m_prenom(copy.getPrenom()),
       m_entreprise(copy.getEntreprise()), m_mail(copy.getMail()),
-      m_telephone(copy.getTelephone()), m_uriPhoto(copy.getUriPhoto()),
+      m_telephone(copy.getTelephone()), m_photo(copy.getPhoto()),
       m_interactions(copy.interactions()) {}
 
 Contact::Contact() : m_IdC(-1) {}
@@ -52,14 +52,14 @@ const DateSimple &Contact::getDateModification() const
     return m_dateDerniereModification;
 }
 
-const std::string& Contact::getUriPhoto() const
+const std::string& Contact::getPhoto() const
 {
-    return m_uriPhoto;
+    return m_photo;
 }
 
-void Contact::setUriPhoto(const std::string &value)
+void Contact::setPhoto(const std::string &value)
 {
-    m_uriPhoto = value;
+    m_photo = value;
 }
 
 std::string Contact::getTelephone() const
@@ -120,7 +120,7 @@ bool Contact::operator==(const Contact& in){
                 in.m_entreprise.compare(m_entreprise) == 0 &&
                 in.m_mail.compare(m_mail) == 0&&
                 in.m_telephone.compare(m_telephone) == 0 &&
-                in.m_uriPhoto.compare(m_uriPhoto) == 0 &&
+                in.m_photo.compare(m_photo) == 0 &&
                 in.m_dateCreation == m_dateCreation &&
                 in.m_dateDerniereModification == m_dateDerniereModification
            );
@@ -134,7 +134,7 @@ std::ostream& operator<<(std::ostream& out, const Contact& c)
                << std::endl << "Entreprise: " << c.getEntreprise()
                << ", Mail: " << c.getMail()
                << ", Téléphone: " << c.getTelephone()
-               << std::endl << "Uri: " << c.getUriPhoto()
+               << std::endl << "Uri: " << c.getPhoto()
                << std::endl << "Nombre d'interaction(s): " << c.getNombreInteraction() << std::endl;
     if(c.getNombreInteraction() > 0)
         out << c.m_interactions;

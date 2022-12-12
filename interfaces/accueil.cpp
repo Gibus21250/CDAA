@@ -5,6 +5,7 @@
 #include "contactwidget.h"
 #include "creationcontact.h"
 #include "fichecontact.h"
+#include "bdd/mainsqlmanager.h"
 
 void Accueil::setGt(GestionContact *newGt)
 {
@@ -33,6 +34,7 @@ void Accueil::actualiseList()
 Accueil::Accueil(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::Accueil())
 {
+    manager.connectTo("E:\\Cloud\\GitHub\\CDAA\\CDAA\\gestion.sqlite");
     ui->setupUi(this);
 
     QObject::connect(ui->b_Supprimer, SIGNAL(clicked()), this, SLOT(supprimerContact()));
@@ -57,6 +59,9 @@ void Accueil::supprimerContact()
     //On vérifie qu'il y a bien un item de séléctionné
     if(ui->lw_Contact->selectedItems().count() != 0)
     {
+        ContactWidget* cw = dynamic_cast<ContactWidget*>(ui->lw_Contact->itemWidget(ui->lw_Contact->currentItem()));
+
+        manager.supprimerContact(cw->getContact()->getIdC());
         //On supprime le contact de la list de contact
         gt->supprimerElement(ui->lw_Contact->currentRow());
 
@@ -73,6 +78,7 @@ void Accueil::ouvrirInfoContact(QListWidgetItem* )
 
     FicheContact fc(this, cw->getContact());
     fc.exec();
+    manager.modifierContact(cw->getContact());
     actualiseList();
 }
 
@@ -80,13 +86,14 @@ void Accueil::ouvrirInfoContact(QListWidgetItem* )
 void Accueil::ouvrirCreationContact()
 {
     CreationContact cc(this);
-    QObject::connect(&cc, SIGNAL(creerContact(Contact)), this, SLOT(ajouterContact(Contact)));
+    QObject::connect(&cc, SIGNAL(creerContact(Contact&)), this, SLOT(ajouterContact(Contact&)));
     cc.exec();
     actualiseList();
 }
 
-void Accueil::ajouterContact(const Contact& c)
+void Accueil::ajouterContact(Contact& c)
 {
+    std::cout << "Resultat: " << manager.ajouterContact(&c) << std::endl;
     gt->ajouterElement(c);
     actualiseList();
 }

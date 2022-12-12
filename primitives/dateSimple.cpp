@@ -34,7 +34,7 @@ DateSimple::DateSimple(const std::string& str)
             {
                 try {
                     date[i] = stoi(tmp);
-                } catch (_exception &err) {
+                } catch (...) {
                     date[i] = 1;
                 }
                 i++;

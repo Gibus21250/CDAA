@@ -25,6 +25,8 @@ public:
     Interaction *p_interaction() const;
     void setP_interaction(Interaction *newP_interaction);
 
+    void actualiserInfoWidget();
+
 signals:
 
 };

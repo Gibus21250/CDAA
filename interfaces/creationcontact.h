@@ -24,7 +24,7 @@ public:
     explicit CreationContact(QWidget *parent = nullptr);
 
 signals:
-    void creerContact(const Contact& c);
+    void creerContact(Contact& c);
 
 private slots:
     void terminerCreation();

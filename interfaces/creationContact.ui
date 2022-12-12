@@ -17,7 +17,7 @@
    <item>
     <layout class="QHBoxLayout" name="layout_champs">
      <item>
-      <layout class="QVBoxLayout" name="l_photo">
+      <layout class="QVBoxLayout" name="layout_photo">
        <item alignment="Qt::AlignHCenter">
         <widget class="QLabel" name="image">
          <property name="minimumSize">

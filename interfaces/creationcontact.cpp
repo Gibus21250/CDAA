@@ -33,9 +33,9 @@ void CreationContact::ouvrirDialogFichier()
         //Si il a eu un echec (fichier non conforme, etc)
         if(pix.isNull())
         {
-            pix = QPixmap(":/profileImg/no-image");
             uri = "";
             //On charge l'image par défaut
+            pix = QPixmap(":/profileImg/no-image");
         }
         else uri = dir;
         ui->image->setPixmap(pix.scaled(75, 75, Qt::KeepAspectRatio));
@@ -67,9 +67,7 @@ void CreationContact::terminerCreation()
         contact.setMail(ui->le_mail->text().toStdString());
 
         contact.setEntreprise(ui->le_entreprise->text().toStdString());
-        contact.setUriPhoto(uri.toStdString());
-
-        contact.setUriPhoto(uri.toStdString());
+        contact.setPhoto(uri.toStdString());
 
         //Emission du signal en ayant le contact en argument
         emit creerContact(contact);

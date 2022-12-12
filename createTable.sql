@@ -15,7 +15,7 @@ CREATE TABLE Contact
     tel VARCHAR,
     dateCreation DATE NOT NULL,
     dateModification DATE,
-    uriPhoto VARCHAR
+    photo VARCHAR
 );
 
 CREATE TABLE Interaction 
@@ -42,6 +42,8 @@ CREATE TABLE Tache
         ON DELETE CASCADE
 );
 
+--UPDATE Contact SET nom = 'test', prenom = 'wesh', dateModification = DATE('now') WHERE IdC = 15;
+
 INSERT INTO Contact VALUES
 (NULL, "Mortier", "Marie", "none", "m.m@gmail.com", "0607080910", "2022-11-12", "2022-11-12", NULL),
 (NULL, "Jacquinet", "Nathan", "none", "n.j@gmail.com", "1090807060", "2022-12-08", "2022-12-08", NULL);
@@ -51,4 +53,7 @@ INSERT INTO Interaction VALUES (NULL, "Continuer SR", DATE('now'), 1);
 PRAGMA foreign_keys;
 PRAGMA foreign_keys = ON;
 
+SELECT max(IdC) FROM Contact;
+
 -- PRAGMA foreign_keys = ON;DELETE FROM Contact WHERE IdC = 1;
+-- INSERT INTO Contact VALUES (NULL, "Mortier", "Marie", "none", "m.m@gmail.com", "0607080910", "2022-11-12", "2022-11-12", NULL);

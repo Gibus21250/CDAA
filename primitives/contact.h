@@ -13,7 +13,7 @@ class Contact
 private:
 
     unsigned m_IdC;
-    std::string m_nom, m_prenom, m_entreprise, m_mail, m_telephone, m_uriPhoto;
+    std::string m_nom, m_prenom, m_entreprise, m_mail, m_telephone, m_photo;
     GestionInteraction m_interactions;
     DateSimple m_dateCreation, m_dateDerniereModification;
 
@@ -76,8 +76,8 @@ public:
      * @brief getUriPhoto
      * @return l'URI de la photo du contact
      */
-    const std::string& getUriPhoto() const;
-    void setUriPhoto(const std::string &value);
+    const std::string& getPhoto() const;
+    void setPhoto(const std::string &value);
 
     /**
      * @brief Recupère la Date de création du contact

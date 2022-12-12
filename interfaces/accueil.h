@@ -5,6 +5,7 @@
 #include<QListWidget>
 
 #include "primitives/gestioncontact.h"
+#include "bdd/mainsqlmanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,8 +22,10 @@ private:
     GestionContact* gt;
 
     void actualiseList();
+    MainSQLManager manager;
 
 public:
+
     explicit Accueil(QWidget *parent = nullptr);
     ~Accueil();
 
@@ -33,7 +36,7 @@ private slots:
     void supprimerContact();
 
     void ouvrirCreationContact();
-    void ajouterContact(const Contact& c);
+    void ajouterContact(Contact& c);
     void ouvrirInfoContact(QListWidgetItem*);
 };
 
