@@ -23,6 +23,13 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label_Filtre">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <italic>true</italic>
+        <underline>true</underline>
+       </font>
+      </property>
       <property name="text">
        <string>Rechercher par filtre :</string>
       </property>
@@ -40,7 +47,17 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_nom"/>
+         <widget class="QLineEdit" name="le_nom">
+          <property name="maximumSize">
+           <size>
+            <width>225</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -54,7 +71,17 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_prenom"/>
+         <widget class="QLineEdit" name="le_prenom">
+          <property name="maximumSize">
+           <size>
+            <width>225</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -72,22 +99,32 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_entreprise"/>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
+         <widget class="QLineEdit" name="le_entreprise">
+          <property name="maximumSize">
            <size>
-            <width>40</width>
-            <height>20</height>
+            <width>225</width>
+            <height>16777215</height>
            </size>
           </property>
-         </spacer>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+         </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
@@ -99,55 +136,159 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="labelDate">
-      <property name="text">
-       <string>Par date:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="layout_date_apres">
+     <layout class="QHBoxLayout" name="layout_triDate">
       <item>
-       <layout class="QHBoxLayout" name="layout_apres">
+       <layout class="QVBoxLayout" name="layout_dateCreation">
         <item>
-         <widget class="QCheckBox" name="checkBox_4">
+         <widget class="QLabel" name="l_dateCrea">
+          <property name="font">
+           <font>
+            <italic>true</italic>
+            <underline>true</underline>
+           </font>
+          </property>
           <property name="text">
-           <string>Après :</string>
+           <string>Date de création</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QDateEdit" name="dateEdit"/>
+         <layout class="QHBoxLayout" name="layout_CApres">
+          <item>
+           <widget class="QCheckBox" name="check_CApres">
+            <property name="text">
+             <string>Après</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="de_CApres"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="layout_CAvant">
+          <item>
+           <widget class="QCheckBox" name="check_CAvant">
+            <property name="text">
+             <string>Avant</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="de_CAvant"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="layout_avant">
+       <widget class="Line" name="line_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layout_dateModif">
         <item>
-         <widget class="QCheckBox" name="checkBox_5">
+         <widget class="QLabel" name="l_dateM">
+          <property name="font">
+           <font>
+            <italic>true</italic>
+            <underline>true</underline>
+           </font>
+          </property>
           <property name="text">
-           <string>Avant :</string>
+           <string>Date de modification</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QDateEdit" name="dateEdit_2"/>
+         <layout class="QHBoxLayout" name="layout_DMApres">
+          <item>
+           <widget class="QCheckBox" name="check_MApres">
+            <property name="text">
+             <string>Après</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="de_MApres"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
         <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
+         <layout class="QHBoxLayout" name="layout_DMAvant">
+          <item>
+           <widget class="QCheckBox" name="check_MAvant">
+            <property name="text">
+             <string>Avant</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="de_MAvant"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
@@ -211,7 +352,7 @@
      <x>0</x>
      <y>0</y>
      <width>650</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAccueil">
@@ -223,9 +364,15 @@
       <string>Charger</string>
      </property>
      <addaction name="actionOuvrirBDD"/>
-     <addaction name="actiondepuis_JSON"/>
+    </widget>
+    <widget class="QMenu" name="menuExporter">
+     <property name="title">
+      <string>Exporter</string>
+     </property>
+     <addaction name="actionJSON"/>
     </widget>
     <addaction name="menuAjouter"/>
+    <addaction name="menuExporter"/>
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
@@ -243,8 +390,14 @@
     <addaction name="action_actualiser"/>
     <addaction name="menuLangue"/>
    </widget>
+   <widget class="QMenu" name="menuFiltre_Avanc_e">
+    <property name="title">
+     <string>Filtre Avancée</string>
+    </property>
+   </widget>
    <addaction name="menuAccueil"/>
    <addaction name="menuAffichage"/>
+   <addaction name="menuFiltre_Avanc_e"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOuvrirBDD">
@@ -279,6 +432,11 @@
   <action name="actionAnglais">
    <property name="text">
     <string>Anglais</string>
+   </property>
+  </action>
+  <action name="actionJSON">
+   <property name="text">
+    <string>JSON</string>
    </property>
   </action>
  </widget>
