@@ -33,7 +33,8 @@ Contact::Contact(const Contact &copy)
     : m_IdC(copy.getIdC()), m_nom(copy.getNom()), m_prenom(copy.getPrenom()),
       m_entreprise(copy.getEntreprise()), m_mail(copy.getMail()),
       m_telephone(copy.getTelephone()), m_photo(copy.getPhoto()),
-      m_interactions(copy.interactions()) {}
+      m_interactions(copy.interactions()), m_dateCreation(copy.getDateCreation()),
+        m_dateDerniereModification(copy.dateDerniereModification()) {}
 
 Contact::Contact() : m_IdC(-1) {}
 

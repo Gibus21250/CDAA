@@ -9,6 +9,8 @@
 
 #include "interfaces/accueil.h"
 
+#include "primitives/dateSimple.h"
+
 int main(int argc, char *argv[])
 {
     //qputenv("QT_DEBUG_PLUGINS", QByteArray("1"));

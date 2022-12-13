@@ -31,6 +31,8 @@ public:
     explicit ContactWidget(QWidget *parent = nullptr, Contact* = nullptr);
     ~ContactWidget();
 
+    void actualiserAffichage();
+
 
     Contact* getContact() const;
 

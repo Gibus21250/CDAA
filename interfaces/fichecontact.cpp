@@ -43,15 +43,40 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact, const MainSQLMan
     m_dcl[3]->setText(QString::fromStdString(m_p_contact->getMail()));
     m_dcl[4]->setText(QString::fromStdString(m_p_contact->getEntreprise()));
 
+    m_dcl[0]->setMaximumWidth(200);
+    m_dcl[1]->setMaximumWidth(200);
+    m_dcl[2]->setMaximumWidth(200);
+    m_dcl[3]->setMaximumWidth(200);
+    m_dcl[4]->setMaximumWidth(200);
+
+    QFont font = QFont();
+    font.setPointSize(10);
+
+    m_dcl[0]->setFont(font);
+    m_dcl[1]->setFont(font);
+    m_dcl[2]->setFont(font);
+    m_dcl[3]->setFont(font);
+    m_dcl[4]->setFont(font);
+
+    m_le[0]->setMaximumWidth(200);
+    m_le[1]->setMaximumWidth(200);
+    m_le[2]->setMaximumWidth(200);
+    m_le[3]->setMaximumWidth(200);
+
+    m_le[0]->setFont(font);
+    m_le[1]->setFont(font);
+    m_le[2]->setFont(font);
+    m_le[3]->setFont(font);
+
     QString uriImage;
     if(m_p_contact->getPhoto().empty()) uriImage = ":/profileImg/no-image";
     else uriImage = QString::fromStdString(m_p_contact->getPhoto());
 
     QPixmap pix(uriImage);
 
-    m_dcl[5]->setPixmap(pix.scaled(50, 50, Qt::KeepAspectRatio));
-    m_dcl[5]->setFixedHeight(75);
-    m_dcl[5]->setFixedWidth(75);
+    m_dcl[5]->setPixmap(pix.scaled(100, 100, Qt::KeepAspectRatio));
+    m_dcl[5]->setFixedHeight(100);
+    m_dcl[5]->setFixedWidth(100);
 
     //Ajout de l'image à gauche du layout
     ui->layout_infosPrincipales->insertWidget(0, m_dcl[5]);
@@ -60,8 +85,8 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact, const MainSQLMan
     ui->layout_nom_prenom->addWidget(m_dcl[0]);
     ui->layout_nom_prenom->addWidget(m_le[0]);
 
-    ui->layout_nom_prenom->addWidget(m_dcl[1]);
     ui->layout_nom_prenom->addWidget(m_le[1]);
+    ui->layout_nom_prenom->addWidget(m_dcl[1]);
 
     //Ajout mail et tel
     ui->layout_mail_tel->addWidget(m_dcl[3]);
@@ -228,7 +253,7 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
             quiEstEdite = -1;
             modeEdition = false;
         }
-        //Ici on cherche à enregistrer les modifications
+        //Ici on cherche à enregistrer les modifications d'une interactions
         else if (event->matches(QKeySequence::Save) && quiEstEdite == -1)
         {
 
@@ -281,7 +306,8 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
                 }
                 if(dateStrTache.empty())
                 {
-                    tache = Tache(-1, descTache);
+                    //Dans l'énoncé, il est dit de mettre la date d'aujourdhui, si pas de @date trouvé
+                    tache = Tache(-1, descTache, DateSimple());
                 }
                 else
                 {

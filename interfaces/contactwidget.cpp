@@ -14,12 +14,22 @@ ContactWidget::ContactWidget(QWidget *parent, Contact* cont)
     : QWidget{parent}, contact(cont), ui(new Ui::ContactWidget())
 {
     ui->setupUi(this);
+    actualiserAffichage();
+}
+
+ContactWidget::~ContactWidget()
+{
+    delete ui;
+}
+
+void ContactWidget::actualiserAffichage()
+{
     QString uriImage;
-    if(cont->getPhoto().empty()) uriImage = ":/profileImg/no-image";
-    else uriImage = QString::fromStdString(cont->getPhoto());
+    if(contact->getPhoto().empty()) uriImage = ":/profileImg/no-image";
+    else uriImage = QString::fromStdString(contact->getPhoto());
 
     QPixmap pix(uriImage);
-    ui->profileImg->setPixmap(pix.scaled(50, 50, Qt::KeepAspectRatio));
+    ui->profileImg->setPixmap(pix.scaled(75, 75, Qt::KeepAspectRatio));
 
     ui->l_nom->setText(QString::fromStdString(contact->getNom()));
     ui->l_prenom->setText(QString::fromStdString(contact->getPrenom()));
@@ -29,9 +39,7 @@ ContactWidget::ContactWidget(QWidget *parent, Contact* cont)
 
     ui->l_entreprise->setText(QString::fromStdString(contact->getEntreprise()));
 
-}
+    ui->l_DateC->setText(QString::fromStdString(contact->getDateCreation().getDateStrFormat()));
 
-ContactWidget::~ContactWidget()
-{
-    delete ui;
+    ui->l_DateM->setText(QString::fromStdString(contact->dateDerniereModification().getDateStrFormat()));
 }

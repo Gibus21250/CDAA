@@ -11,7 +11,67 @@
 #include <QErrorMessage>
 
 #include <QDebug>
-void Accueil::actualiseList()
+
+Accueil::Accueil(QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::Accueil())
+{
+
+    BDDLocation = "E:\\Cloud\\GitHub\\CDAA\\CDAA\\gestion.sqlite";
+
+    manager.connectTo(this->BDDLocation);
+
+    ui->setupUi(this);
+
+    manager.chargerBaseDeDonnee(&gt);
+
+    //On initialise les dates des QDateEdit par la date d'aujourd'hui
+    ui->de_CApres->setDate(QDateTime::currentDateTime().date());
+    ui->de_CAvant->setDate(QDateTime::currentDateTime().date());
+    ui->de_MApres->setDate(QDateTime::currentDateTime().date());
+    ui->de_MAvant->setDate(QDateTime::currentDateTime().date());
+
+
+    QObject::connect(ui->b_Supprimer, SIGNAL(clicked()), this, SLOT(supprimerContact()));
+    QObject::connect(ui->b_Ajouter, SIGNAL(clicked()), this, SLOT(ouvrirCreationContact()));
+    QObject::connect(ui->lw_Contact, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(ouvrirInfoContact(QListWidgetItem*)));
+
+    //Connexion des checkbox de filtre
+    QObject::connect(ui->check_Prenom, SIGNAL(toggled(bool)), this, SLOT(onFiltreActive(bool)));
+    QObject::connect(ui->check_nom, SIGNAL(toggled(bool)), this, SLOT(onFiltreActive(bool)));
+    QObject::connect(ui->check_entreprise, SIGNAL(toggled(bool)), this, SLOT(onFiltreActive(bool)));
+
+    //Connexion des lineEdit associé aux checkbox
+    QObject::connect(ui->le_nom, SIGNAL(textChanged(QString)), this, SLOT(onValueTEChanged()));
+    QObject::connect(ui->le_prenom, SIGNAL(textChanged(QString)), this, SLOT(onValueTEChanged()));
+    QObject::connect(ui->le_entreprise, SIGNAL(textChanged(QString)), this, SLOT(onValueTEChanged()));
+
+
+    //Connexion aux checkBox associé aux date de filtre
+    QObject::connect(ui->check_CApres, SIGNAL(toggled(bool)), this, SLOT(onFiltreDateActive(bool)));
+    QObject::connect(ui->check_CAvant, SIGNAL(toggled(bool)), this, SLOT(onFiltreDateActive(bool)));
+    QObject::connect(ui->check_MApres, SIGNAL(toggled(bool)), this, SLOT(onFiltreDateActive(bool)));
+    QObject::connect(ui->check_MAvant, SIGNAL(toggled(bool)), this, SLOT(onFiltreDateActive(bool)));
+
+    //Connexion des dateEdit, lorsqu'ils sont modifié on récupère leur signaux
+    QObject::connect(ui->de_CApres, SIGNAL(dateChanged(QDate)), this, SLOT(onDateEditChange()));
+    QObject::connect(ui->de_CAvant, SIGNAL(dateChanged(QDate)), this, SLOT(onDateEditChange()));
+    QObject::connect(ui->de_MApres, SIGNAL(dateChanged(QDate)), this, SLOT(onDateEditChange()));
+    QObject::connect(ui->de_MAvant, SIGNAL(dateChanged(QDate)), this, SLOT(onDateEditChange()));
+
+
+    QWidget::setWindowTitle("Gestionnaire de Contact");
+    setMinimumWidth(650);
+    setMinimumHeight(700);
+
+    resetList();
+}
+
+Accueil::~Accueil()
+{
+    delete ui;
+}
+
+void Accueil::resetList()
 {
     ui->lw_Contact->clear();
 
@@ -35,7 +95,6 @@ void Accueil::filtrerListe()
     {
         ContactWidget* cw = dynamic_cast<ContactWidget*>(
                     ui->lw_Contact->itemWidget(ui->lw_Contact->item(i)));
-        std::cout << *cw->getContact() << std::endl;
         if(ui->check_nom->isChecked())
         {
             if(cw->getContact()->getNom().find(ui->le_nom->text().toStdString()) == std::string::npos)
@@ -60,33 +119,12 @@ void Accueil::filtrerListe()
     }
 }
 
-Accueil::Accueil(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::Accueil())
+void Accueil::reafficherListe()
 {
-
-    BDDLocation = "E:\\Cloud\\GitHub\\CDAA\\CDAA\\gestion.sqlite";
-
-    manager.connectTo(this->BDDLocation);
-
-    ui->setupUi(this);
-
-    manager.chargerBaseDeDonnee(&gt);
-
-
-    QObject::connect(ui->b_Supprimer, SIGNAL(clicked()), this, SLOT(supprimerContact()));
-    QObject::connect(ui->b_Ajouter, SIGNAL(clicked()), this, SLOT(ouvrirCreationContact()));
-    QObject::connect(ui->lw_Contact, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(ouvrirInfoContact(QListWidgetItem*)));
-
-    QWidget::setWindowTitle("Gestionnaire de Contact");
-    setMinimumWidth(650);
-    setMinimumHeight(700);
-
-    actualiseList();
-}
-
-Accueil::~Accueil()
-{
-    delete ui;
+    for(int i = 0; i < ui->lw_Contact->count(); ++i)
+    {
+        ui->lw_Contact->item(i)->setHidden(false);
+    }
 }
 
 /**
@@ -117,8 +155,12 @@ void Accueil::ouvrirInfoContact(QListWidgetItem* )
 
     FicheContact fc(this, cw->getContact(), &manager);
     fc.exec();
+
     manager.modifierContact(cw->getContact());
-    actualiseList();
+    cw->actualiserAffichage();
+    reafficherListe();
+    filtrerListe();
+    filtrerListeParDate();
 }
 
 
@@ -127,14 +169,14 @@ void Accueil::ouvrirCreationContact()
     CreationContact cc(this);
     QObject::connect(&cc, SIGNAL(creerContact(Contact&)), this, SLOT(ajouterContact(Contact&)));
     cc.exec();
-    actualiseList();
+    resetList();
 }
 
 void Accueil::ajouterContact(Contact& c)
 {
     manager.ajouterContact(&c);
     gt.ajouterElement(c);
-    actualiseList();
+    resetList();
 }
 
 
@@ -149,15 +191,13 @@ void Accueil::on_actionOuvrirBDD_triggered()
     QString dir = QFileDialog::getOpenFileName(this, tr("Fichier BDD"), QDir::currentPath());
     if(!dir.isEmpty())
     {
-        qDebug() << "dir non null";
         manager.connectTo(dir.toStdString());
-        qDebug() << manager.getIsConnected();
         if(manager.getIsConnected())
         {
             BDDLocation = dir.toStdString();
             gt.effacerToutElements();
             manager.chargerBaseDeDonnee(&gt);
-            actualiseList();
+            resetList();
         }
         else
         {
@@ -168,8 +208,7 @@ void Accueil::on_actionOuvrirBDD_triggered()
     }
 }
 
-
-void Accueil::on_check_nom_toggled(bool checked)
+void Accueil::onFiltreActive(bool checked)
 {
     if(checked)
     {
@@ -177,39 +216,99 @@ void Accueil::on_check_nom_toggled(bool checked)
     }
     else
     {
-        actualiseList();
+        reafficherListe();
+        filtrerListe();
+        filtrerListeParDate();
     }
 }
 
-void Accueil::on_check_Prenom_toggled(bool checked)
+void Accueil::onValueTEChanged()
+{
+    if(ui->check_Prenom->isChecked() || ui->check_entreprise->isChecked() || ui->check_nom->isChecked())
+    {
+        reafficherListe();
+        filtrerListe();
+        filtrerListeParDate();
+    }
+}
+
+void Accueil::onFiltreDateActive(bool checked)
 {
     if(checked)
     {
-        filtrerListe();
+        filtrerListeParDate();
     }
     else
     {
-        actualiseList();
+        reafficherListe();
+        filtrerListe();
+        filtrerListeParDate();
     }
 }
 
-void Accueil::on_check_entreprise_toggled(bool checked)
+void Accueil::onDateEditChange()
 {
-    if(checked)
+    if(ui->check_CApres->isChecked() || ui->check_CAvant->isChecked() || ui->check_MApres->isChecked() || ui->check_MAvant)
     {
+        reafficherListe();
         filtrerListe();
-    }
-    else
-    {
-        actualiseList();
+        filtrerListeParDate();
     }
 }
 
-void Accueil::on_le_nom_textChanged(const QString &arg1)
+void Accueil::filtrerListeParDate()
 {
-    if(ui->check_nom->isChecked())
+    for(int i = 0; i < ui->lw_Contact->count(); ++i)
     {
-        actualiseList();
-        filtrerListe();
+        ContactWidget* cw = dynamic_cast<ContactWidget*>(
+                    ui->lw_Contact->itemWidget(ui->lw_Contact->item(i)));
+
+
+        if(ui->check_CApres->isChecked())
+        {
+            const QDate sdate = ui->de_CApres->date();
+
+            DateSimple date(sdate.year(), sdate.month(), sdate.day());
+
+            if(cw->getContact()->getDateCreation() < date)
+            {
+                ui->lw_Contact->item(i)->setHidden(true);
+            }
+        }
+        if(ui->check_CAvant->isChecked())
+        {
+
+            const QDate sdate = ui->de_CAvant->date();
+            DateSimple date(sdate.year(), sdate.month(), sdate.day());
+
+            if(cw->getContact()->getDateCreation() > date)
+            {
+                ui->lw_Contact->item(i)->setHidden(true);
+            }
+        }
+
+        if(ui->check_MApres->isChecked())
+        {
+
+            const QDate sdate = ui->de_MApres->date();
+            DateSimple date(sdate.year(), sdate.month(), sdate.day());
+            if(cw->getContact()->dateDerniereModification() < date)
+            {
+                ui->lw_Contact->item(i)->setHidden(true);
+            }
+        }
+        if(ui->check_MAvant->isChecked())
+        {
+
+            const QDate sdate = ui->de_MAvant->date();
+            DateSimple date(sdate.year(), sdate.month(), sdate.day());
+            if(cw->getContact()->dateDerniereModification() > date)
+            {
+                ui->lw_Contact->item(i)->setHidden(true);
+            }
+        }
+
     }
 }
+
+
