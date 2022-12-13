@@ -23,13 +23,13 @@ void Interaction::setIdI(const unsigned &newIdI)
 Interaction::Interaction() : Interaction(-1, "") {}
 
 Interaction::Interaction(const unsigned id, const std::string& desc)
-    : m_contenu(desc), m_date(DateSimple()) {}
+    : m_IdI(id), m_contenu(desc), m_date(DateSimple()) {}
 
 Interaction::Interaction(const unsigned id, const std::string& desc, const DateSimple& date_)
-    : m_contenu(desc), m_date(date_) {}
+    : m_IdI(id), m_contenu(desc), m_date(date_) {}
 
 Interaction::Interaction(const unsigned id, const std::string& desc, const std::string& dateStr)
-    : m_contenu(desc), m_date(DateSimple(dateStr)) {}
+    : m_IdI(id), m_contenu(desc), m_date(DateSimple(dateStr)) {}
 
 const DateSimple &Interaction::getDate() const
 {

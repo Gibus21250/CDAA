@@ -2,8 +2,8 @@
 #define MAINSQLMANAGER_H
 
 #include <QtSql/QSqlDatabase>
-#include "primitives/contact.h"
 
+#include "primitives/gestioncontact.h"
 
 class MainSQLManager
 {
@@ -19,6 +19,8 @@ public:
     bool verifierSchema() const;
 
     bool getIsConnected() const;
+
+    void chargerBaseDeDonnee(GestionContact* gt) const;
 
     /////////////////////////////
     /// Partie des Contacts   ///
@@ -36,6 +38,16 @@ public:
     bool ajouterInteraction(const int IdC, Interaction* inter) const;
     bool supprimerInteraction(const int IdC) const;
     bool modifierInteraction(const Interaction* inter) const;
+
+    ////////////////////////////////
+    ///    Partie des Tâches     ///
+    ////////////////////////////////
+
+    bool ajouterTache(const int IdI, Tache* tache) const;
+    bool supprimerTache(const int IdT) const;
+    bool modifierTache(const Tache* tache) const;
+
+    void supprimerToutTache(const int IdI) const;
 };
 
 #endif // MAINSQLMANAGER_H

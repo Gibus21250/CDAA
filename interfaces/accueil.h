@@ -19,7 +19,9 @@ class Accueil : public QMainWindow
 
 private:
     Ui::Accueil* ui;
-    GestionContact* gt;
+    GestionContact gt;
+
+    std::string BDDLocation;
 
     void actualiseList();
     MainSQLManager manager;
@@ -29,15 +31,13 @@ public:
     explicit Accueil(QWidget *parent = nullptr);
     ~Accueil();
 
-
-    void setGt(GestionContact *newGt);
-
 private slots:
     void supprimerContact();
 
     void ouvrirCreationContact();
     void ajouterContact(Contact& c);
     void ouvrirInfoContact(QListWidgetItem*);
+    void on_actionQuitter_triggered();
 };
 
 #endif // ACCUEIL_H

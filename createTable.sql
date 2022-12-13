@@ -22,7 +22,7 @@ CREATE TABLE Interaction
 (
     IdI INTEGER PRIMARY KEY,
     Contenu VARCHAR,
-    dateCreation DATE,
+    date DATE,
     IdC INTEGER,
 
     FOREIGN KEY (IdC)
@@ -45,10 +45,16 @@ CREATE TABLE Tache
 --UPDATE Contact SET nom = 'test', prenom = 'wesh', dateModification = DATE('now') WHERE IdC = 15;
 
 INSERT INTO Contact VALUES
-(NULL, "Mortier", "Marie", "none", "m.m@gmail.com", "0607080910", "2022-11-12", "2022-11-12", NULL),
-(NULL, "Jacquinet", "Nathan", "none", "n.j@gmail.com", "1090807060", "2022-12-08", "2022-12-08", NULL);
+(NULL, "Mortier", "Marie", "none", "marie.mortier@gmail.com", "00645874920", "2022-11-12", "2022-11-12", NULL),
+(NULL, "Jacquinet", "Nathan", "none", "n.j@gmail.com", "76543210", "2022-12-08", "2022-12-08", NULL);
 
-INSERT INTO Interaction VALUES (NULL, "Continuer SR", DATE('now'), 1); 
+INSERT INTO Interaction VALUES (NULL, "Continuer SR", DATE('now'), 1);
+INSERT INTO Interaction VALUES (NULL, "Faire la vaisselle", DATE('now'), 2); 
+
+INSERT INTO Tache VALUES (NULL, "Manger", DATE('now'), 2); 
+INSERT INTO Tache VALUES (NULL, "Boire", DATE('now'), 2); 
+
+INSERT INTO Tache VALUES (NULL, "avancer shell script", DATE('now'), 1); 
 
 PRAGMA foreign_keys;
 PRAGMA foreign_keys = ON;

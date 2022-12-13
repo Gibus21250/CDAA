@@ -8,8 +8,8 @@
 #include "ui_ficheContact.h"
 #include "doubleclickqlabel.h"
 
-FicheContact::FicheContact(QWidget *parent, Contact* p_contact)
-    : QDialog{parent}, ui(new Ui::FicheContact()), m_p_contact(p_contact), modeEdition(false), quiEstEdite(-1)
+FicheContact::FicheContact(QWidget *parent, Contact* p_contact, const MainSQLManager* manager)
+    : QDialog{parent}, ui(new Ui::FicheContact()), m_p_contact(p_contact), manager(manager), modeEdition(false), quiEstEdite(-1)
 {
     ui->setupUi(this);
 
@@ -241,7 +241,14 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
 
             I.setDate(dateI);
 
-            // ------------------------------- //
+            InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
+
+            //On oublie pas de copier aussi l'ID de l'interaction!
+            I.setIdI(iw->p_interaction()->IdI());
+
+            // --------------PARTIE DECOUPAGE DU TEXT ET RCUPERATION DONNEES----------------- //
+
+            manager->supprimerToutTache(iw->p_interaction()->IdI());
 
             QTextDocument* qDoc = dcte->document();
             QTextCursor c(qDoc);
@@ -280,15 +287,18 @@ void FicheContact::keyPressEvent(QKeyEvent *event)
                 {
                     tache = Tache(-1, descTache, dateStrTache);
                 }
+                manager->ajouterTache(iw->p_interaction()->IdI(), &tache);
                 I.ajouterTache(tache);
-                //TODO ajouter BDD!
             }
 
 
-            InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
 
-            //On modifie directement dans la mémoire la nouvelle Interaction!
+            //On modifie directement dans la mémoire la nouvelle Interaction
             *iw->p_interaction() = I;
+
+            iw->p_interaction()->setIdI(I.IdI());
+
+            manager->modifierInteraction(iw->p_interaction());
             iw->actualiserInfoWidget();
 
             ui->de_interaction->setEnabled(false);
@@ -308,7 +318,7 @@ void FicheContact::ajouterInteraction()
 {
 
     Interaction i(-1, "Remplir contenu");
-    //TODO Ajouter à la BDD sans oublier de mettre à jour l'id
+    manager->ajouterInteraction(m_p_contact->getIdC(), &i);
     m_p_contact->ajoutInteraction(i);
 
     int nbI = m_p_contact->getNombreInteraction();
@@ -355,11 +365,14 @@ void FicheContact::supprimerInteraction()
     //On vérifie qu'il y a bien un item de séléctionné
     if(ui->lw_interactions->selectedItems().count() != 0)
     {
+
         //On récupère le InteractionWidget associé à l'item de la QListWidget
-        //InteractionWidget* cw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
+        InteractionWidget* cw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->currentItem()));
+
+        manager->supprimerInteraction(cw->p_interaction()->IdI());
 
         //utilisation de supprimerInteraction avec un indice, car supprime interaction par instance
-        //Est de une lourde (compare chaque instance une par une)
+        //Est de une: lourde (compare chaque instance une par une)
         //Mais le plus grave, c'est qu'elle supprime la première instance correspondant, qui n'est donc pas
         //forcément celle selectionné dans l'IHM (car deux instances peuvent être identique, pour autant
         //L'utilisateur les vois comme differente.
@@ -367,6 +380,7 @@ void FicheContact::supprimerInteraction()
 
         ui->lw_interactions->removeItemWidget(ui->lw_interactions->currentItem());
         delete ui->lw_interactions->currentItem();
+
     }
 }
 

@@ -10,6 +10,8 @@
 
 #include "primitives/contact.h"
 
+#include "bdd/mainsqlmanager.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
     class FicheContact;
@@ -23,6 +25,7 @@ class FicheContact : public QDialog
 private:
     Ui::FicheContact* ui;
     Contact* m_p_contact;
+    const MainSQLManager* manager;
 
     DoubleClickQLabel* m_dcl[6];
     QLineEdit* m_le[5];
@@ -39,7 +42,7 @@ private:
 
 
 public:
-    explicit FicheContact(QWidget *parent = nullptr, Contact* p_contact = nullptr);
+    explicit FicheContact(QWidget *parent = nullptr, Contact* p_contact = nullptr, const MainSQLManager* manager = nullptr);
     ~FicheContact();
 
 signals:

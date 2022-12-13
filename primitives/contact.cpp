@@ -21,8 +21,13 @@ void Contact::setIdC(const unsigned &newIdC)
     m_IdC = newIdC;
 }
 
+void Contact::setDateCreation(const DateSimple &newDateCreation)
+{
+    m_dateCreation = newDateCreation;
+}
+
 Contact::Contact(const unsigned id, const std::string nom, const std::string prenom, const std::string entreprise,const std::string mail, const std::string telephone, const std::string uriPhoto)
-    : m_nom(nom), m_prenom(prenom), m_entreprise(entreprise), m_mail(mail), m_telephone(telephone), m_photo(uriPhoto) {}
+    : m_IdC(id), m_nom(nom), m_prenom(prenom), m_entreprise(entreprise), m_mail(mail), m_telephone(telephone), m_photo(uriPhoto) {}
 
 Contact::Contact(const Contact &copy)
     : m_IdC(copy.getIdC()), m_nom(copy.getNom()), m_prenom(copy.getPrenom()),

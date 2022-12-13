@@ -134,6 +134,7 @@ public:
 
     const unsigned &getIdC() const;
     void setIdC(const unsigned &newIdC);
+    void setDateCreation(const DateSimple &newDateCreation);
 };
 
 #endif // CONTACT_H

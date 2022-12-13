@@ -15,16 +15,16 @@ void Tache::setIdT(const unsigned &newIdT)
 Tache::Tache() : m_contenu(""), m_hasDate(false) {}
 
 Tache::Tache(const unsigned id, const Tache& tache)
-    : m_contenu(tache.m_contenu), m_date(tache.m_date), m_hasDate(tache.m_hasDate) {}
+    : m_IdT(id), m_contenu(tache.m_contenu), m_date(tache.m_date), m_hasDate(tache.m_hasDate) {}
 
 Tache::Tache(const unsigned id, const std::string& contenu_)
-    : m_contenu(contenu_), m_hasDate(false) {}
+    : m_IdT(id), m_contenu(contenu_), m_hasDate(false) {}
 
 Tache::Tache(const unsigned id, const std::string& contenu_, const DateSimple& date_)
-    : m_contenu(contenu_), m_date(date_), m_hasDate(true) {}
+    : m_IdT(id), m_contenu(contenu_), m_date(date_), m_hasDate(true) {}
 
 Tache::Tache(const unsigned id, const std::string& contenu_, const std::string& datestr)
-    : m_contenu(contenu_), m_date(DateSimple(datestr)), m_hasDate(true) {}
+    : m_IdT(id), m_contenu(contenu_), m_date(DateSimple(datestr)), m_hasDate(true) {}
 
 bool Tache::isDatee() const
 {

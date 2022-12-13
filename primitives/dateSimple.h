@@ -53,6 +53,8 @@ public:
      */
     std::string getDateStrFormat() const;
 
+    std::string getDateStrFormatBDD() const;
+
     int getJour() const;
     int getMois() const;
     int getAnnee() const;

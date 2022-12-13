@@ -39,17 +39,39 @@ DateSimple::DateSimple(const std::string& str)
                 }
                 i++;
             }
+
+            time = date::year(date[2])/date::month(date[1])/date::day(date[0]);
+
         }
         else
         {
-            date[2] = 2000;
-            date[1] = 1;
-            date[0] = 1;
+            n = std::count(str.begin(), str.end(), '-');
+
+            if(n == 2)
+            {
+                short i = 0;
+                while(std::getline(ss, tmp, '-'))
+                {
+                    try {
+                        date[i] = stoi(tmp);
+                    } catch (...) {
+                        date[i] = 1;
+                    }
+                    i++;
+                }
+
+                time = date::year(date[0])/date::month(date[1])/date::day(date[2]);
+
+            }
+            else
+            {
+                date[2] = 2000;
+                date[1] = 1;
+                date[0] = 1;
+            }
+
         }
 
-
-
-        time = date::year(date[2])/date::month(date[1])/date::day(date[0]);
     }
 }
 DateSimple::DateSimple(const unsigned y, const unsigned m, const unsigned d)
@@ -72,6 +94,17 @@ std::string DateSimple::getDateStrFormat() const
             nbMois = std::to_string(ymd.month().m_),
             nbAnnee = std::to_string(ymd.year().y_);
     return nbDay + "/" + nbMois + "/" + nbAnnee;
+}
+
+std::string DateSimple::getDateStrFormatBDD() const
+{
+    auto ymd = date::year_month_day{time};
+
+    std::string
+            nbDay = std::to_string(ymd.day().d_),
+            nbMois = std::to_string(ymd.month().m_),
+            nbAnnee = std::to_string(ymd.year().y_);
+    return nbAnnee + "-" + nbMois + "-" + nbDay;
 }
 
 int DateSimple::getJour() const

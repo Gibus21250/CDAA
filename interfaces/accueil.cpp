@@ -7,19 +7,13 @@
 #include "fichecontact.h"
 #include "bdd/mainsqlmanager.h"
 
-void Accueil::setGt(GestionContact *newGt)
-{
-    gt = newGt;
-    actualiseList();
-}
-
 void Accueil::actualiseList()
 {
     ui->lw_Contact->clear();
 
-    for(unsigned i = 0; i < gt->getNombreElements(); i++)
+    for(unsigned i = 0; i < gt.getNombreElements(); i++)
     {
-        ContactWidget* cw = new ContactWidget(this, &(gt->getElement(i)));
+        ContactWidget* cw = new ContactWidget(this, &(gt.getElement(i)));
 
         auto item = new QListWidgetItem();
 
@@ -34,8 +28,15 @@ void Accueil::actualiseList()
 Accueil::Accueil(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::Accueil())
 {
-    manager.connectTo("E:\\Cloud\\GitHub\\CDAA\\CDAA\\gestion.sqlite");
+
+    BDDLocation = "E:\\Cloud\\GitHub\\CDAA\\CDAA\\gestion.sqlite";
+
+    manager.connectTo(this->BDDLocation);
+
     ui->setupUi(this);
+
+    manager.chargerBaseDeDonnee(&gt);
+
 
     QObject::connect(ui->b_Supprimer, SIGNAL(clicked()), this, SLOT(supprimerContact()));
     QObject::connect(ui->b_Ajouter, SIGNAL(clicked()), this, SLOT(ouvrirCreationContact()));
@@ -44,6 +45,8 @@ Accueil::Accueil(QWidget *parent)
     QWidget::setWindowTitle("Gestionnaire de Contact");
     setMinimumWidth(650);
     setMinimumHeight(700);
+
+    actualiseList();
 }
 
 Accueil::~Accueil()
@@ -63,9 +66,10 @@ void Accueil::supprimerContact()
 
         manager.supprimerContact(cw->getContact()->getIdC());
         //On supprime le contact de la list de contact
-        gt->supprimerElement(ui->lw_Contact->currentRow());
+        gt.supprimerElement(ui->lw_Contact->currentRow());
 
         ui->lw_Contact->removeItemWidget(ui->lw_Contact->currentItem());
+        //Dans la doc on nous dit de delete nous même le pointer, pour que le widget soit à jour
         delete ui->lw_Contact->currentItem();
     }
 
@@ -76,7 +80,7 @@ void Accueil::ouvrirInfoContact(QListWidgetItem* )
     //On récupère le widget selectionné par l'utilisateur
     ContactWidget* cw = dynamic_cast<ContactWidget*>(ui->lw_Contact->itemWidget(ui->lw_Contact->currentItem()));
 
-    FicheContact fc(this, cw->getContact());
+    FicheContact fc(this, cw->getContact(), &manager);
     fc.exec();
     manager.modifierContact(cw->getContact());
     actualiseList();
@@ -93,8 +97,14 @@ void Accueil::ouvrirCreationContact()
 
 void Accueil::ajouterContact(Contact& c)
 {
-    std::cout << "Resultat: " << manager.ajouterContact(&c) << std::endl;
-    gt->ajouterElement(c);
+    manager.ajouterContact(&c);
+    gt.ajouterElement(c);
     actualiseList();
+}
+
+
+void Accueil::on_actionQuitter_triggered()
+{
+    close();
 }
 
