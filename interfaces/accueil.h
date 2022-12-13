@@ -26,6 +26,8 @@ private:
     void actualiseList();
     MainSQLManager manager;
 
+    void filtrerListe();
+
 public:
 
     explicit Accueil(QWidget *parent = nullptr);
@@ -39,6 +41,10 @@ private slots:
     void ouvrirInfoContact(QListWidgetItem*);
     void on_actionQuitter_triggered();
     void on_actionOuvrirBDD_triggered();
+    void on_check_Prenom_toggled(bool checked);
+    void on_check_nom_toggled(bool checked);
+    void on_check_entreprise_toggled(bool checked);
+    void on_le_nom_textChanged(const QString &arg1);
 };
 
 #endif // ACCUEIL_H

@@ -33,28 +33,28 @@
       <item>
        <layout class="QHBoxLayout" name="ly_nom">
         <item>
-         <widget class="QCheckBox" name="checkBox_2">
+         <widget class="QCheckBox" name="check_nom">
           <property name="text">
            <string>Nom</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="le_nom"/>
         </item>
        </layout>
       </item>
       <item>
        <layout class="QHBoxLayout" name="ly_prenom">
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="check_Prenom">
           <property name="text">
            <string>Prenom</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="le_prenom"/>
         </item>
        </layout>
       </item>
@@ -65,14 +65,14 @@
       <item>
        <layout class="QHBoxLayout" name="ly_entreprise">
         <item>
-         <widget class="QCheckBox" name="checkBox_3">
+         <widget class="QCheckBox" name="check_entreprise">
           <property name="text">
            <string>Entreprise</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_3"/>
+         <widget class="QLineEdit" name="le_entreprise"/>
         </item>
         <item>
          <spacer name="horizontalSpacer">
@@ -211,7 +211,7 @@
      <x>0</x>
      <y>0</y>
      <width>650</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAccueil">
@@ -249,7 +249,8 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOuvrirBDD">
    <property name="icon">
-    <iconset theme="document-open"/>
+    <iconset theme="document-open">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>depuis BDD</string>

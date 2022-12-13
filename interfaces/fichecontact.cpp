@@ -386,7 +386,7 @@ void FicheContact::supprimerInteraction()
 
 void FicheContact::doubleCliqueTextEditor()
 {
-    ui->l_info->setText("Echap pour annuler les modifications | ctrl+s pour enrigistrer");
+    ui->l_info->setText("Echap pour annuler les modifications | ctrl+s pour enregistrer");
     modeEdition = true;
     changerEtatPourEdition(false);
     dcte->setReadOnly(false);

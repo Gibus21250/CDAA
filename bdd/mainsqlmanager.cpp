@@ -41,7 +41,6 @@ void MainSQLManager::chargerBaseDeDonnee(GestionContact *gt) const
 
         QSqlQuery qContact("SELECT * FROM Contact");
         qContact.exec();
-
         int cmp = 0;
 
         while(qContact.next())

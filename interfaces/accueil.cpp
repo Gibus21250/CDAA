@@ -29,6 +29,37 @@ void Accueil::actualiseList()
     }
 }
 
+void Accueil::filtrerListe()
+{
+    for(int i = 0; i < ui->lw_Contact->count(); ++i)
+    {
+        ContactWidget* cw = dynamic_cast<ContactWidget*>(
+                    ui->lw_Contact->itemWidget(ui->lw_Contact->item(i)));
+        std::cout << *cw->getContact() << std::endl;
+        if(ui->check_nom->isChecked())
+        {
+            if(cw->getContact()->getNom().find(ui->le_nom->text().toStdString()) == std::string::npos)
+            {
+                ui->lw_Contact->item(i)->setHidden(true);
+            }
+        }
+        if(ui->check_Prenom->isChecked())
+        {
+            if(cw->getContact()->getPrenom().find(ui->le_prenom->text().toStdString()) == std::string::npos)
+            {
+                ui->lw_Contact->item(i)->setHidden(true);
+            }
+        }
+        if(ui->check_entreprise->isChecked())
+        {
+            if(cw->getContact()->getEntreprise().find(ui->le_entreprise->text().toStdString()) == std::string::npos)
+            {
+                ui->lw_Contact->item(i)->setHidden(true);
+            }
+        }
+    }
+}
+
 Accueil::Accueil(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::Accueil())
 {
@@ -137,3 +168,48 @@ void Accueil::on_actionOuvrirBDD_triggered()
     }
 }
 
+
+void Accueil::on_check_nom_toggled(bool checked)
+{
+    if(checked)
+    {
+        filtrerListe();
+    }
+    else
+    {
+        actualiseList();
+    }
+}
+
+void Accueil::on_check_Prenom_toggled(bool checked)
+{
+    if(checked)
+    {
+        filtrerListe();
+    }
+    else
+    {
+        actualiseList();
+    }
+}
+
+void Accueil::on_check_entreprise_toggled(bool checked)
+{
+    if(checked)
+    {
+        filtrerListe();
+    }
+    else
+    {
+        actualiseList();
+    }
+}
+
+void Accueil::on_le_nom_textChanged(const QString &arg1)
+{
+    if(ui->check_nom->isChecked())
+    {
+        actualiseList();
+        filtrerListe();
+    }
+}
