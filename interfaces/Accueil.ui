@@ -188,16 +188,16 @@
        <number>25</number>
       </property>
       <item>
-       <widget class="QPushButton" name="b_Ajouter">
+       <widget class="QPushButton" name="b_Supprimer">
         <property name="text">
-         <string>Ajouter</string>
+         <string>Supprimer</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="b_Supprimer">
+       <widget class="QPushButton" name="b_Ajouter">
         <property name="text">
-         <string>Supprimer</string>
+         <string>Ajouter</string>
         </property>
        </widget>
       </item>
@@ -222,7 +222,7 @@
      <property name="title">
       <string>Charger</string>
      </property>
-     <addaction name="actionContact"/>
+     <addaction name="actionOuvrirBDD"/>
      <addaction name="actiondepuis_JSON"/>
     </widget>
     <addaction name="menuAjouter"/>
@@ -246,7 +246,11 @@
    <addaction name="menuAccueil"/>
    <addaction name="menuAffichage"/>
   </widget>
-  <action name="actionContact">
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOuvrirBDD">
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
    <property name="text">
     <string>depuis BDD</string>
    </property>
@@ -254,11 +258,6 @@
   <action name="actiondepuis_JSON">
    <property name="text">
     <string>depuis JSON</string>
-   </property>
-  </action>
-  <action name="actionActualiser">
-   <property name="text">
-    <string>Actualiser</string>
    </property>
   </action>
   <action name="actionQuitter">

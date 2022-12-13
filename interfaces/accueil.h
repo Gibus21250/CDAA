@@ -38,6 +38,7 @@ private slots:
     void ajouterContact(Contact& c);
     void ouvrirInfoContact(QListWidgetItem*);
     void on_actionQuitter_triggered();
+    void on_actionOuvrirBDD_triggered();
 };
 
 #endif // ACCUEIL_H

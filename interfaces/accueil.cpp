@@ -7,6 +7,10 @@
 #include "fichecontact.h"
 #include "bdd/mainsqlmanager.h"
 
+#include <QFileDialog>
+#include <QErrorMessage>
+
+#include <QDebug>
 void Accueil::actualiseList()
 {
     ui->lw_Contact->clear();
@@ -106,5 +110,30 @@ void Accueil::ajouterContact(Contact& c)
 void Accueil::on_actionQuitter_triggered()
 {
     close();
+}
+
+
+void Accueil::on_actionOuvrirBDD_triggered()
+{
+    QString dir = QFileDialog::getOpenFileName(this, tr("Fichier BDD"), QDir::currentPath());
+    if(!dir.isEmpty())
+    {
+        qDebug() << "dir non null";
+        manager.connectTo(dir.toStdString());
+        qDebug() << manager.getIsConnected();
+        if(manager.getIsConnected())
+        {
+            BDDLocation = dir.toStdString();
+            gt.effacerToutElements();
+            manager.chargerBaseDeDonnee(&gt);
+            actualiseList();
+        }
+        else
+        {
+            QErrorMessage qem(this);
+            qem.showMessage("Impossible d'ouvrir la base de donnée selectionnée!\nVérifier que le fichier est valide (.sqlite)");
+            qem.exec();
+        }
+    }
 }
 

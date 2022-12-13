@@ -7,6 +7,15 @@
 
 bool MainSQLManager::connectTo(const std::string &pathFichier)
 {
+
+    //Améliorer reset connection DB
+    db = QSqlDatabase::database();
+
+    QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
+
+    if(db.isOpen()) db.close();
+    if(db.isValid()) db.close();
+
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(QString::fromStdString(pathFichier));
 
@@ -92,34 +101,38 @@ void MainSQLManager::chargerBaseDeDonnee(GestionContact *gt) const
 
             ++cmp;
         }
+
     }
 }
 
 bool MainSQLManager::ajouterContact(Contact *contact) const
 {
-    int IdC = -1;
-    QSqlQuery query2("SELECT max(IdC) FROM Contact;");
-
-    if(query2.next())
+    if(isConnected)
     {
-        IdC = query2.value(0).toInt();
-    }
+        int IdC = -1;
+        QSqlQuery query2("SELECT max(IdC) FROM Contact;");
 
-    if(IdC != -1)
-    {
-        contact->setIdC(IdC+1);
+        if(query2.next())
+        {
+            IdC = query2.value(0).toInt();
+        }
+
+        if(IdC != -1)
+        {
+            contact->setIdC(IdC+1);
 
 
-        QSqlQuery query(db);
-        query.prepare("INSERT INTO Contact VALUES (NULL, :n, :p, :e, :m, :t, DATE('now'), DATE('now'), :u)");
-        query.bindValue(":n", QString::fromStdString(contact->getNom()));
-        query.bindValue(":p", QString::fromStdString(contact->getPrenom()));
-        query.bindValue(":e", QString::fromStdString(contact->getEntreprise()));
-        query.bindValue(":m", QString::fromStdString(contact->getMail()));
-        query.bindValue(":t", QString::fromStdString(contact->getTelephone()));
-        query.bindValue(":u", QString::fromStdString(contact->getPhoto()));
+            QSqlQuery query(db);
+            query.prepare("INSERT INTO Contact VALUES (NULL, :n, :p, :e, :m, :t, DATE('now'), DATE('now'), :u)");
+            query.bindValue(":n", QString::fromStdString(contact->getNom()));
+            query.bindValue(":p", QString::fromStdString(contact->getPrenom()));
+            query.bindValue(":e", QString::fromStdString(contact->getEntreprise()));
+            query.bindValue(":m", QString::fromStdString(contact->getMail()));
+            query.bindValue(":t", QString::fromStdString(contact->getTelephone()));
+            query.bindValue(":u", QString::fromStdString(contact->getPhoto()));
 
-        return query.exec();
+            return query.exec();
+        }
     }
 
     return false;
@@ -128,104 +141,11 @@ bool MainSQLManager::ajouterContact(Contact *contact) const
 
 bool MainSQLManager::supprimerContact(const int IdC) const
 {
-    QSqlQuery query;
-    query.prepare("DELETE FROM Contact WHERE IdC = :id");
-    query.bindValue(":id", IdC);
-
-    return query.exec();
-
-}
-
-bool MainSQLManager::modifierContact(const Contact* contact) const
-{
-    QSqlQuery query;
-    query.prepare("UPDATE Contact SET nom = :n, prenom = :p, entreprise = :e, email = :m, tel = :t, dateModification = DATE('now'), photo = :u WHERE IdC = :id");
-    query.bindValue(":id", contact->getIdC());
-
-    query.bindValue(":n", QString::fromStdString(contact->getNom()));
-    query.bindValue(":p", QString::fromStdString(contact->getPrenom()));
-    query.bindValue(":e", QString::fromStdString(contact->getEntreprise()));
-    query.bindValue(":m", QString::fromStdString(contact->getMail()));
-    query.bindValue(":t", QString::fromStdString(contact->getTelephone()));
-    query.bindValue(":u", QString::fromStdString(contact->getPhoto()));
-
-    query.exec();
-
-    return query.numRowsAffected() == 1;
-
-}
-
-bool MainSQLManager::ajouterInteraction(const int IdC, Interaction *inter) const
-{
-
-    int IdI = -1;
-    QSqlQuery query2("SELECT max(IdI) FROM Interaction;");
-
-    if(query2.next())
+    if(isConnected)
     {
-        IdI = query2.value(0).toInt();
-    }
-
-    if(IdI != -1)
-    {
-
-        inter->setIdI(IdI+1);
-
         QSqlQuery query;
-        query.prepare("INSERT INTO Interaction VALUES (NULL, :c, :date, :idc)");
-
-        query.bindValue(":c", QString::fromStdString(inter->getContenu()));
-        query.bindValue(":date", QString::fromStdString(inter->getDate().getDateStrFormatBDD()));
-        query.bindValue(":idc", IdC);
-
-        return query.exec();
-    }
-
-  return false;
-}
-
-bool MainSQLManager::supprimerInteraction(const int IdI) const
-{
-    QSqlQuery query;
-    query.prepare("DELETE FROM Interaction WHERE IdI = :id");
-    query.bindValue(":id", IdI);
-
-    return query.exec();
-}
-
-bool MainSQLManager::modifierInteraction(const Interaction *inter) const
-{
-    QSqlQuery query;
-    query.prepare("UPDATE Interaction SET Contenu = :c, date = :date WHERE IdI = :id");
-    query.bindValue(":id", inter->IdI());
-
-    query.bindValue(":c", QString::fromStdString(inter->getContenu()));
-    query.bindValue(":date", QString::fromStdString(inter->getDate().getDateStrFormatBDD()));
-
-    return query.exec();
-}
-
-bool MainSQLManager::ajouterTache(const int IdI, Tache *tache) const
-{
-    int IdT = -1;
-    QSqlQuery query2("SELECT max(IdT) FROM Tache;");
-
-    if(query2.next())
-    {
-        IdT = query2.value(0).toInt();
-    }
-
-    if(IdT != -1)
-    {
-
-        tache->setIdT(IdT+1);
-
-        QSqlQuery query;
-        query.prepare("INSERT INTO Tache VALUES (NULL, :c, :date, :idi)");
-
-        query.bindValue(":c", QString::fromStdString(tache->getContenu()));
-        query.bindValue(":date", QString::fromStdString(tache->getDate().getDateStrFormatBDD()));
-        query.bindValue(":idi", IdI);
+        query.prepare("DELETE FROM Contact WHERE IdC = :id");
+        query.bindValue(":id", IdC);
 
         return query.exec();
     }
@@ -233,34 +153,163 @@ bool MainSQLManager::ajouterTache(const int IdI, Tache *tache) const
     return false;
 }
 
+bool MainSQLManager::modifierContact(const Contact* contact) const
+{
+    if(isConnected)
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE Contact SET nom = :n, prenom = :p, entreprise = :e, email = :m, tel = :t, dateModification = DATE('now'), photo = :u WHERE IdC = :id");
+        query.bindValue(":id", contact->getIdC());
+
+        query.bindValue(":n", QString::fromStdString(contact->getNom()));
+        query.bindValue(":p", QString::fromStdString(contact->getPrenom()));
+        query.bindValue(":e", QString::fromStdString(contact->getEntreprise()));
+        query.bindValue(":m", QString::fromStdString(contact->getMail()));
+        query.bindValue(":t", QString::fromStdString(contact->getTelephone()));
+        query.bindValue(":u", QString::fromStdString(contact->getPhoto()));
+
+        query.exec();
+
+        return query.numRowsAffected() == 1;
+    }
+
+    return false;
+
+}
+
+bool MainSQLManager::ajouterInteraction(const int IdC, Interaction *inter) const
+{
+    if(isConnected)
+    {
+        int IdI = -1;
+        QSqlQuery query2("SELECT max(IdI) FROM Interaction;");
+
+        if(query2.next())
+        {
+            IdI = query2.value(0).toInt();
+        }
+
+        if(IdI != -1)
+        {
+
+            inter->setIdI(IdI+1);
+
+            QSqlQuery query;
+            query.prepare("INSERT INTO Interaction VALUES (NULL, :c, :date, :idc)");
+
+            query.bindValue(":c", QString::fromStdString(inter->getContenu()));
+            query.bindValue(":date", QString::fromStdString(inter->getDate().getDateStrFormatBDD()));
+            query.bindValue(":idc", IdC);
+
+            return query.exec();
+        }
+    }
+
+    return false;
+}
+
+bool MainSQLManager::supprimerInteraction(const int IdI) const
+{
+    if(isConnected)
+    {
+        QSqlQuery query;
+        query.prepare("DELETE FROM Interaction WHERE IdI = :id");
+        query.bindValue(":id", IdI);
+
+        return query.exec();
+    }
+    return false;
+
+}
+
+bool MainSQLManager::modifierInteraction(const Interaction *inter) const
+{
+    if(isConnected)
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE Interaction SET Contenu = :c, date = :date WHERE IdI = :id");
+        query.bindValue(":id", inter->IdI());
+
+        query.bindValue(":c", QString::fromStdString(inter->getContenu()));
+        query.bindValue(":date", QString::fromStdString(inter->getDate().getDateStrFormatBDD()));
+
+        return query.exec();
+    }
+    return false;
+
+}
+
+bool MainSQLManager::ajouterTache(const int IdI, Tache *tache) const
+{
+    if(isConnected)
+    {
+        int IdT = -1;
+        QSqlQuery query2("SELECT max(IdT) FROM Tache;");
+
+        if(query2.next())
+        {
+            IdT = query2.value(0).toInt();
+        }
+
+        if(IdT != -1)
+        {
+
+            tache->setIdT(IdT+1);
+
+            QSqlQuery query;
+            query.prepare("INSERT INTO Tache VALUES (NULL, :c, :date, :idi)");
+
+            query.bindValue(":c", QString::fromStdString(tache->getContenu()));
+            query.bindValue(":date", QString::fromStdString(tache->getDate().getDateStrFormatBDD()));
+            query.bindValue(":idi", IdI);
+
+            return query.exec();
+        }
+    }
+
+    return false;
+}
+
 bool MainSQLManager::supprimerTache(const int IdT) const
 {
-    QSqlQuery query;
-    query.prepare("DELETE FROM Tache WHERE IdT = :id");
-    query.bindValue(":id", IdT);
+    if(isConnected)
+    {
+        QSqlQuery query;
+        query.prepare("DELETE FROM Tache WHERE IdT = :id");
+        query.bindValue(":id", IdT);
 
-    return query.exec();
+        return query.exec();
+    }
+    return false;
 }
 
 bool MainSQLManager::modifierTache(const Tache *tache) const
 {
-    QSqlQuery query;
-    query.prepare("UPDATE Tache SET Contenu = :c, dateAFaire = :date WHERE IdT = :id");
-    query.bindValue(":id", tache->IdT());
+    if(isConnected)
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE Tache SET Contenu = :c, dateAFaire = :date WHERE IdT = :id");
+        query.bindValue(":id", tache->IdT());
 
-    query.bindValue(":c", QString::fromStdString(tache->getContenu()));
-    query.bindValue(":date", QString::fromStdString(tache->getDate().getDateStrFormatBDD()));
+        query.bindValue(":c", QString::fromStdString(tache->getContenu()));
+        query.bindValue(":date", QString::fromStdString(tache->getDate().getDateStrFormatBDD()));
 
-    return query.exec();
+        return query.exec();
+    }
+    return false;
+
 }
 
 void MainSQLManager::supprimerToutTache(const int IdI) const
 {
-    QSqlQuery query;
-    query.prepare("DELETE FROM Tache WHERE IdI = :id");
-    query.bindValue(":id", IdI);
+    if(isConnected)
+    {
+        QSqlQuery query;
+        query.prepare("DELETE FROM Tache WHERE IdI = :id");
+        query.bindValue(":id", IdI);
 
-    query.exec();
+        query.exec();
+    }
 }
 
 bool MainSQLManager::verifierSchema() const
