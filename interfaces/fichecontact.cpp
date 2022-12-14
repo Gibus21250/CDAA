@@ -15,6 +15,15 @@ FicheContact::FicheContact(QWidget *parent, Contact* p_contact, const MainSQLMan
 
     QWidget::setWindowTitle(QString::fromStdString("Fiche contact: " + p_contact->getNom() + " " + p_contact->getPrenom()));
 
+    QObject::connect(ui->check_apres, SIGNAL(toggled(bool)), this, SLOT(onFiltreDateActive(bool)));
+    QObject::connect(ui->check_avant, SIGNAL(toggled(bool)), this, SLOT(onFiltreDateActive(bool)));
+
+    QObject::connect(ui->de_avant, SIGNAL(dateChanged(QDate)), this, SLOT(onDateEditChange()));
+    QObject::connect(ui->de_apres, SIGNAL(dateChanged(QDate)), this, SLOT(onDateEditChange()));
+
+    ui->de_apres->setDate(QDateTime::currentDateTime().date());
+    ui->de_avant->setDate(QDateTime::currentDateTime().date());
+
     /**
      * Explications:
      * Nous avons 6 pointeurs de notre QLabel custom
@@ -418,6 +427,71 @@ void FicheContact::doubleCliqueTextEditor()
     dcte->setReadOnly(false);
     dcte->setEnabled(true);
     ui->de_interaction->setEnabled(true);
+}
+
+void FicheContact::reafficherListe()
+{
+    for(int i = 0; i < ui->lw_interactions->count(); ++i)
+    {
+        ui->lw_interactions->item(i)->setHidden(false);
+    }
+}
+
+void FicheContact::onFiltreDateActive(bool checked)
+{
+    if(checked)
+    {
+        reafficherListe();
+        filtrerListeParDate();
+    }
+    else
+    {
+        reafficherListe();
+    }
+}
+
+void FicheContact::filtrerListeParDate()
+{
+
+    for(int i = 0; i < ui->lw_interactions->count(); ++i)
+    {
+        InteractionWidget* cw = dynamic_cast<InteractionWidget*>(
+                    ui->lw_interactions->itemWidget(ui->lw_interactions->item(i)));
+
+
+        if(ui->check_apres->isChecked())
+        {
+            const QDate sdate = ui->de_apres->date();
+
+            DateSimple date(sdate.year(), sdate.month(), sdate.day());
+
+            if(cw->p_interaction()->getDate() < date)
+            {
+                ui->lw_interactions->item(i)->setHidden(true);
+            }
+        }
+        if(ui->check_avant->isChecked())
+        {
+
+            const QDate sdate = ui->de_avant->date();
+            DateSimple date(sdate.year(), sdate.month(), sdate.day());
+
+            if(cw->p_interaction()->getDate() > date)
+            {
+                ui->lw_interactions->item(i)->setHidden(true);
+            }
+        }
+    }
+
+}
+
+void FicheContact::onDateEditChange()
+{
+    if(ui->check_apres->isChecked() || ui->check_avant->isChecked())
+    {
+        reafficherListe();
+        filtrerListeParDate();
+    }
 }
 
 FicheContact::~FicheContact()

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include<QListWidget>
+#include <QLabel>
 
 #include "primitives/gestioncontact.h"
 #include "bdd/mainsqlmanager.h"
@@ -22,6 +23,9 @@ private:
     Ui::Accueil* ui;
     //Instance de Gestionnaire de Contact
     GestionContact gt;
+
+    QLabel *l_nbContact, *l_nbContactActuel;
+    int nbVisible;
 
     //Inutile ?
     std::string BDDLocation;
@@ -49,6 +53,8 @@ private:
      * @brief Déclanche une procédure de filtre par date
      */
     void filtrerListeParDate();
+
+    void actualiserStatusBar();
 
 public:
 

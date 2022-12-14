@@ -40,6 +40,12 @@ private:
 
     void actualiserContenuTextEdit();
 
+    void reafficherListe();
+
+    /**
+     * @brief Déclanche une procédure de filtre par date
+     */
+    void filtrerListeParDate();
 
 public:
     explicit FicheContact(QWidget *parent = nullptr, Contact* p_contact = nullptr, const MainSQLManager* manager = nullptr);
@@ -48,6 +54,18 @@ public:
 signals:
 
 private slots:
+
+    /**
+     * @brief Slot permettant d'ensuite déclancher les filtres par date
+     * @param checked si le bouton est coché ou pas
+     */
+    void onFiltreDateActive(bool checked);
+    /**
+     * @brief Llors du changement de valeur des DateEdit
+     * Pour permettre une actualisation en temps réel
+     */
+    void onDateEditChange();
+
     void interactionChange();
     void modEditionInformation(char);
     void ajouterInteraction();

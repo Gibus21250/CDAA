@@ -30,6 +30,13 @@ Accueil::Accueil(QWidget *parent)
     ui->de_MApres->setDate(QDateTime::currentDateTime().date());
     ui->de_MAvant->setDate(QDateTime::currentDateTime().date());
 
+    nbVisible = gt.getNombreElements();
+
+    l_nbContact = new QLabel("Nombre total de contact: " + QString::number(nbVisible));
+    l_nbContactActuel = new QLabel("  |  Nombre actuel de contact visible: " + QString::number(nbVisible));
+    ui->statusBar->addPermanentWidget(l_nbContact);
+    ui->statusBar->addPermanentWidget(l_nbContactActuel);
+
 
     QObject::connect(ui->b_Supprimer, SIGNAL(clicked()), this, SLOT(supprimerContact()));
     QObject::connect(ui->b_Ajouter, SIGNAL(clicked()), this, SLOT(ouvrirCreationContact()));
@@ -87,6 +94,9 @@ void Accueil::resetList()
         ui->lw_Contact->setItemWidget(item, cw);
 
     }
+
+    l_nbContact->setText("Nombre total de contact: " + QString::number(gt.getNombreElements()));
+    actualiserStatusBar();
 }
 
 void Accueil::filtrerListe()
@@ -125,6 +135,8 @@ void Accueil::reafficherListe()
     {
         ui->lw_Contact->item(i)->setHidden(false);
     }
+
+        l_nbContactActuel->setText("  |  Nombre actuel de contact visible: " + QString::number(ui->lw_Contact->count()));
 }
 
 /**
@@ -163,7 +175,6 @@ void Accueil::ouvrirInfoContact(QListWidgetItem* )
     filtrerListeParDate();
 }
 
-
 void Accueil::ouvrirCreationContact()
 {
     CreationContact cc(this);
@@ -179,12 +190,10 @@ void Accueil::ajouterContact(Contact& c)
     resetList();
 }
 
-
 void Accueil::on_actionQuitter_triggered()
 {
     close();
 }
-
 
 void Accueil::on_actionOuvrirBDD_triggered()
 {
@@ -220,6 +229,7 @@ void Accueil::onFiltreActive(bool checked)
         filtrerListe();
         filtrerListeParDate();
     }
+    actualiserStatusBar();
 }
 
 void Accueil::onValueTEChanged()
@@ -229,6 +239,7 @@ void Accueil::onValueTEChanged()
         reafficherListe();
         filtrerListe();
         filtrerListeParDate();
+        actualiserStatusBar();
     }
 }
 
@@ -244,6 +255,7 @@ void Accueil::onFiltreDateActive(bool checked)
         filtrerListe();
         filtrerListeParDate();
     }
+    actualiserStatusBar();
 }
 
 void Accueil::onDateEditChange()
@@ -253,6 +265,7 @@ void Accueil::onDateEditChange()
         reafficherListe();
         filtrerListe();
         filtrerListeParDate();
+        actualiserStatusBar();
     }
 }
 
@@ -309,6 +322,22 @@ void Accueil::filtrerListeParDate()
         }
 
     }
+}
+
+void Accueil::actualiserStatusBar()
+{
+    nbVisible = gt.getNombreElements();
+
+    for(unsigned i = 0; i < ui->lw_Contact->count(); i++)
+    {
+
+        if(ui->lw_Contact->item(i)->isHidden())
+        {
+            nbVisible--;
+        }
+    }
+
+    l_nbContactActuel->setText("  |  Nombre actuel de contact visible: " + QString::number(nbVisible));
 }
 
 

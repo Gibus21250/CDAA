@@ -42,7 +42,14 @@
    <item>
     <layout class="QVBoxLayout" name="layout_interactions">
      <item>
-      <layout class="QHBoxLayout" name="layout_bt_interactions">
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="layout_bt_filtre">
        <item>
         <widget class="QLabel" name="l_interaction">
          <property name="font">
@@ -56,6 +63,59 @@
           <string>Interaction:</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="spacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="check_apres">
+         <property name="text">
+          <string>Après</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="de_apres"/>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="check_avant">
+         <property name="text">
+          <string>Avant</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="de_avant"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QListWidget" name="lw_interactions"/>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="layout_bt_interaction">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <widget class="QPushButton" name="b_ajout_interaction">
@@ -72,9 +132,6 @@
         </widget>
        </item>
       </layout>
-     </item>
-     <item>
-      <widget class="QListWidget" name="lw_interactions"/>
      </item>
     </layout>
    </item>
