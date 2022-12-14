@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 RC_ICONS = images/appli.ico
 
 SOURCES += \
+        bdd/jsonexporteur.cpp \
         bdd/mainsqlmanager.cpp \
         interfaces/accueil.cpp \
         interfaces/contactwidget.cpp \
@@ -12,6 +13,7 @@ SOURCES += \
         interfaces/doubleclicktexteditor.cpp \
         interfaces/fichecontact.cpp \
         interfaces/interactionwidget.cpp \
+        interfaces/windowrecherche.cpp \
         interfaces/windowtachecontact.cpp \
         main.cpp \
         primitives/contact.cpp \
@@ -23,6 +25,7 @@ SOURCES += \
         primitives/tache.cpp
 
 HEADERS += \
+    bdd/jsonexporteur.h \
     bdd/mainsqlmanager.h \
     date/chrono_io.h \
     date/date.h \
@@ -41,6 +44,7 @@ HEADERS += \
     interfaces/doubleclicktexteditor.h \
     interfaces/fichecontact.h \
     interfaces/interactionwidget.h \
+    interfaces/windowrecherche.h \
     interfaces/windowtachecontact.h \
     primitives/contact.h \
     primitives/dateSimple.h \
@@ -59,6 +63,7 @@ FORMS += \
     interfaces/creationContact.ui \
     interfaces/ficheContact.ui \
     interfaces/interactionwidget.ui \
+    interfaces/windowRecherche.ui \
     interfaces/windowTacheContact.ui
 
 RESOURCES += \

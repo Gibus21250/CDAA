@@ -176,6 +176,17 @@ bool MainSQLManager::modifierContact(const Contact* contact) const
 
 }
 
+int MainSQLManager::getNombreContact() const
+{
+    if(isConnected)
+    {
+        QSqlQuery query("SELECT count(IdC) FROM Contact;");
+
+        return query.value(0).toInt();
+    }
+    return -1;
+}
+
 bool MainSQLManager::ajouterInteraction(const int IdC, Interaction *inter) const
 {
     if(isConnected)
@@ -238,6 +249,17 @@ bool MainSQLManager::modifierInteraction(const Interaction *inter) const
 
 }
 
+int MainSQLManager::getNombreInteraction() const
+{
+    if(isConnected)
+    {
+        QSqlQuery query("SELECT count(IdI) FROM Interaction;");
+
+        return query.value(0).toInt();
+    }
+    return -1;
+}
+
 bool MainSQLManager::ajouterTache(const int IdI, Tache *tache) const
 {
     if(isConnected)
@@ -297,6 +319,17 @@ bool MainSQLManager::modifierTache(const Tache *tache) const
     }
     return false;
 
+}
+
+int MainSQLManager::getNombreTache() const
+{
+    if(isConnected)
+    {
+        QSqlQuery query("SELECT count(IdT) FROM Tache;");
+
+        return query.value(0).toInt();
+    }
+    return -1;
 }
 
 void MainSQLManager::supprimerToutTache(const int IdI) const

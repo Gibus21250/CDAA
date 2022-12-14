@@ -390,16 +390,15 @@
     <addaction name="action_actualiser"/>
     <addaction name="menuLangue"/>
    </widget>
-   <widget class="QMenu" name="menuFiltre_Avanc_e">
+   <widget class="QMenu" name="menuRecherche">
     <property name="title">
-     <string>Filtre Avancée</string>
+     <string>Recherche</string>
     </property>
-    <addaction name="actionInteractions"/>
-    <addaction name="actionT_ches"/>
+    <addaction name="actionGenerale"/>
    </widget>
    <addaction name="menuAccueil"/>
    <addaction name="menuAffichage"/>
-   <addaction name="menuFiltre_Avanc_e"/>
+   <addaction name="menuRecherche"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOuvrirBDD">
@@ -441,9 +440,9 @@
     <string>JSON</string>
    </property>
   </action>
-  <action name="actionInteractions">
+  <action name="actionGenerale">
    <property name="text">
-    <string>Interactions</string>
+    <string>Générale</string>
    </property>
   </action>
   <action name="actionT_ches">

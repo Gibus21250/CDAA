@@ -115,6 +115,8 @@ private slots:
      */
     void onDateEditChange();
 
+
+    void on_actionGenerale_triggered();
 };
 
 #endif // ACCUEIL_H

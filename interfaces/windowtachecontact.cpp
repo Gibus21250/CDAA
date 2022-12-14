@@ -15,7 +15,6 @@ WindowTacheContact::WindowTacheContact(QWidget *parent, std::list<Tache*>* list,
                          + " "
                          + QString::fromStdString(who->getPrenom()));
 
-    std::cout << apres << " " << avant << std::endl;
     if(filtre)
     {
         //On affiche les tâches avant la date

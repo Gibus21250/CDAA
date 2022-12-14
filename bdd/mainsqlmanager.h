@@ -30,6 +30,8 @@ public:
     bool supprimerContact(const int IdC) const;
     bool modifierContact(const Contact* contact) const;
 
+    int getNombreContact() const;
+
 
     ////////////////////////////////
     /// Partie des Interactions  ///
@@ -38,6 +40,8 @@ public:
     bool ajouterInteraction(const int IdC, Interaction* inter) const;
     bool supprimerInteraction(const int IdC) const;
     bool modifierInteraction(const Interaction* inter) const;
+
+    int getNombreInteraction() const;
 
     ////////////////////////////////
     ///    Partie des Tâches     ///
@@ -48,6 +52,8 @@ public:
     bool modifierTache(const Tache* tache) const;
 
     void supprimerToutTache(const int IdI) const;
+
+    int getNombreTache() const;
 };
 
 #endif // MAINSQLMANAGER_H

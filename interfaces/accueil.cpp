@@ -6,6 +6,7 @@
 #include "creationcontact.h"
 #include "fichecontact.h"
 #include "bdd/mainsqlmanager.h"
+#include "windowrecherche.h"
 
 #include <QFileDialog>
 #include <QErrorMessage>
@@ -340,4 +341,10 @@ void Accueil::actualiserStatusBar()
     l_nbContactActuel->setText("  |  Nombre actuel de contact visible: " + QString::number(nbVisible));
 }
 
+
+void Accueil::on_actionGenerale_triggered()
+{
+    WindowRecherche* wr = new WindowRecherche(this, &gt);
+    wr->show();
+}
 
