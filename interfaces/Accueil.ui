@@ -394,6 +394,8 @@
     <property name="title">
      <string>Filtre Avancée</string>
     </property>
+    <addaction name="actionInteractions"/>
+    <addaction name="actionT_ches"/>
    </widget>
    <addaction name="menuAccueil"/>
    <addaction name="menuAffichage"/>
@@ -437,6 +439,16 @@
   <action name="actionJSON">
    <property name="text">
     <string>JSON</string>
+   </property>
+  </action>
+  <action name="actionInteractions">
+   <property name="text">
+    <string>Interactions</string>
+   </property>
+  </action>
+  <action name="actionT_ches">
+   <property name="text">
+    <string>Tâches</string>
    </property>
   </action>
  </widget>

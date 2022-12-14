@@ -3,10 +3,13 @@
 #include <QFileDialog>
 #include <QTextBlock>
 
+#include <QDebug>
+
 #include "fichecontact.h"
 #include "interactionwidget.h"
 #include "ui_ficheContact.h"
 #include "doubleclickqlabel.h"
+#include "windowtachecontact.h"
 
 FicheContact::FicheContact(QWidget *parent, Contact* p_contact, const MainSQLManager* manager)
     : QDialog{parent}, ui(new Ui::FicheContact()), m_p_contact(p_contact), manager(manager), modeEdition(false), quiEstEdite(-1)
@@ -498,3 +501,43 @@ FicheContact::~FicheContact()
 {
     delete ui;
 }
+
+void FicheContact::on_pb_toutTache_clicked()
+{
+
+    std::list<Tache*> liste;
+    if(ui->lw_interactions->count() != 0)
+    {
+        for(int i = 0; i < ui->lw_interactions->count(); i++)
+        {
+            if(!ui->lw_interactions->item(i)->isHidden())
+            {
+                InteractionWidget* iw = dynamic_cast<InteractionWidget*>(ui->lw_interactions->itemWidget(ui->lw_interactions->item(i)));
+                for(int j = 0; j < iw->p_interaction()->getNombreTache(); j++)
+                {
+                    liste.push_back(&(iw->p_interaction()->taches().getElement(j)));
+                }
+            }
+        }
+    }
+
+    QDate apres, avant;
+    QDate *ap = nullptr, *av = nullptr;
+
+    if(ui->check_apres->isChecked())
+    {
+        apres = ui->de_apres->date();
+        ap = &apres;
+    }
+    if(ui->check_avant->isChecked())
+    {
+        avant = ui->de_avant->date();
+        av = &avant;
+    }
+
+    bool filtre = ui->check_apres->isChecked() || ui->check_avant->isChecked();
+
+    WindowTacheContact wtc(this, &liste, this->m_p_contact, ap, av, filtre);
+    wtc.exec();
+}
+

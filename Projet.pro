@@ -12,6 +12,7 @@ SOURCES += \
         interfaces/doubleclicktexteditor.cpp \
         interfaces/fichecontact.cpp \
         interfaces/interactionwidget.cpp \
+        interfaces/windowtachecontact.cpp \
         main.cpp \
         primitives/contact.cpp \
         primitives/dateSimple.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     interfaces/doubleclicktexteditor.h \
     interfaces/fichecontact.h \
     interfaces/interactionwidget.h \
+    interfaces/windowtachecontact.h \
     primitives/contact.h \
     primitives/dateSimple.h \
     primitives/gestioncontact.h \
@@ -56,7 +58,8 @@ FORMS += \
     interfaces/contactwidget.ui \
     interfaces/creationContact.ui \
     interfaces/ficheContact.ui \
-    interfaces/interactionwidget.ui
+    interfaces/interactionwidget.ui \
+    interfaces/windowTacheContact.ui
 
 RESOURCES += \
     images.qrc

@@ -73,7 +73,7 @@ private slots:
 
     void doubleCliqueTextEditor();
 
-
+    void on_pb_toutTache_clicked();
 };
 
 #endif // FICHECONTACT_H
