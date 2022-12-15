@@ -123,6 +123,7 @@ private slots:
 
     void on_actionGenerale_triggered();
     void on_actionJSON_triggered();
+    void on_action_actualiser_triggered();
 };
 
 #endif // ACCUEIL_H

@@ -171,8 +171,24 @@ void FicheContact::modEditionInformation(char type)
             //Si succes, on change l'image coté IHM et dans l'instance Joueur
             if(!pix.isNull())
             {
+                //Recopier la nouvelle photo et supprimer l'ancienne
+                if(m_p_contact->getPhoto() != "")
+                {
+                    QFile::remove(QString::fromStdString(m_p_contact->getPhoto()));
+                }
+
+                QFileInfo imageSelec(dir);
+
+                if(!QDir("images").exists()) QDir().mkpath("images");
+                //On génère un nouveau nom, pour le copier dedans
+                QString dirGeneralImage = "images/" + QString::number(m_p_contact->getIdC()) + "." + imageSelec.suffix();
+                if(QFile(dirGeneralImage).exists()) QFile::remove(dirGeneralImage); //On supprime si elle existait déjà
+
+                //On copie l'image selectionnée par l'utilisateur dans le dossier images
+                QFile::copy(imageSelec.absoluteFilePath(), dirGeneralImage);
                 m_dcl[5]->setPixmap(pix.scaled(75, 75, Qt::KeepAspectRatio));
-                m_p_contact->setPhoto(dir.toStdString());
+                m_p_contact->setPhoto(dirGeneralImage.toStdString());
+                manager->modifierContact(m_p_contact);
             }
         }
     }

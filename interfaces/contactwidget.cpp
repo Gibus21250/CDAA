@@ -29,6 +29,10 @@ void ContactWidget::actualiserAffichage()
     else uriImage = QString::fromStdString(contact->getPhoto());
 
     QPixmap pix(uriImage);
+    if(pix.isNull())
+    {
+        pix = QPixmap(":/profileImg/no-image");
+    }
     ui->profileImg->setPixmap(pix.scaled(75, 75, Qt::KeepAspectRatio));
 
     ui->l_nom->setText(QString::fromStdString(contact->getNom()));

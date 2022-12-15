@@ -380,15 +380,7 @@
     <property name="title">
      <string>Affichage</string>
     </property>
-    <widget class="QMenu" name="menuLangue">
-     <property name="title">
-      <string>Langue</string>
-     </property>
-     <addaction name="actionFran_ais"/>
-     <addaction name="actionAnglais"/>
-    </widget>
     <addaction name="action_actualiser"/>
-    <addaction name="menuLangue"/>
    </widget>
    <widget class="QMenu" name="menuRecherche">
     <property name="title">

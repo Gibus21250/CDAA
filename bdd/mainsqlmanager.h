@@ -34,6 +34,8 @@ public:
 
     int getNombreContact() const;
 
+    int getProchainIdC() const;
+
 
     ////////////////////////////////
     /// Partie des Interactions  ///

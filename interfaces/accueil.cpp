@@ -177,6 +177,11 @@ void Accueil::supprimerContact()
     {
         ContactWidget* cw = dynamic_cast<ContactWidget*>(ui->lw_Contact->itemWidget(ui->lw_Contact->currentItem()));
 
+        if(cw->getContact()->getPhoto() != "")
+        {
+            QFile::remove(QString::fromStdString(cw->getContact()->getPhoto()));
+        }
+
         manager.supprimerContact(cw->getContact()->getIdC());
         //On supprime le contact de la list de contact
         gt.supprimerElement(ui->lw_Contact->currentRow());
@@ -214,6 +219,23 @@ void Accueil::ouvrirCreationContact()
 void Accueil::ajouterContact(Contact& c)
 {
     manager.ajouterContact(&c);
+    //Important de le mettre après car manager actualise le numéro du contact!
+    if(c.getPhoto() != "")
+    {
+        //On récupère les infos de l'image
+        QFileInfo imageSelec(QString::fromStdString(c.getPhoto()));
+
+        if(!QDir("images").exists()) QDir().mkpath("images");
+        //On génère un nouveau nom, pour le copier dedans
+        QString dirGeneralImage = "images/" + QString::number(c.getIdC()) + "." + imageSelec.suffix();
+        if(QFile(dirGeneralImage).exists()) QFile::remove(dirGeneralImage); //On supprime si elle existait déjà
+
+        QFile::copy(imageSelec.absoluteFilePath(), dirGeneralImage);
+
+        c.setPhoto(dirGeneralImage.toStdString());
+        //On met a jour sa nouvelle photo
+        manager.modifierContact(&c);
+    }
     gt.ajouterElement(c);
     resetList();
 }
@@ -387,5 +409,11 @@ void Accueil::on_actionJSON_triggered()
     QString dir = QFileDialog::getSaveFileName(this, tr("Dossier de sauvegarde du fichier JSON"), QDir::currentPath());
     std::cout << dir.toStdString() << std::endl;
     je.exporterJSONVers(dir);
+}
+
+
+void Accueil::on_action_actualiser_triggered()
+{
+    resetList();
 }
 

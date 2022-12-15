@@ -25,6 +25,7 @@ void CreationContact::annulerCreation()
 
 void CreationContact::ouvrirDialogFichier()
 {
+    //On ne précise pas le type de fichier, on veut avoir le choix (on filtrera après)
     QString dir = QFileDialog::getOpenFileName(this, tr("Image de profil"), QDir::currentPath());
     if(!dir.isEmpty())
     {
@@ -34,10 +35,12 @@ void CreationContact::ouvrirDialogFichier()
         if(pix.isNull())
         {
             uri = "";
-            //On charge l'image par défaut
-            pix = QPixmap(":/profileImg/no-image");
         }
-        else uri = dir;
+        //Fichier selectionné est compatible pour un PixMap
+        else
+        {
+            uri = dir;
+        }
         ui->image->setPixmap(pix.scaled(75, 75, Qt::KeepAspectRatio));
     }
 }
