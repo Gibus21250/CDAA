@@ -34,14 +34,9 @@ Contact::Contact(const Contact &copy)
       m_entreprise(copy.getEntreprise()), m_mail(copy.getMail()),
       m_telephone(copy.getTelephone()), m_photo(copy.getPhoto()),
       m_interactions(copy.interactions()), m_dateCreation(copy.getDateCreation()),
-        m_dateDerniereModification(copy.dateDerniereModification()) {}
+        m_dateDerniereModification(copy.getDateModification()) {}
 
 Contact::Contact() : m_IdC(-1) {}
-
-const DateSimple &Contact::dateDerniereModification() const
-{
-    return m_dateDerniereModification;
-}
 
 void Contact::setDateDerniereModification(const DateSimple &newDateDerniereModification)
 {
@@ -146,9 +141,8 @@ std::ostream& operator<<(std::ostream& out, const Contact& c)
         out << c.m_interactions;
     return out;
 }
-        //////////////////////////////////////////
-        /// Gestion des Intéractions du contact //
-        //////////////////////////////////////////
+
+        // Gestion des Intéractions du contact //
 
 void Contact::ajoutInteraction(const Interaction& in)
 {

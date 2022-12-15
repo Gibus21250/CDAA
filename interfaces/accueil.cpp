@@ -363,7 +363,7 @@ void Accueil::filtrerListeParDate()
 
             const QDate sdate = ui->de_MApres->date();
             DateSimple date(sdate.year(), sdate.month(), sdate.day());
-            if(cw->getContact()->dateDerniereModification() < date)
+            if(cw->getContact()->getDateModification() < date)
             {
                 ui->lw_Contact->item(i)->setHidden(true);
             }
@@ -373,7 +373,7 @@ void Accueil::filtrerListeParDate()
 
             const QDate sdate = ui->de_MAvant->date();
             DateSimple date(sdate.year(), sdate.month(), sdate.day());
-            if(cw->getContact()->dateDerniereModification() > date)
+            if(cw->getContact()->getDateModification() > date)
             {
                 ui->lw_Contact->item(i)->setHidden(true);
             }

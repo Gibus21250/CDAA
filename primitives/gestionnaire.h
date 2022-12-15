@@ -4,36 +4,46 @@
 #include <list>
 #include <iostream>
 
+/**
+ * @brief Classe Abstraite d'un Gestionnaire de Type T
+ */
 template<class T>
 class Gestionnaire
 {
 protected:
-    //Déclaration de la list
-    //mutable permet d'autoriser la modification de la liste (et de récupérer les référence des instance dans les listes
+    ///Déclaration de la list
+    ///mutable permet d'autoriser la modification de la liste (et de récupérer les référence des instance dans les listes et de les modifier
     mutable std::list<T> m_list;
 
 public:
+    ///Constructeur par défaut
     Gestionnaire();
 
+    ///Renvoie la liste de Type T
     std::list<T> &list() const;
 
+    /**
+     * @brief Ajoute une copie de l'instance T dans la liste
+     * @param Instance T à ajouter
+     */
     void ajouterElement(const T& element);
+
     /**
      * @brief Supprimer le premier element correspondant à la tache mit en argument
-     * @param in
+     * @param Instance T à supprimer
      */
     bool supprimerElement(const T& element);
 
     /**
-     * @brief Supprime l'élément à l'indice de la list
-     * @param indice
-     * @return True si l'opération a aboutit
+     * @brief Supprime l'élément situé à l'indice de la list
+     * @param Indice de l'élément à supprimer
+     * @return True si l'opération a aboutit, false sinon
      */
     bool supprimerElement(const unsigned indice);
 
     /**
-     * @brief Supprime l'objet T correspondant à son ID
-     * @param Id
+     * @brief Supprime l'instance de T correspondant à l'ID
+     * @param Id de l'instance T
      * @return Si la suppression a aboutit
      */
     virtual bool supprimerParId(const unsigned Id) = 0;
@@ -65,11 +75,12 @@ public:
 
     bool operator==(const Gestionnaire<T>& c) const;
 
+    ///Transforme tout le contenu de la liste en flux et l'envoie au flux out
     friend std::ostream& operator<<(std::ostream& out, const Gestionnaire<T>& c)
     {
         for(auto it = c.m_list.begin(); it != c.m_list.end(); ++it)
         {
-            std::cout << *it << std::endl;
+            out << *it << std::endl;
         }
         return out;
     }

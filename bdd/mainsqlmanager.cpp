@@ -32,7 +32,7 @@ bool MainSQLManager::connectTo(const std::string &pathFichier)
         if(db.open())
         {
             //On vérifie le schéma
-            if(verifierSchema(pathFichier))
+            if(verifierSchema())
             {
                 //On active ce paramètre pour que les delete on cascade se déclanche
                 QSqlQuery query("PRAGMA foreign_keys = ON;");
@@ -370,7 +370,7 @@ void MainSQLManager::supprimerToutTache(const int IdI) const
     }
 }
 
-bool MainSQLManager::verifierSchema(const std::string& path) const
+bool MainSQLManager::verifierSchema() const
 {
     QStringList tables = db.tables();
     QSqlDriver* driver = db.driver();

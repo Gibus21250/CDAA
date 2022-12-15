@@ -45,5 +45,5 @@ void ContactWidget::actualiserAffichage()
 
     ui->l_DateC->setText(QString::fromStdString(contact->getDateCreation().getDateStrFormat()));
 
-    ui->l_DateM->setText(QString::fromStdString(contact->dateDerniereModification().getDateStrFormat()));
+    ui->l_DateM->setText(QString::fromStdString(contact->getDateModification().getDateStrFormat()));
 }

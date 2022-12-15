@@ -19,9 +19,7 @@ private:
     time_point<system_clock, date::days> time;
 
 public:
-                ////////////////////////
-                ///   CONSTRUCTEURS  ///
-                ////////////////////////
+
     /**
      * @brief Initialise une date à la date du jour
      */
@@ -29,7 +27,8 @@ public:
 
     /**
      * @brief Initialise une date au jour correspondant à la date strDate
-     * @param strDate
+     * @param String de la date<br>
+     * L'argument peut être de forme jj/MM/aaaa ou aaaa-MM-jj
      */
     DateSimple(const std::string& strDate);
 
@@ -48,15 +47,22 @@ public:
     DateSimple(time_point<system_clock, date::days> time);
 
     /**
-     * @brief Renvoie sous forme de string standard la date associé à l'instance
-     * @return DateSimple sous forme de string standard à l'aide de la classe date.h modifiée
+     * @brief Renvoie sous forme de string standard la date associé à l'instance de forme jj/MM/aaaa
+     * @return string correspondant à l'instance DateSimple
      */
     std::string getDateStrFormat() const;
 
+    /**
+     * @brief Renvoie sous forme de string standart la date associé à l'instance de forme aaaa-MM-jj
+     * @return string correspondant à l'instance DateSimple
+     */
     std::string getDateStrFormatBDD() const;
 
+    ///Renvoie le numéro du jour associé à l'instance DateSimple
     int getJour() const;
+    ///Renvoie le numéro du mois associé à l'instance DateSimple
     int getMois() const;
+    ///Renvoie le numéro de l'année associé à l'instance DateSimple
     int getAnnee() const;
 
     /**

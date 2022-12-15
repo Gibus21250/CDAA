@@ -4,10 +4,15 @@
 
 #include "dateSimple.h"
 
+/**
+ * @brief Classe gérant une Tache
+ */
 class Tache
 {
 private:
+    ///ID de la Tache
     unsigned m_IdT;
+    ///Contenu de
     std::string m_contenu;
     DateSimple m_date;
     bool m_hasDate;
