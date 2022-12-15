@@ -23,7 +23,7 @@ public:
 
     /**
      * @brief Permet d'ouvrir une connexion vers base de donnée
-     * @param Chemin du fichier .sqlite
+     * @param pathFichier Chemin du fichier .sqlite
      * @return True si succès, false sinon
      * @pre pathFichier non nul et est une chemin vers un fichier .sqlite
      */
@@ -45,28 +45,28 @@ public:
 
     /**
      * @brief Charge les données de la base de donnée dans l'instance pointée vers GestionContact
-     * @param Pointeur vers une instance de GestionContact
+     * @param gt Pointeur vers une instance de GestionContact
      * @pre gt non nul (et de préférence vide)
      */
     void chargerBaseDeDonnee(GestionContact* gt) const;
 
     /**
      * @brief Inscrit le Contact pointé dans la base de donnée
-     * @param Pointeur vers une instance de Contact
+     * @param contact Pointeur vers une instance de Contact
      * @return True si l'insertion a été faite avec succès, false sinon
      */
     bool ajouterContact(Contact* contact) const;
 
     /**
      * @brief Supprime l'inscription du Contact de a base de donnée associé à l'ID
-     * @param ID du contact
+     * @param IdC ID du contact
      * @return True si la suppression a été faite avec succès, false sinon
      */
     bool supprimerContact(const int IdC) const;
 
     /**
      * @brief Met à jour l'insription du Contact dans la base de donnée avec les valeurs de l'instance pointée
-     * @param Pointeur vers une instance de Contact
+     * @param contact Pointeur vers une instance de Contact
      * @return True si la mise a jouer a été faite avec succès, false sinon
      */
     bool modifierContact(const Contact* contact) const;
@@ -79,21 +79,21 @@ public:
 
     /**
      * @brief Inscrit l'Interaction pointée dans la base de donnée
-     * @param Pointeur vers une instance d'Interaction
+     * @param inter Pointeur vers une instance d'Interaction
      * @return True si l'insertion a été faite avec succès, false sinon
      */
     bool ajouterInteraction(const int IdC, Interaction* inter) const;
 
     /**
      * @brief Supprime l'inscription de l'Interaction de a base de donnée associé à l'ID
-     * @param ID de l'Interaction
+     * @param IdCID de l'Interaction
      * @return True si la suppression a été faite avec succès, false sinon
      */
     bool supprimerInteraction(const int IdC) const;
 
     /**
      * @brief Met à jour l'insription de l'Interaction dans la base de donnée avec les valeurs de l'instance pointée
-     * @param Pointeur vers une instance d'Interaction
+     * @param inter Pointeur vers une instance d'Interaction
      * @return True si la mise a jouer a été faite avec succès, false sinon
      */
     bool modifierInteraction(const Interaction* inter) const;
@@ -103,27 +103,27 @@ public:
 
     /**
      * @brief Inscrit la Tache pointée dans la base de donnée
-     * @param Pointeur vers une instance de Tache
+     * @param tache Pointeur vers une instance de Tache
      * @return True si l'insertion a été faite avec succès, false sinon
      */
     bool ajouterTache(const int IdI, Tache* tache) const;
 
     /**
      * @brief Supprime l'inscription de la Tache de a base de donnée associé à l'ID
-     * @param ID de la Tache
+     * @param IdT ID de la Tache
      * @return True si la suppression a été faite avec succès, false sinon
      */
     bool supprimerTache(const int IdT) const;
 
     /**
      * @brief Supprime toutes les instance de Tache associées à l'Interaction définit par son ID
-     * @param ID de l'Interaction
+     * @param IdI ID de l'Interaction
      */
     void supprimerToutTache(const int IdI) const;
 
     /**
      * @brief Met à jour l'insription de la Tache dans la base de donnée avec les valeurs de l'instance pointée
-     * @param Pointeur vers une instance de Tache
+     * @param tache Pointeur vers une instance de Tache
      * @return True si la mise a jouer a été faite avec succès, false sinon
      */
     bool modifierTache(const Tache* tache) const;

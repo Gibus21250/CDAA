@@ -43,7 +43,7 @@ GestionTache& GestionTache::getTachesAvant(const DateSimple &date)
     return *this;
 }
 
-GestionTache& GestionTache::getTachesApres(const DateSimple &date)
+GestionTache &GestionTache::getTachesApres(const DateSimple &date)
 {
     //On parcour toutes les tâches
     for(auto it = m_list.begin(); it != m_list.end(); ++it){

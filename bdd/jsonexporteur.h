@@ -50,7 +50,7 @@ public:
 
     /**
      * @brief Génère puis exporte les données de l'instance pointée par @ref m_p_gt à l'emplacement path
-     * @param Chemin du fichier
+     * @param path Chemin du fichier
      * @return True Si l'exportation a eu lieu, false sinon
      */
     bool exporterJSONVers(const QString& path);

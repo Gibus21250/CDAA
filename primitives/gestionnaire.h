@@ -24,26 +24,26 @@ public:
 
     /**
      * @brief Ajoute une copie de l'instance T dans la liste
-     * @param Instance T à ajouter
+     * @param element Instance T à ajouter
      */
     void ajouterElement(const T& element);
 
     /**
      * @brief Supprimer le premier element correspondant à la tache mit en argument
-     * @param Instance T à supprimer
+     * @param element Instance T à supprimer
      */
     bool supprimerElement(const T& element);
 
     /**
      * @brief Supprime l'élément situé à l'indice de la list
-     * @param Indice de l'élément à supprimer
+     * @param indice l'Indice de l'élément à supprimer
      * @return True si l'opération a aboutit, false sinon
      */
     bool supprimerElement(const unsigned indice);
 
     /**
      * @brief Supprime l'instance de T correspondant à l'ID
-     * @param Id de l'instance T
+     * @param Id id de l'instance T
      * @return Si la suppression a aboutit
      */
     virtual bool supprimerParId(const unsigned Id) = 0;
@@ -67,8 +67,8 @@ public:
 
     /**
      * @brief Remplace l'instance de l'élément à l'indice précisé, par celle mit en argument
-     * @param La nouvelle instance
-     * @param Indice de l'instance à remplacer
+     * @param tache La nouvelle instance
+     * @param indice indice de l'instance à remplacer
      * @return true ou false, si le remplacement a abouti
      */
     bool remplacer(const T& tache, const unsigned indice);

@@ -48,6 +48,8 @@ public:
      */
     Tache(const unsigned id, const std::string& contenu, const std::string& dateStr);
 
+    void printValue();
+
     /**
      * @brief isDate
      * @return un boolean pour savoir si la tache est datée
@@ -62,7 +64,7 @@ public:
 
     /**
      * @brief setContenu
-     * @param valeur du contenu à modifier
+     * @param value valeur du contenu à modifier
      */
     void setContenu(const std::string &value);
 
@@ -74,13 +76,13 @@ public:
 
     /**
      * @brief setDate
-     * @param valeur de la date à modifier
+     * @param value valeur de la date à modifier
      */
     void setDate(const DateSimple &value);
 
     /**
      * @brief setDate
-     * @param valeur de la date à modifier
+     * @param value valeur de la date à modifier
      */
     void setDate(const std::string &value);
 
@@ -88,16 +90,7 @@ public:
 
     bool operator==(const Tache& t) const;
 
-    /**
-     * @brief Renvoie l'ID de la Tache
-     * @return L'ID
-     */
     const unsigned &IdT() const;
-
-    /**
-     * @brief Change la valeur de l'ID de la Tache
-     * @param Nouvel ID
-     */
     void setIdT(const unsigned &newIdT);
 };
 

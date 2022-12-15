@@ -29,24 +29,24 @@ public:
     Interaction();
     /**
      * @brief Constructeur partiel initialisant la date de l'interaction à la date du jour
-     * @param ID de l'Interaction
-     * @param Description de l'Interaction
+     * @param id ID de l'Interaction
+     * @param desc Description de l'Interaction
      */
     Interaction(const unsigned id, const std::string& desc);
 
     /**
      * @brief Constructeur standard de l'instance Interaction
-     * @param ID de l'Interaction
-     * @param Description de l'Interaction
-     * @param Instance DateSimple de la date à associer à l'instance Interaction
+     * @param id ID de l'Interaction
+     * @param desc Description de l'Interaction
+     * @param date Instance DateSimple de la date à associer à l'instance Interaction
      */
     Interaction(const unsigned id, const std::string& desc, const DateSimple& date);
 
     /**
      * @brief Constructeur standard de l'instance Interaction
-     * @param ID de l'Interaction
-     * @param Description de l'Interaction
-     * @param Date sous forme de string, de syntax jj/MM/aaaa ou aaaa-MM-jj
+     * @param id ID de l'Interaction
+     * @param desc Description de l'Interaction
+     * @param date Date sous forme de string, de syntax jj/MM/aaaa ou aaaa-MM-jj
      */
     Interaction(const unsigned id, const std::string& desc, const std::string& date);
 
@@ -61,7 +61,7 @@ public:
 
     /**
      * @brief Change l'instance de la date
-     * @param Nouvelle DateSimple
+     * @param value Nouvelle DateSimple
      */
     void setDate(const DateSimple &value);
 
@@ -73,7 +73,7 @@ public:
 
     /**
      * @brief Change la valeur du contenu
-     * @param valeur du contenu à modifier
+     * @param value valeur du contenu à modifier
      */
     void setContenu(const std::string &value);
 
@@ -82,19 +82,19 @@ public:
 
     /**
      * @brief Ajoute une Tache à la liste de tache
-     * @param Instance de Tache
+     * @param tache Instance de Tache
      */
     void ajouterTache(const Tache& tache);
 
     /**
      * @brief Retire la Tache du gestionnaire de tache associé à l'Interaction
-     * @param Instance de Tache à supprimer
+     * @param tache Instance de Tache à supprimer
      */
     void retirerTache(const Tache& tache);
 
     /**
      * @brief Retire la Tache correspondant à l'ID
-     * @param ID de la Tache
+     * @param id ID de la Tache
      */
     void retirerTache(const unsigned id);
 
@@ -109,7 +109,7 @@ public:
 
     /**
      * @brief Change le gestionnaire de Tache
-     * @param Le nouveau GestionTache
+     * @param newTaches Le nouveau GestionTache
      */
     void setTaches(const GestionTache &newTaches);
 
@@ -121,7 +121,7 @@ public:
 
     /**
      * @brief Change l'ID de l'Interaction
-     * @param Nouvel ID
+     * @param newIdI Nouvel ID
      */
     void setIdI(const unsigned &newIdI);
 };
