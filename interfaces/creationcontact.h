@@ -28,7 +28,7 @@ public:
 
 signals:
     /**
-     * @brief Signal émit lors de la ocnfirmation de la création du contact
+     * @brief Signal émit lors de la confirmation de la création du contact
      * @param c le contact crée
      */
     void creerContact(Contact& c);
