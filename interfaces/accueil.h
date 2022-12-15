@@ -28,8 +28,7 @@ private:
     QLabel *l_nbContact, *l_nbContactActuel;
     int nbVisible;
 
-    //Inutile ?
-    std::string BDDLocation;
+    QString BDDLocation;
 
     /**
      * @brief Manager de base de donnée, qui s'occupe de mettre à jour, de charger des donner et de charger une nouvelle

@@ -1,31 +1,57 @@
 #include "mainsqlmanager.h"
-#include "qvariant.h"
 #include <QDebug>
+
+#include <QVariant>
 
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
+#include <QtSql/QSqlDriver>
+#include <QtSql/QSqlRecord>
+#include <QtSql/QSqlField>>
+
+MainSQLManager::MainSQLManager()
+{
+    db = QSqlDatabase::database();
+    db.addDatabase("QSQLITE");
+}
 
 bool MainSQLManager::connectTo(const std::string &pathFichier)
 {
+        isConnected = false;
 
-    //Améliorer reset connection DB
-    db = QSqlDatabase::database();
+        if(db.isOpen())
+        {
+            QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
+            db.close();
+        }
 
-    QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName(QString::fromStdString(pathFichier));
 
-    if(db.isOpen()) db.close();
-    if(db.isValid()) db.close();
+        //Si on arrive à se connecter à la BDD
+        if(db.open())
+        {
+            //On vérifie le schéma
+            if(verifierSchema(pathFichier))
+            {
+                //On active ce paramètre pour que les delete on cascade se déclanche
+                QSqlQuery query("PRAGMA foreign_keys = ON;");
+                query.exec();
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(QString::fromStdString(pathFichier));
+                isConnected = true;
 
-    isConnected = db.open();
+                return isConnected;
+            }
+            else
+            {
+                db.close();
+                db = QSqlDatabase::database();
+                db.addDatabase("QSQLITE");
 
-    //On active ce paramètre pour que les delete on cascade se déclanche
-    QSqlQuery query("PRAGMA foreign_keys = ON;");
-    query.exec();
-
-    return isConnected;
+                return false;
+            }
+        }
+    return false;
 
 }
 
@@ -344,8 +370,48 @@ void MainSQLManager::supprimerToutTache(const int IdI) const
     }
 }
 
-bool MainSQLManager::verifierSchema() const
+bool MainSQLManager::verifierSchema(const std::string& path) const
 {
+    QStringList tables = db.tables();
+    QSqlDriver* driver = db.driver();
+
+    if(tables.count() == 3)
+    {
+        if(tables[0] == "Contact")
+        {
+            QSqlRecord record = driver->record("Contact");
+            if(record.count() == 9)
+            {
+                if(!(record.field(0).name() ==  "IdC")) return false;
+                if(!(record.field(1).name() ==  "nom")) return false;
+                if(!(record.field(2).name() ==  "prenom")) return false;
+                if(!(record.field(3).name() ==  "entreprise")) return false;
+                if(!(record.field(4).name() ==  "email")) return false;
+                if(!(record.field(5).name() ==  "tel")) return false;
+                if(!(record.field(6).name() ==  "dateCreation")) return false;
+                if(!(record.field(7).name() ==  "dateModification")) return false;
+                if(!(record.field(8).name() ==  "photo")) return false;
+            }
+            record = driver->record("Interaction");
+            if(record.count() == 4)
+            {
+                if(!(record.field(0).name() ==  "IdI")) return false;
+                if(!(record.field(1).name() ==  "Contenu")) return false;
+                if(!(record.field(2).name() ==  "date")) return false;
+                if(!(record.field(3).name() ==  "IdC")) return false;
+            }
+            record = driver->record("Tache");
+            if(record.count() == 4)
+            {
+                if(!(record.field(0).name() ==  "IdT")) return false;
+                if(!(record.field(1).name() ==  "Contenu")) return false;
+                if(!(record.field(2).name() ==  "dateAFaire")) return false;
+                if(!(record.field(3).name() ==  "IdI")) return false;
+            }
+            else return false;
+        }
+        else return false;
+    }
     return true;
 }
 

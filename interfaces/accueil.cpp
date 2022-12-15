@@ -9,21 +9,48 @@
 #include "windowrecherche.h"
 
 #include <QFileDialog>
-#include <QErrorMessage>
-
-#include <QDebug>
+#include <QMessageBox>
+#include <QDir>
 
 Accueil::Accueil(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::Accueil()), je(&gt)
 {
+    QDir cacheDir("cache");
+    if(cacheDir.exists())
+    {
+        QFile cacheBdd("cache/bdd.data");
+        if(cacheBdd.exists())
+        {
+            cacheBdd.open(QIODevice::ReadOnly | QIODevice::Text);
+            QTextStream in(&cacheBdd);
+            if(!in.atEnd()) BDDLocation = in.readLine();
+        }
+        else
+        {
+            cacheBdd.open(QIODevice::WriteOnly);
+        }
+        cacheBdd.close();
+    }
+    else
+    {
+        if(cacheDir.mkpath("."))
+        {
+            QFile cacheBdd("cache/bdd.data");
+            cacheBdd.open(QIODevice::WriteOnly);
+        }
+    }
 
-    BDDLocation = "E:\\Cloud\\GitHub\\CDAA\\CDAA\\gestion.sqlite";
+    //BDDLocation = "E:\\Cloud\\GitHub\\CDAA\\CDAA\\gestion.sqlite";
 
-    manager.connectTo(this->BDDLocation);
+    if(!BDDLocation.isEmpty())
+    {
+        manager.connectTo(this->BDDLocation.toStdString());
+        manager.chargerBaseDeDonnee(&gt);
+    }
+
 
     ui->setupUi(this);
 
-    manager.chargerBaseDeDonnee(&gt);
 
     //On initialise les dates des QDateEdit par la date d'aujourd'hui
     ui->de_CApres->setDate(QDateTime::currentDateTime().date());
@@ -204,15 +231,23 @@ void Accueil::on_actionOuvrirBDD_triggered()
         manager.connectTo(dir.toStdString());
         if(manager.getIsConnected())
         {
-            BDDLocation = dir.toStdString();
+            BDDLocation = dir;
+
+            //On sauvegarde le nouveau dir selectionné
+            QFile cache("cache/bdd.data");
+            cache.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Truncate);
+            cache.write(dir.toStdString().c_str());
+            cache.close();
+
             gt.effacerToutElements();
             manager.chargerBaseDeDonnee(&gt);
             resetList();
         }
         else
         {
-            QErrorMessage qem(this);
-            qem.showMessage("Impossible d'ouvrir la base de donnée selectionnée!\nVérifier que le fichier est valide (.sqlite)");
+            QMessageBox qem("Base de donnée incorrecte",
+                            "Le fichier selectionné est invalide!\nVérifier que le fichier (.sqlite)) ainsi que les schémas des tables correspondent",
+                            QMessageBox::NoIcon, QMessageBox::Ok | QMessageBox::Default, QMessageBox::NoButton, QMessageBox::NoButton);
             qem.exec();
         }
     }
@@ -341,13 +376,11 @@ void Accueil::actualiserStatusBar()
     l_nbContactActuel->setText("  |  Nombre actuel de contact visible: " + QString::number(nbVisible));
 }
 
-
 void Accueil::on_actionGenerale_triggered()
 {
     WindowRecherche* wr = new WindowRecherche(this, &gt);
     wr->show();
 }
-
 
 void Accueil::on_actionJSON_triggered()
 {

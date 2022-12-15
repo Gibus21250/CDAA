@@ -15,8 +15,10 @@ private:
 
 public:
 
+    MainSQLManager();
+
     bool connectTo(const std::string& pathFichier);
-    bool verifierSchema() const;
+    bool verifierSchema(const std::string& pathFichier) const;
 
     bool getIsConnected() const;
 
