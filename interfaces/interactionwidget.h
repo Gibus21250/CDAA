@@ -15,14 +15,30 @@ class InteractionWidget : public QWidget
     Q_OBJECT
 
 private:
+    //Pointeur vers l'ui InteractionWidget
     Ui::InteractionWidget* ui;
+    //Pointeur vers l'interaction à associer
     Interaction* m_p_interaction;
 
 public:
+    /**
+     * @brief Constructeur
+     * @param parent
+     * @param pointeur vers l'interaction à associer
+     */
     explicit InteractionWidget(QWidget *parent = nullptr, Interaction* p_int = nullptr);
     ~InteractionWidget();
 
+    /**
+     * @brief p_interaction
+     * @return
+     */
     Interaction *p_interaction() const;
+
+    /**
+     * @brief setP_interaction
+     * @param newP_interaction
+     */
     void setP_interaction(Interaction *newP_interaction);
 
     void actualiserInfoWidget();

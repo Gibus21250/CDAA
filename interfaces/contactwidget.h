@@ -31,9 +31,16 @@ public:
     explicit ContactWidget(QWidget *parent = nullptr, Contact* = nullptr);
     ~ContactWidget();
 
+    /**
+     * @brief Actualiser le contenu du widget
+     */
     void actualiserAffichage();
 
 
+    /**
+     * @brief Retourne le pointeur du contact associé au widget
+     * @return
+     */
     Contact* getContact() const;
 
 signals:

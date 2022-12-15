@@ -118,7 +118,7 @@ private slots:
      */
     void onFiltreDateActive(bool checked);
     /**
-     * @brief Llors du changement de valeur des DateEdit
+     * @brief Lors du changement de valeur des DateEdit
      * Pour permettre une actualisation en temps réel
      */
     void onDateEditChange();

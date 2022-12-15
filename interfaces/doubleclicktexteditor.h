@@ -10,10 +10,17 @@ class DoubleClickTextEditor : public QTextEdit
 public:
     explicit DoubleClickTextEditor(QWidget *parent = nullptr);
 
+    /**
+     * @brief Redifinition de l'evennement double clique, emettant un signal receptionnable
+     * @param event
+     */
     void mouseDoubleClickEvent(QMouseEvent* e);
 
 signals:
-
+    /**
+     * @brief Redifinition de l'evennement double clique, emettant un signal receptionnable
+     * @param event
+     */
     void doubleClique();
 
 };
