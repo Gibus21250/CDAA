@@ -14,7 +14,7 @@
 #include <QDebug>
 
 Accueil::Accueil(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::Accueil())
+    : QMainWindow(parent), ui(new Ui::Accueil()), je(&gt)
 {
 
     BDDLocation = "E:\\Cloud\\GitHub\\CDAA\\CDAA\\gestion.sqlite";
@@ -346,5 +346,13 @@ void Accueil::on_actionGenerale_triggered()
 {
     WindowRecherche* wr = new WindowRecherche(this, &gt);
     wr->show();
+}
+
+
+void Accueil::on_actionJSON_triggered()
+{
+    QString dir = QFileDialog::getSaveFileName(this, tr("Dossier de sauvegarde du fichier JSON"), QDir::currentPath());
+    std::cout << dir.toStdString() << std::endl;
+    je.exporterJSONVers(dir);
 }
 

@@ -61,5 +61,6 @@ PRAGMA foreign_keys = ON;
 
 SELECT max(IdC) FROM Contact;
 
+-- SELECT count(IdC) FROM Contact
 -- PRAGMA foreign_keys = ON;DELETE FROM Contact WHERE IdC = 1;
 -- INSERT INTO Contact VALUES (NULL, "Mortier", "Marie", "none", "m.m@gmail.com", "0607080910", "2022-11-12", "2022-11-12", NULL);

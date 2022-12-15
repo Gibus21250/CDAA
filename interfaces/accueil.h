@@ -7,6 +7,7 @@
 
 #include "primitives/gestioncontact.h"
 #include "bdd/mainsqlmanager.h"
+#include "bdd/jsonexporteur.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -35,6 +36,11 @@ private:
      * Base de donnée tout en vérifiant les schémas
      */
     MainSQLManager manager;
+
+    /**
+     * @brief Instance de l'exporteur de donnée en format JSON alègé (sans ID, les liens sont entre eux dans les objets)
+     */
+    JsonExporteur je;
 
     /**
      * @brief Rénitialise la list de widget, et la reremplie
@@ -117,6 +123,7 @@ private slots:
 
 
     void on_actionGenerale_triggered();
+    void on_actionJSON_triggered();
 };
 
 #endif // ACCUEIL_H
