@@ -74,6 +74,7 @@ private slots:
     void doubleCliqueTextEditor();
 
     void on_pb_toutTache_clicked();
+    void on_pushButton_clicked();
 };
 
 #endif // FICHECONTACT_H

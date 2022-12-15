@@ -218,6 +218,13 @@ void FicheContact::changerEtatPourEdition(bool mode)
 
     dcte->setEnabled(mode);
     ui->lw_interactions->setEnabled(mode);
+
+    ui->de_apres->setEnabled(mode);
+    ui->de_avant->setEnabled(mode);
+    ui->pb_toutTache->setEnabled(mode);
+
+    ui->check_apres->setEnabled(mode);
+    ui->check_avant->setEnabled(mode);
 }
 
 void FicheContact::keyPressEvent(QKeyEvent *event)
@@ -557,3 +564,8 @@ void FicheContact::on_pb_toutTache_clicked()
     wtc.exec();
 }
 
+
+void FicheContact::on_pushButton_clicked()
+{
+    close();
+}

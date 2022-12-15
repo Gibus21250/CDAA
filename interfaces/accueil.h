@@ -25,9 +25,11 @@ private:
     //Instance de Gestionnaire de Contact
     GestionContact gt;
 
+    //Label de la bar status et sa varible
     QLabel *l_nbContact, *l_nbContactActuel;
     int nbVisible;
 
+    //Chemin du fichier BDD
     QString BDDLocation;
 
     /**
@@ -37,12 +39,12 @@ private:
     MainSQLManager manager;
 
     /**
-     * @brief Instance de l'exporteur de donnée en format JSON alègé (sans ID, les liens sont entre eux dans les objets)
+     * @brief Instance de l'exporteur de donnée en format JSON alègé (sans ID, les liens entre eux sont dans les objets)
      */
     JsonExporteur je;
 
     /**
-     * @brief Rénitialise la list de widget, et la reremplie
+     * @brief Rénitialise la list de widget de contact, et la reremplie
      */
     void resetList();
 
@@ -59,6 +61,9 @@ private:
      */
     void filtrerListeParDate();
 
+    /**
+     * @brief Actualise les infos dans la status bar
+     */
     void actualiserStatusBar();
 
 public:
@@ -77,21 +82,19 @@ private slots:
      */
     void ouvrirCreationContact();
     /**
-     * @brief Ajoute une copy (dû au push_back de la list) le contact en argument
+     * @brief Ajoute une copie (dû au push_back de la list) du contact en argument
      * @param c Contact fraichemment créé
      */
     void ajouterContact(Contact& c);
     /**
-     * @brief Ouvre la fenêtre d'information du contact
+     * @brief Ouvre la fenêtre d'information du contact (double clique sur item de la liste)
      */
     void ouvrirInfoContact(QListWidgetItem*);
     /**
-     * @brief Connexion automatique depuis le fichier ui:
      * Fermeture de l'application lors du clique sur le bouton Quitter de la barre d'action
      */
     void on_actionQuitter_triggered();
     /**
-     * @brief Connexion automatique depuis le fichier ui:
      * Ouverture d'un FileDialog de l'application lors du clique sur le bouton Ouvrir -> BDD de la barre d'action
      * pour aller chercher (ou non) un nouveau fichier BDD
      */
@@ -121,8 +124,19 @@ private slots:
     void onDateEditChange();
 
 
+    /**
+     * @brief Slot recepteur du clique sur l'action Général dans la barre d'action
+     */
     void on_actionGenerale_triggered();
+
+    /**
+     * @brief Slot recepteur du clique sur l'action expoter > JSON
+     */
     void on_actionJSON_triggered();
+
+    /**
+     * @brief Slot recepteur du clique sur l'action Actualiser (peu utile)
+     */
     void on_action_actualiser_triggered();
 };
 

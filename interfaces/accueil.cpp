@@ -415,5 +415,9 @@ void Accueil::on_actionJSON_triggered()
 void Accueil::on_action_actualiser_triggered()
 {
     resetList();
+    reafficherListe();
+    filtrerListe();
+    filtrerListeParDate();
+    actualiserStatusBar();
 }
 

@@ -20,6 +20,8 @@ WindowRecherche::WindowRecherche(QWidget *parent, const GestionContact* p_gt)
 
     ui->tw_donnee->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    ui->tw_donnee->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
     QObject::connect(ui->check_apres, SIGNAL(toggled(bool)), this, SLOT(reactualiserTable()));
     QObject::connect(ui->check_avant, SIGNAL(toggled(bool)), this, SLOT(reactualiserTable()));
 
@@ -167,3 +169,8 @@ void WindowRecherche::reactualiserTable()
     ui->tw_donnee->setSortingEnabled(ui->check_trier->isChecked());
 }
 
+
+void WindowRecherche::on_pb_fermer_clicked()
+{
+    close();
+}

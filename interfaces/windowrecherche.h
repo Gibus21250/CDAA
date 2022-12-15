@@ -36,6 +36,7 @@ private slots:
     void on_check_trier_toggled(bool checked);
 
     void reactualiserTable();
+    void on_pb_fermer_clicked();
 };
 
 #endif // WINDOWRECHERCHE_H
