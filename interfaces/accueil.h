@@ -15,21 +15,25 @@ namespace Ui {
 }
 QT_END_NAMESPACE
 
+/**
+ * @brief Classe gérant la page d'acceuil de l'application
+ */
 class Accueil : public QMainWindow
 {
     Q_OBJECT
 
 private:
-    //UI de l'accueil
+    ///UI de l'accueil
     Ui::Accueil* ui;
-    //Instance de Gestionnaire de Contact
+    ///Instance de Gestionnaire de Contact
     GestionContact gt;
 
-    //Label de la bar status et sa varible
+    ///Label de la bar status et sa varible
     QLabel *l_nbContact, *l_nbContactActuel;
+    ///Variable stockant le nombre de Contact visible
     int nbVisible;
 
-    //Chemin du fichier BDD
+    ///Chemin du fichier BDD
     QString BDDLocation;
 
     /**
@@ -68,7 +72,12 @@ private:
 
 public:
 
+    /**
+     * @brief Constructeur standard de l'Accueil
+     * @param parent Pointeur vers un widget parent
+     */
     explicit Accueil(QWidget *parent = nullptr);
+
     ~Accueil();
 
 private slots:

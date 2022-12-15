@@ -20,7 +20,9 @@ class ContactWidget : public QWidget
     Q_OBJECT
 
 private:
+    ///Pointeur du contact
     Contact* contact;
+    ///Pointeur de l'UI
     Ui::ContactWidget* ui;
 
 public:

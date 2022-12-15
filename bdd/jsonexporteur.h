@@ -14,7 +14,7 @@ class JsonExporteur
 private:
     /**
      * @brief Génère un objet QJsonObject correspondant à l'instance de Tache pointée
-     * @param Pointeur vers une instance de Tache
+     * @param p_tache Pointeur vers une instance de Tache
      * @pre p_tache non nul
      * @return L'objet QJsonObject généré
      */
@@ -22,7 +22,7 @@ private:
 
     /**
      * @brief Génère un objet QJsonObject correspondant à l'instance d'Interaction pointée
-     * @param Pointeur vers une instance d'Interaction
+     * @param p_inte Pointeur vers une instance d'Interaction
      * @pre p_inte non nul
      * @return L'objet QJsonObject généré
      */
@@ -30,7 +30,7 @@ private:
 
     /**
      * @brief Génère un objet QJsonObject correspondant à l'instance de Contact pointée
-     * @param Pointeur vers une instance de Contact
+     * @param p_contact Pointeur vers une instance de Contact
      * @pre p_contact non nul
      * @return L'objet QJsonObject généré
      */
@@ -43,7 +43,7 @@ private:
 public:
     /**
      * @brief Constructeur standart d'un JsonExporteur
-     * @param Pointeur vers une instance de GestionContact
+     * @param p_gt Pointeur vers une instance de GestionContact
      * @pre p_gt non nul
      */
     JsonExporteur(const GestionContact* p_gt);

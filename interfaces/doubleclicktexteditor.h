@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QTextEdit>
 
+/**
+ * @brief Classe dérivée d(un QTextEdit, permettant de gérer le double clique
+ */
 class DoubleClickTextEditor : public QTextEdit
 {
     Q_OBJECT
@@ -12,14 +15,13 @@ public:
 
     /**
      * @brief Redifinition de l'evennement double clique, emettant un signal receptionnable
-     * @param event
+     * @param event évènement de la souris
      */
     void mouseDoubleClickEvent(QMouseEvent* e);
 
 signals:
     /**
      * @brief Redifinition de l'evennement double clique, emettant un signal receptionnable
-     * @param event
      */
     void doubleClique();
 

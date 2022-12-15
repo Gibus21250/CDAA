@@ -10,37 +10,43 @@ namespace Ui {
 }
 QT_END_NAMESPACE
 
+/**
+ * @brief Classe gérant l'affichage d'une Interaction
+ */
 class InteractionWidget : public QWidget
 {
     Q_OBJECT
 
 private:
-    //Pointeur vers l'ui InteractionWidget
+    ///Pointeur vers l'ui InteractionWidget
     Ui::InteractionWidget* ui;
-    //Pointeur vers l'interaction à associer
+    ///Pointeur vers l'interaction à associer
     Interaction* m_p_interaction;
 
 public:
     /**
      * @brief Constructeur
-     * @param parent
-     * @param pointeur vers l'interaction à associer
+     * @param parent Pointeur vers la fenêtre parent
+     * @param p_int Pointeur vers l'Interaction à associer
      */
     explicit InteractionWidget(QWidget *parent = nullptr, Interaction* p_int = nullptr);
     ~InteractionWidget();
 
     /**
-     * @brief p_interaction
-     * @return
+     * @brief Renvoie le pointeur de l'Interaction associé au widget
+     * @return Le pointeur de l'interaction
      */
     Interaction *p_interaction() const;
 
     /**
-     * @brief setP_interaction
-     * @param newP_interaction
+     * @brief Change la valeur du pointeur de l'Interaction
+     * @param newP_interaction Nouvelle valeur du pointeur
      */
     void setP_interaction(Interaction *newP_interaction);
 
+    /**
+     * @brief Actualise les informations affichés sur le widget
+     */
     void actualiserInfoWidget();
 
 signals:

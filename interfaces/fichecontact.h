@@ -18,43 +18,45 @@ namespace Ui {
 }
 QT_END_NAMESPACE
 
+/**
+ * @brief Classe gérant l'affichage d'un Contact, et de la modification des données associées à lui
+ */
 class FicheContact : public QDialog
 {
     Q_OBJECT
 
 private:
-    //pointeur vers l'ui FicheContact
+    ///Pointeur vers l'ui FicheContact
     Ui::FicheContact* ui;
-    //Pointeur du contact
+    ///Pointeur du contact
     Contact* m_p_contact;
-    //Manager de la base de donnée
+    ///Manager de la base de donnée
     const MainSQLManager* manager;
 
-    //Tableau des qlabel custom qui prennent en charge le double clique
+    ///Tableau des qlabel custom qui prennent en charge le double clique
     DoubleClickQLabel* m_dcl[6];
-    //Tableau des qline edit, qui serviront à remplacer les QLabl custom lors de la phase de modification
+    ///Tableau des qline edit, qui serviront à remplacer les QLabl custom lors de la phase de modification
     QLineEdit* m_le[5];
 
-    //pointeur d'une instance d'un textEditor integrant l'emmission lors du oduble clique
+    ///pointeur d'une instance d'un textEditor integrant l'emmission lors du oduble clique
     DoubleClickTextEditor* dcte;
 
-    ////////////////////////
-    ///  Mode Edition    ///
-    ////////////////////////
 
-    //bool mode edition activé?
+
+    ///bool mode edition activé?
     bool modeEdition;
-    //char contenant le numero de qui est edité (cf tableau double clique qlabel)
+    ///char contenant le numero de qui est edité (cf tableau double clique qlabel)
     char quiEstEdite;
 
     /**
-     * @brief Permet de desactiver tout les widgets pour entrer en mode edition
-     * @param mode
+     * @brief Permet de desactiver tout les widgets pour entrer en mode edition (et l'inverse)
+     * @param mode true, ou false
      */
     void changerEtatPourEdition(bool mode);
+
     /**
      * @brief Evenement d'appuie sur les boutons: echap, ctrl+s, entrer
-     * @param event
+     * @param event touche évènement
      */
     void keyPressEvent(QKeyEvent *event);
 
@@ -83,7 +85,7 @@ private slots:
 
     /**
      * @brief Slot permettant d'ensuite déclancher les filtres par date
-     * @param checked si le bouton est coché ou pas
+     * @param checked si la checkbox est cochée ou non
      */
     void onFiltreDateActive(bool checked);
     /**
@@ -98,7 +100,7 @@ private slots:
     void interactionChange();
 
     /**
-     * @brief Slot rcpeteur des signaux des custom QLabel
+     * @brief Slot récpeteur des signaux des custom QLabel
      */
     void modEditionInformation(char);
 
@@ -121,6 +123,7 @@ private slots:
      * Cela ouvre une fenetre qui affiche toute les tâches des interactions selectionnée
      */
     void on_pb_toutTache_clicked();
+
     /**
      * @brief Slot recepteur du clique de bouton fermer
      */

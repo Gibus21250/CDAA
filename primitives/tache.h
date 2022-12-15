@@ -48,8 +48,6 @@ public:
      */
     Tache(const unsigned id, const std::string& contenu, const std::string& dateStr);
 
-    void printValue();
-
     /**
      * @brief isDate
      * @return un boolean pour savoir si la tache est datée
@@ -90,7 +88,16 @@ public:
 
     bool operator==(const Tache& t) const;
 
+    /**
+     * @brief Renvoie l'ID de la Tache
+     * @return L'ID
+     */
     const unsigned &IdT() const;
+
+    /**
+     * @brief Change la valeur de l'ID de la Tache
+     * @param Nouvel ID
+     */
     void setIdT(const unsigned &newIdT);
 };
 
