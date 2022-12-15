@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/appIcon">
-        <file>images/appli.ico</file>
-    </qresource>
-    <qresource prefix="/profileImg">
-        <file alias="no-image">images/no-user-image.gif</file>
-    </qresource>
-</RCC>
