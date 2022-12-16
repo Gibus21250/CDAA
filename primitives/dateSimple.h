@@ -27,7 +27,7 @@ public:
 
     /**
      * @brief Initialise une date au jour correspondant à la date strDate
-     * @param String de la date<br>
+     * @param strDate String de la date<br>
      * L'argument peut être de forme jj/MM/aaaa ou aaaa-MM-jj
      */
     DateSimple(const std::string& strDate);

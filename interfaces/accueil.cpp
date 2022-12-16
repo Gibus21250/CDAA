@@ -42,11 +42,10 @@ Accueil::Accueil(QWidget *parent)
 
     //BDDLocation = "E:\\Cloud\\GitHub\\CDAA\\CDAA\\gestion.sqlite";
 
-    if(!BDDLocation.isEmpty())
-    {
-        manager.connectTo(this->BDDLocation.toStdString());
-        manager.chargerBaseDeDonnee(&gt);
-    }
+    if(BDDLocation.isEmpty()) BDDLocation = "../gestion.sqlite";
+
+    manager.connectTo(this->BDDLocation.toStdString());
+    manager.chargerBaseDeDonnee(&gt);
 
 
     ui->setupUi(this);

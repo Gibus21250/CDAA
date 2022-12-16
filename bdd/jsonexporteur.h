@@ -49,9 +49,9 @@ public:
     JsonExporteur(const GestionContact* p_gt);
 
     /**
-     * @brief Génère puis exporte les données de l'instance pointée par @ref m_p_gt à l'emplacement path
+     * @brief Génère puis exporte les données de l'instance pointée par m_p_gt à l'emplacement path
      * @param path Chemin du fichier
-     * @return True Si l'exportation a eu lieu, false sinon
+     * @return True si l'exportation a eu lieu, false sinon
      */
     bool exporterJSONVers(const QString& path);
 

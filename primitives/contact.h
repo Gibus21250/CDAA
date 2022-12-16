@@ -27,7 +27,7 @@ public:
 
     /**
      * @brief Constructeur standard d'un contact
-     * @param ID du Contact
+     * @param id ID du Contact
      * @param nom Le nom du contact
      * @param prenom Le prenom du contact
      * @param entreprise Le nom de l'entreprise
@@ -59,7 +59,7 @@ public:
 
     /**
      * @brief Change le nom de l'instance Contact
-     * @param Nouveau nom
+     * @param value Nouveau nom
      */
     void setNom(const std::string &value);
 
@@ -71,7 +71,7 @@ public:
 
     /**
      * @brief Change le prenom de l'instance Contact
-     * @param Nouveau prenom
+     * @param value Nouveau prenom
      */
     void setPrenom(const std::string &value);
 
@@ -83,7 +83,7 @@ public:
 
     /**
      * @brief Change l'entreprise de l'instance Contact
-     * @param Nouvelle entreprise
+     * @param value Nouvelle entreprise
      */
     void setEntreprise(const std::string &value);
 
@@ -95,7 +95,7 @@ public:
 
     /**
      * @brief Change le mail de l'instance Contact
-     * @param Nouveau mail
+     * @param value Nouveau mail
      */
     void setMail(const std::string &value);
 
@@ -107,7 +107,7 @@ public:
 
     /**
      * @brief Change le numéro de téléphone de l'instance Contact
-     * @param Nouveau numéro de téléphone
+     * @param value Nouveau numéro de téléphone
      */
     void setTelephone(const std::string &value);
 
@@ -119,7 +119,7 @@ public:
 
     /**
      * @brief Change le chemin de la photo de l'instance Contact
-     * @param Nouveau chemin de photo du Contact
+     * @param value Nouveau chemin de photo du Contact
      */
     void setPhoto(const std::string &value);
 
@@ -157,7 +157,7 @@ public:
     /**
      * @brief Permet de retirer une interaction de la liste des interactions du contact
      * Dans le pire des cas O(N) comparaison d'instance
-     * @param Interaction
+     * @param in Interaction a supprimer
      */
     void supprimerInteraction(const Interaction& in);
 
@@ -181,13 +181,13 @@ public:
 
     /**
      * @brief Change l'instance DateSimple associé à la date de création du Contact
-     * @param Nouvelle DateSimple
+     * @param newDateCreation Nouvelle DateSimple
      */
     void setDateCreation(const DateSimple &newDateCreation);
 
     /**
      * @brief Change l'instance DateSimple associé à la dernière date de modification du Contact
-     * @param Nouvelle DateSimple
+     * @param newDateDerniereModification Nouvelle DateSimple
      */
     void setDateDerniereModification(const DateSimple &newDateDerniereModification);
 };

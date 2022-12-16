@@ -225,6 +225,8 @@ void FicheContact::changerEtatPourEdition(bool mode)
 
     ui->check_apres->setEnabled(mode);
     ui->check_avant->setEnabled(mode);
+
+    ui->pushButton->setEnabled(mode);
 }
 
 void FicheContact::keyPressEvent(QKeyEvent *event)

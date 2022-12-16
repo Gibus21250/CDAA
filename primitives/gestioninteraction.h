@@ -19,21 +19,21 @@ public:
 
     /**
     * @brief Permet de récupérer une instance de GestionInteraction avec dedans toutes les Interactions contenant le mot 'mot'
-    * @param mot à tester
+    * @param mot le mot à tester
     * @return Un nouveau GestionInteraction contenant des Interactions satisfaisant la condition
     */
    GestionInteraction& getInteractionsContenant(const std::string& mot);
 
    /**
     * @brief Permet de récupérer une instance de GestionInteraction avec dedans toutes les Interactions se passant avant la date en agument
-    * @param La date
+    * @param date La date a tester
     * @return Un nouveau GestionInteraction contenant des Interactions satisfaisant la condition
     */
    GestionInteraction& getInteractionsAvant(const DateSimple& date);
 
    /**
     * @brief Permet de récupérer une instance de GestionTache avec dedans toutes les Interactions se passant après la date en agument
-    * @param La date
+    * @param date La date a tester
     * @return Un nouveau GestionInteraction contenant des Interactions satisfaisant la condition
     */
    GestionInteraction& getInteractionsApres(const DateSimple& date);

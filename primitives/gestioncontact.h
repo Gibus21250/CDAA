@@ -19,35 +19,35 @@ public:
 
     /**
      * @brief Permet de récupérer l'instance de GestionContact avec dedans toutes les Contacts étant dans l'entreprise 'mot'
-     * @param mot à tester
+     * @param mot Le mot à tester
      * @return Un nouveau GestionContact contenant des Contacts satisfaisant la condition
      */
     GestionContact& getContactsEntreprise(const std::string& mot);
 
     /**
      * @brief Permet de récupérer l'instance de GestionContact avec dedans toutes les Contacts se passant avant la date en agument
-     * @param La date
+     * @param date La date a tester
      * @return Un nouveau GestionContact contenant des Interactions satisfaisant la condition
      */
     GestionContact& getContactsAvantCreation(const DateSimple& date);
 
     /**
      * @brief Permet de récupérer l'instance de GestionContact avec dedans toutes les Contacts se passant après la date en agument
-     * @param La date
+     * @param date La date a tester
      * @return Un nouveau GestionContact contenant des Contacts satisfaisant la condition
      */
     GestionContact& getContactsApresCreation(const DateSimple& date);
 
     /**
      * @brief Permet de récupérer l'instance de GestionContact avec dedans toutes les Contacts se passant avant la date en agument
-     * @param La date
+     * @param date La date a tester
      * @return Un nouveau GestionContact contenant des Interactions satisfaisant la condition
      */
     GestionContact& getContactsAvantModif(const DateSimple& date);
 
     /**
      * @brief Permet de récupérer l'instance de GestionContact avec dedans toutes les Contacts se passant après la date en agument
-     * @param La date
+     * @param date La date a tester
      * @return Un nouveau GestionContact contenant des Contacts satisfaisant la condition
      */
     GestionContact& getContactsApresModif(const DateSimple& date);

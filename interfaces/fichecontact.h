@@ -18,33 +18,32 @@ namespace Ui {
 }
 QT_END_NAMESPACE
 
+/**
+ * @brief Classe permettant l'affichage de la fiche d'un Contact
+ */
 class FicheContact : public QDialog
 {
     Q_OBJECT
 
 private:
-    //pointeur vers l'ui FicheContact
+    ///pointeur vers l'ui FicheContact
     Ui::FicheContact* ui;
-    //Pointeur du contact
+    ///Pointeur du contact
     Contact* m_p_contact;
-    //Manager de la base de donnée
+    ///Manager de la base de donnée
     const MainSQLManager* manager;
 
-    //Tableau des qlabel custom qui prennent en charge le double clique
+    ///Tableau des qlabel custom qui prennent en charge le double clique
     DoubleClickQLabel* m_dcl[6];
-    //Tableau des qline edit, qui serviront à remplacer les QLabl custom lors de la phase de modification
+    ///Tableau des qline edit, qui serviront à remplacer les QLabl custom lors de la phase de modification
     QLineEdit* m_le[5];
 
-    //pointeur d'une instance d'un textEditor integrant l'emmission lors du oduble clique
+    ///pointeur d'une instance d'un textEditor integrant l'emmission lors du oduble clique
     DoubleClickTextEditor* dcte;
 
-    ////////////////////////
-    ///  Mode Edition    ///
-    ////////////////////////
-
-    //bool mode edition activé?
+    ///bool mode edition activé?
     bool modeEdition;
-    //char contenant le numero de qui est edité (cf tableau double clique qlabel)
+    ///char contenant le numero de qui est edité (cf tableau double clique qlabel)
     char quiEstEdite;
 
     /**
@@ -98,7 +97,7 @@ private slots:
     void interactionChange();
 
     /**
-     * @brief Slot rcpeteur des signaux des custom QLabel
+     * @brief Slot recpeteur des signaux des custom QLabel
      */
     void modEditionInformation(char);
 

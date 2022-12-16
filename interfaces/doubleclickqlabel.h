@@ -3,7 +3,9 @@
 
 #include <QLabel>
 
-
+/**
+ * @brief Classe hériant d'un QLabel et permet de gérer les doubles cliques
+ */
 class DoubleClickQLabel : public QLabel {
     Q_OBJECT
 

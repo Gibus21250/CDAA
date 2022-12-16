@@ -20,15 +20,18 @@ class ContactWidget : public QWidget
     Q_OBJECT
 
 private:
+    ///Pointeur vers une instance de contact
     Contact* contact;
+    ///Pointeur vers une instance de l'UI
     Ui::ContactWidget* ui;
 
 public:
     /**
-     * @brief Prend en argument un pointeur du contact
-     * @param parent
+     * @brief Constructeur standard
+     * @param parent Parent du widget
+     * @param cont Pointeur vers une instance de Contact
      */
-    explicit ContactWidget(QWidget *parent = nullptr, Contact* = nullptr);
+    explicit ContactWidget(QWidget *parent = nullptr, Contact* cont = nullptr);
     ~ContactWidget();
 
     /**

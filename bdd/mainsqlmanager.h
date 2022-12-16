@@ -79,6 +79,7 @@ public:
 
     /**
      * @brief Inscrit l'Interaction pointée dans la base de donnée
+     * @param IdC Id du contact
      * @param inter Pointeur vers une instance d'Interaction
      * @return True si l'insertion a été faite avec succès, false sinon
      */
@@ -86,7 +87,7 @@ public:
 
     /**
      * @brief Supprime l'inscription de l'Interaction de a base de donnée associé à l'ID
-     * @param IdCID de l'Interaction
+     * @param IdC ID de l'Interaction
      * @return True si la suppression a été faite avec succès, false sinon
      */
     bool supprimerInteraction(const int IdC) const;
@@ -103,6 +104,7 @@ public:
 
     /**
      * @brief Inscrit la Tache pointée dans la base de donnée
+     * @param IdI Id de l'interaction
      * @param tache Pointeur vers une instance de Tache
      * @return True si l'insertion a été faite avec succès, false sinon
      */

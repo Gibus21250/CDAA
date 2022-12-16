@@ -30,21 +30,24 @@ public:
 
     /**
      * @brief Constructeur de Tache avec contenu
-     * @param contenu
+     * @param id Id de la Tache
+     * @param contenu Contenu de la Tache
      */
     Tache(const unsigned id, const std::string& contenu);
 
     /**
      * @brief Constructeur avec contenu et instance de date
-     * @param contenu
-     * @param date
+     * @param id Id de la Tache
+     * @param contenu Contenu de la Tache
+     * @param date associée à la Tache
      */
     Tache(const unsigned id, const std::string& contenu, const DateSimple& date);
 
     /**
      * @brief Constructeur avec contenu et date sous forme de string
-     * @param contenu
-     * @param dateStr
+     * @param id ID de la Tache
+     * @param contenu Contenu de la Tache
+     * @param dateStr associée à la Tache sous forme de string
      */
     Tache(const unsigned id, const std::string& contenu, const std::string& dateStr);
 

@@ -11,16 +11,19 @@ namespace Ui {
 }
 QT_END_NAMESPACE
 
+/**
+ * @brief Classe gérant la fenêtre de création d'un Contact
+ */
 class CreationContact : public QDialog
 {
     Q_OBJECT
 
 private:
-    //pointeur du l'ui CreationContact
+    ///pointeur du l'ui CreationContact
     Ui::CreationContact* ui;
-    //Instance d'un contact
+    ///Instance d'un contact
     Contact contact;
-    //Uri de la photo de profil du contact
+    ///Uri de la photo de profil du contact
     QString uri;
 
 public:
