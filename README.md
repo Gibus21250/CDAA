@@ -36,12 +36,12 @@ cd src
     make (relase | debug)
 ```
 
-Le resultat de la compilation sera dans build-Projet-***-Release|Debug\n
-Allez dans le dossier correspondant, puis executé l'executable.\n
+Le resultat de la compilation sera dans build-Projet-***-Release|Debug
+Allez dans le dossier correspondant, puis executé l'executable.
 Attention: Si vous êtes sur windows vous aurez besoin de *windeployqt.exe* (Qui se situe dans le dossier bin de votre istallation de Qt) qui ajoutera toutes les librairies dynamiques nécessaires pour le programme. [source](https://doc.qt.io/Qt-5/windows-deployment.html)
 
 ### Avec QtCreator
-Dans QtCreator, importez le fichier Projet.pro situé dans le dossier src.\n
+Dans QtCreator, importez le fichier Projet.pro situé dans le dossier src.
 Ou, double cliquez directement sur le fichier Projet.pro.
 
 ## Informations
@@ -50,7 +50,7 @@ Ou, double cliquez directement sur le fichier Projet.pro.
 Il faut que vous chargiez une base de données conforme, dans l'application allez dans Accueil -> Charger -> depuis BDD
 puis choisissez une fichier *.sqlite*.
 
-Un fichier *.sqlite* avec un jeu de donnée est déjà présent dans le dossier racine ``gestion.sqlite``.\n
+Un fichier *.sqlite* avec un jeu de donnée est déjà présent dans le dossier racine ``gestion.sqlite``.
 Vous pouvez aussi générer les tables sur votre base de donnée à l'aide sur script ``createTable.sql`` avec quelques données.
 
 ### Si les contacts n'ont pas de photo de profil:
