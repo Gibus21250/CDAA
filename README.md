@@ -12,7 +12,7 @@ Les données sont sauvegardé dans une base de donnée SQlite composée de 3 tab
 - Interaction(__IdI__, Contenu, date, _IdC_)
 - Tache(__IdT__, Contenu, dateAFaire, _IdI_)
 
-Vous pouvez initialiser un jeu de donnée de test en executant le script `createTable.sql`
+Vous pouvez créer et initialiser un jeu de donnée de test en executant le script `createTable.sql`
 
 /!\ *Les images ne seront pas affichées, il faudra modifier le contact et reselectionner d'autre images, ou celles disponible le dossier source `image`* /!\
 
