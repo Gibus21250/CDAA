@@ -16,7 +16,7 @@ Vous pouvez créer et initialiser un jeu de donnée de test en executant le scri
 
 /!\ *Les images ne seront pas affichées, il faudra modifier le contact et reselectionner d'autre images, ou celles disponible le dossier source `image`* /!\
 
-Vous pouvez exporter toutes les données sous format JSON depuis l'application, en cliquant sur Acceuil -> Exporter -> JSON
+Vous pouvez exporter toutes les données sous format JSON depuis l'application, en cliquant sur Accueil -> Exporter -> JSON
 
 ## **Comment utiliser**
 
